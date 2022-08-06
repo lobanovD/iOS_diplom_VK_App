@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AB987A5289F23CB00F56E76 /* VKSdkFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; };
+		1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AB987A9289F23EA00F56E76 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 1AB987A8289F23EA00F56E76 /* Cartfile.resolved */; };
 		1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D7289DBF980083730F /* AppDelegate.swift */; };
 		1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D9289DBF980083730F /* SceneDelegate.swift */; };
 		1AD9F1DC289DBF980083730F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1DB289DBF980083730F /* ViewController.swift */; };
@@ -15,7 +18,23 @@
 		1AD9F1E4289DBF9C0083730F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1AB987A7289F23CB00F56E76 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
+		1AB987A8289F23EA00F56E76 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cartfile.resolved; sourceTree = SOURCE_ROOT; };
 		1AD9F1D4289DBF980083730F /* iOS_diplom_VK_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_diplom_VK_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD9F1D7289DBF980083730F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AD9F1D9289DBF980083730F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +50,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB987A5289F23CB00F56E76 /* VKSdkFramework.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AB987A3289F23CB00F56E76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1AD9F1CB289DBF980083730F = {
 			isa = PBXGroup;
 			children = (
 				1AD9F1D6289DBF980083730F /* iOS_diplom_VK_App */,
 				1AD9F1D5289DBF980083730F /* Products */,
+				1AB987A3289F23CB00F56E76 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +92,7 @@
 				1AD9F1E0289DBF9C0083730F /* Assets.xcassets */,
 				1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */,
 				1AD9F1E5289DBF9C0083730F /* Info.plist */,
+				1AB987A8289F23EA00F56E76 /* Cartfile.resolved */,
 			);
 			path = iOS_diplom_VK_App;
 			sourceTree = "<group>";
@@ -77,6 +107,7 @@
 				1AD9F1D0289DBF980083730F /* Sources */,
 				1AD9F1D1289DBF980083730F /* Frameworks */,
 				1AD9F1D2289DBF980083730F /* Resources */,
+				1AB987A7289F23CB00F56E76 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AD9F1E4289DBF9C0083730F /* LaunchScreen.storyboard in Resources */,
+				1AB987A9289F23EA00F56E76 /* Cartfile.resolved in Resources */,
 				1AD9F1E1289DBF9C0083730F /* Assets.xcassets in Resources */,
 				1AD9F1DF289DBF980083730F /* Main.storyboard in Resources */,
 			);
