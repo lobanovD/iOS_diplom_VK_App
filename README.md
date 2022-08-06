@@ -2,4 +2,5 @@
 
 1. brew install carthage 
 2. В папке проекта выполнить
-carthage update --use-xcframeworks
+- cp Cartfile.resolved Cartfile
+- carthage update --use-xcframeworks
