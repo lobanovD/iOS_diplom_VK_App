@@ -2,4 +2,4 @@
 
 1. brew install cartage
 2. В папке проекта выполнить
-cartage update
+carthage update --use-xcframeworks
