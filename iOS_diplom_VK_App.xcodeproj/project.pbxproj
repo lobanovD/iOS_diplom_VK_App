@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A50CC5A28A0674100688497 /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A50CC5928A0674100688497 /* FeedViewController.storyboard */; };
+		1A50CC5C28A0679500688497 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A50CC5B28A0679500688497 /* FeedViewController.swift */; };
 		1AB987A5289F23CB00F56E76 /* VKSdkFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; };
 		1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AB987A9289F23EA00F56E76 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 1AB987A8289F23EA00F56E76 /* Cartfile.resolved */; };
+		1AB987AC289F2E6900F56E76 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB987AB289F2E6900F56E76 /* AuthService.swift */; };
 		1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D7289DBF980083730F /* AppDelegate.swift */; };
 		1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D9289DBF980083730F /* SceneDelegate.swift */; };
-		1AD9F1DC289DBF980083730F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1DB289DBF980083730F /* ViewController.swift */; };
-		1AD9F1DF289DBF980083730F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD9F1DD289DBF980083730F /* Main.storyboard */; };
+		1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1DB289DBF980083730F /* AuthViewController.swift */; };
 		1AD9F1E1289DBF9C0083730F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AD9F1E0289DBF9C0083730F /* Assets.xcassets */; };
 		1AD9F1E4289DBF9C0083730F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -33,13 +35,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A50CC5928A0674100688497 /* FeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedViewController.storyboard; sourceTree = "<group>"; };
+		1A50CC5B28A0679500688497 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
 		1AB987A8289F23EA00F56E76 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = SOURCE_ROOT; };
+		1AB987AB289F2E6900F56E76 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1AD9F1D4289DBF980083730F /* iOS_diplom_VK_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_diplom_VK_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD9F1D7289DBF980083730F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AD9F1D9289DBF980083730F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1AD9F1DB289DBF980083730F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1AD9F1DE289DBF980083730F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1AD9F1DB289DBF980083730F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		1AD9F1E0289DBF9C0083730F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AD9F1E3289DBF9C0083730F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AD9F1E5289DBF9C0083730F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,12 +61,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A50CC5E28A068DE00688497 /* FeedVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A50CC5B28A0679500688497 /* FeedViewController.swift */,
+				1A50CC5928A0674100688497 /* FeedViewController.storyboard */,
+			);
+			path = FeedVC;
+			sourceTree = "<group>";
+		};
+		1A50CC5F28A068EA00688497 /* AuthVC */ = {
+			isa = PBXGroup;
+			children = (
+				1AD9F1DB289DBF980083730F /* AuthViewController.swift */,
+			);
+			path = AuthVC;
+			sourceTree = "<group>";
+		};
 		1AB987A3289F23CB00F56E76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1AB987AD289F2E6F00F56E76 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1AB987AB289F2E6900F56E76 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		1AD9F1CB289DBF980083730F = {
@@ -87,8 +116,9 @@
 			children = (
 				1AD9F1D7289DBF980083730F /* AppDelegate.swift */,
 				1AD9F1D9289DBF980083730F /* SceneDelegate.swift */,
-				1AD9F1DB289DBF980083730F /* ViewController.swift */,
-				1AD9F1DD289DBF980083730F /* Main.storyboard */,
+				1A50CC5F28A068EA00688497 /* AuthVC */,
+				1A50CC5E28A068DE00688497 /* FeedVC */,
+				1AB987AD289F2E6F00F56E76 /* Services */,
 				1AD9F1E0289DBF9C0083730F /* Assets.xcassets */,
 				1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */,
 				1AD9F1E5289DBF9C0083730F /* Info.plist */,
@@ -158,8 +188,8 @@
 			files = (
 				1AD9F1E4289DBF9C0083730F /* LaunchScreen.storyboard in Resources */,
 				1AB987A9289F23EA00F56E76 /* Cartfile.resolved in Resources */,
+				1A50CC5A28A0674100688497 /* FeedViewController.storyboard in Resources */,
 				1AD9F1E1289DBF9C0083730F /* Assets.xcassets in Resources */,
-				1AD9F1DF289DBF980083730F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,23 +200,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AD9F1DC289DBF980083730F /* ViewController.swift in Sources */,
+				1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */,
 				1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */,
+				1A50CC5C28A0679500688497 /* FeedViewController.swift in Sources */,
 				1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */,
+				1AB987AC289F2E6900F56E76 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1AD9F1DD289DBF980083730F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1AD9F1DE289DBF980083730F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -324,7 +348,6 @@
 				INFOPLIST_FILE = iOS_diplom_VK_App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -352,7 +375,6 @@
 				INFOPLIST_FILE = iOS_diplom_VK_App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
