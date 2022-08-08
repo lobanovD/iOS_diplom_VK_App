@@ -74,6 +74,4 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
         print(#function)
     }
-    
 }
-

@@ -17,8 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
 
+        // Контроллеры приложения
         let authVC = AuthViewController()
         let navigationVC = UINavigationController(rootViewController: authVC)
+        
         window?.rootViewController = navigationVC
         window?.makeKeyAndVisible()
     }
