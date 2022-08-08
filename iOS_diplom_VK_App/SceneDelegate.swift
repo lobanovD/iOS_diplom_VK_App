@@ -8,27 +8,18 @@
 import UIKit
 import VKSdkFramework
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    var authService: AuthService!
-    
-    static func shared() -> SceneDelegate {
-        let scene = UIApplication.shared.connectedScenes.first
-        let sd: SceneDelegate = (((scene?.delegate as? SceneDelegate)!))
-        return sd
-    }
-
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        authService = AuthService()
-        authService.delegate = self
+
         let authVC = AuthViewController()
-        window?.rootViewController = authVC
+        let navigationVC = UINavigationController(rootViewController: authVC)
+        window?.rootViewController = navigationVC
         window?.makeKeyAndVisible()
     }
     
@@ -37,25 +28,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
             VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
         }
     }
-
-
-    // MARK: AuthServiceDelegate
-    
-    func authServiceShouldShow(viewController: UIViewController) {
-        print(#function)
-        window?.rootViewController = viewController
-    }
-    
-    func authServiceSignIn() {
-        print(#function)
-        let feedVC = UIStoryboard(name: "FeedViewController", bundle: nil).instantiateInitialViewController() as! FeedViewController
-        let navigationVC = UINavigationController(rootViewController: feedVC)
-        window?.rootViewController = navigationVC
-    }
-    
-    func authServiceSignInDidFail() {
-        print(#function)
-    }
-
 }
-
