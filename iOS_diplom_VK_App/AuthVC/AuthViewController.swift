@@ -7,9 +7,9 @@
 
 import UIKit
 
-class AuthViewController: UIViewController, AuthServiceDelegate {
+final class AuthViewController: UIViewController, AuthServiceDelegate {
 
-    private var authService: AuthService!
+//    private var authService: AuthService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +18,8 @@ class AuthViewController: UIViewController, AuthServiceDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        authService = AuthService()
-        authService.delegate = self
-        authService.wakeUpSession()
+        AuthService.shared.delegate = self
+        AuthService.shared.wakeUpSession()
     }
     
     
@@ -35,7 +34,7 @@ class AuthViewController: UIViewController, AuthServiceDelegate {
     
     func authServiceSignIn() {
         print(#function)
-        let feedVC = UIStoryboard(name: "FeedViewController", bundle: nil).instantiateInitialViewController() as! FeedViewController
+        let feedVC = FeedViewController()
         navigationController?.pushViewController(feedVC, animated: false)
         navigationController?.navigationBar.isHidden = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false

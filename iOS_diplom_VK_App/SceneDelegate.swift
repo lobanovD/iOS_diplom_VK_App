@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Контроллеры приложения
         let authVC = AuthViewController()
         let navigationVC = UINavigationController(rootViewController: authVC)
-        
+
         window?.rootViewController = navigationVC
         window?.makeKeyAndVisible()
     }

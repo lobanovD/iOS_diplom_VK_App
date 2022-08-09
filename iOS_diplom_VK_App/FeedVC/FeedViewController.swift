@@ -7,12 +7,19 @@
 
 import UIKit
 
-class FeedViewController: UIViewController {
+
+final class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
-       
+        view.backgroundColor = .red
+        
+        let params = URLQueryItem(name: GetFeed.name, value: GetFeed.value)
+        
+        NetworkService.shared.request(path: GetFeed.path, methodParams: params) { data, error in
+            print(data)
+        }
+
     }
     
 

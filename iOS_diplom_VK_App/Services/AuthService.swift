@@ -16,16 +16,16 @@ protocol AuthServiceDelegate: AnyObject {
     
 }
 
-class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
+final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
-    // appID из https://vk.com/apps?act=manage
-    private let appID = "51395644"
+    static let shared = AuthService()
+    
     // экземпляр SDK
     private let vkSdk: VKSdk
     
     override init() {
         // при создании объекта класса, инициализируем SDK через appID
-        vkSdk = VKSdk.initialize(withAppId: appID)
+        vkSdk = VKSdk.initialize(withAppId: API.appID)
         super.init()
         print("VKSdk.initialize")
         // регистрируем SDK
@@ -36,8 +36,14 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
     weak var delegate: AuthServiceDelegate?
     
+    var token: String?  {
+        VKSdk.accessToken().accessToken
+    }
+    
     func wakeUpSession() {
-        let scope = ["offline"]
+
+        let scope = API.scope
+        
         VKSdk.wakeUpSession(scope) { [delegate] (state, error) in
             switch state {
        
