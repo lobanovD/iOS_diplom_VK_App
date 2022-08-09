@@ -1,5 +1,5 @@
 //
-//  AuthService.swift
+//  VKAuthService.swift
 //  iOS_diplom_VK_App
 //
 //  Created by Dmitrii Lobanov on 07.08.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import VKSdkFramework
 
-protocol AuthServiceDelegate: AnyObject {
+protocol VKAuthServiceDelegate: AnyObject {
     
     func authServiceShouldShow(viewController: UIViewController)
     func authServiceSignIn()
@@ -16,9 +16,9 @@ protocol AuthServiceDelegate: AnyObject {
     
 }
 
-final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
+final class VKAuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
-    static let shared = AuthService()
+    static let shared = VKAuthService()
     
     // экземпляр SDK
     private let vkSdk: VKSdk
@@ -34,7 +34,7 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
         vkSdk.uiDelegate = self
     }
     
-    weak var delegate: AuthServiceDelegate?
+    weak var delegate: VKAuthServiceDelegate?
     
     var token: String?  {
         VKSdk.accessToken().accessToken

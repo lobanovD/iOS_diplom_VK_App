@@ -11,14 +11,14 @@ protocol Networking {
     func request(path: String, methodParams: URLQueryItem, completion: @escaping (Data?, Error?) -> Void)
 }
 
-final class NetworkService: Networking {
+final class NetworkService {
     
     static let shared = NetworkService()
     
     // Метод получения URL запроса к API
     private func url(path: String, methodParams: URLQueryItem) -> URL? {
         
-        guard let authToken = AuthService.shared.token else { return nil }
+        guard let authToken = VKAuthService.shared.token else { return nil }
         
         let token = URLQueryItem(name: APIParams.apiToken.rawValue, value: authToken)
         let version = URLQueryItem(name: APIParams.apiVersion.rawValue, value: API.version)

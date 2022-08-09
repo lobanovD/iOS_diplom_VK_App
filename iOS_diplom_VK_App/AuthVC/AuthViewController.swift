@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AuthViewController: UIViewController, AuthServiceDelegate {
+final class AuthViewController: UIViewController, VKAuthServiceDelegate {
 
 //    private var authService: AuthService?
     
@@ -18,8 +18,8 @@ final class AuthViewController: UIViewController, AuthServiceDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        AuthService.shared.delegate = self
-        AuthService.shared.wakeUpSession()
+        VKAuthService.shared.delegate = self
+        VKAuthService.shared.wakeUpSession()
     }
     
     
