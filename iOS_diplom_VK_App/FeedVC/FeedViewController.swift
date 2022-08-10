@@ -14,11 +14,11 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .red
         
-        let params = URLQueryItem(name: GetFeed.name, value: GetFeed.value)
-        
-        NetworkService.shared.request(path: GetFeed.path, methodParams: params) { data, error in
-            print(data)
+        NetworkService.shared.getFeed { responce in
+            print(responce?.response.items.first)
         }
+        
+
 
     }
     

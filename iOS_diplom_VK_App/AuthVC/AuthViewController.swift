@@ -34,9 +34,10 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     
     func authServiceSignIn() {
         print(#function)
-        let feedVC = FeedViewController()
+//        let feedVC = FeedViewController()
+        let feedVC = NewsFeedViewController()
         navigationController?.pushViewController(feedVC, animated: false)
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
     }

@@ -28,13 +28,14 @@ final class NetworkService {
         components.host = API.host
         components.path = path
         components.queryItems = [methodParams, token, version]
- 
+        
         guard let url = components.url else { return nil }
+        print(url)
         return url
     }
     
     // Общий метод запроса данных с API
-    func request(path: String, methodParams: URLQueryItem, completion: @escaping (Data?, Error?) -> Void) {
+    private func request(path: String, methodParams: URLQueryItem, completion: @escaping (Data?, Error?) -> Void) {
         
         guard let url = url(path: path, methodParams: methodParams) else { return }
         let session = URLSession.init(configuration: .default)
@@ -49,4 +50,24 @@ final class NetworkService {
         
     }
     
+    // Метод получения новостной ленты пользователя
+    func getFeed(completion: @escaping (_ responce: FeedResponceWrapped?) -> Void) {
+        
+        let params = URLQueryItem(name: GetFeed.name, value: GetFeed.value)
+        
+        NetworkService.shared.request(path: GetFeed.path, methodParams: params) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let data = data else { return }
+            
+            
+            let responce = try? decoder.decode(FeedResponceWrapped.self, from: data)
+            
+            completion(responce)
+            
+        }
+    }
 }
