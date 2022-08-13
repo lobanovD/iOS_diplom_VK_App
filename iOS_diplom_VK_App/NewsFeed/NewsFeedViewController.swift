@@ -17,6 +17,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
     
+    private var feedViewModel = FeedViewModel(cells: [])
+    
     // MARK: Setup
     
     private func setup() {
@@ -43,18 +45,19 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         setup()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(NewsFeedCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
         view.addSubview(tableView)
+        
+        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
         
         switch viewModel {
-            
-        case .some:
-            print(".some ViewController")
-        case .displayNewsFeed:
-            print(".displayNewsFeed ViewController")
+       
+        case .displayNewsFeed(feedViewModel: let feedViewModel):
+            self.feedViewModel = feedViewModel
+            tableView.reloadData()
         }
         
     }
@@ -76,16 +79,17 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        feedViewModel.cells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = "\(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.cellId, for: indexPath) as! NewsFeedCell
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        cell.set(viewModel: cellViewModel)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        interactor?.makeRequest(request: .getFeed)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 212
     }
 }

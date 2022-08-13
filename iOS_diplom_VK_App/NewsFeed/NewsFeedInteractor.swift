@@ -23,13 +23,13 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
     }
       
       switch request {
-          
-      case .some:
-          print("some")
-          presenter?.presentData(response: .some)
-      case .getFeed:
-          print(".getFeed Interactor")
-          presenter?.presentData(response: .presentNewsFeed)
+      case .getNewsFeed:
+          NetworkService.shared.getFeed { [weak self] responce in
+              guard let feedResponse = responce else { return }
+//              presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed)
+              self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feedResponse))
+
+          }
       }
       
       
