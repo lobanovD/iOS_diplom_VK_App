@@ -20,6 +20,8 @@
 		1ABCBC0E28A464A900010460 /* NewsFeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC0728A464A900010460 /* NewsFeedInteractor.swift */; };
 		1ABCBC1628A5C52800010460 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1528A5C52800010460 /* NewsFeedCell.swift */; };
 		1ABCBC1828A5C53F00010460 /* NewsFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1728A5C53F00010460 /* NewsFeedCell.xib */; };
+		1ABCBC1A28AAF27500010460 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1928AAF27500010460 /* WebImageView.swift */; };
+		1ABCBC1D28AAF8E300010460 /* VKDateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */; };
 		1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D7289DBF980083730F /* AppDelegate.swift */; };
 		1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D9289DBF980083730F /* SceneDelegate.swift */; };
 		1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1DB289DBF980083730F /* AuthViewController.swift */; };
@@ -54,6 +56,8 @@
 		1ABCBC0728A464A900010460 /* NewsFeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedInteractor.swift; sourceTree = "<group>"; };
 		1ABCBC1528A5C52800010460 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		1ABCBC1728A5C53F00010460 /* NewsFeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedCell.xib; sourceTree = "<group>"; };
+		1ABCBC1928AAF27500010460 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
+		1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDateFormater.swift; sourceTree = "<group>"; };
 		1AD9F1D4289DBF980083730F /* iOS_diplom_VK_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_diplom_VK_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD9F1D7289DBF980083730F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AD9F1D9289DBF980083730F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		1ABCBC1B28AAF29D00010460 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1ABCBC1928AAF27500010460 /* WebImageView.swift */,
+				1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		1AD9F1CB289DBF980083730F = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +162,7 @@
 				1A50CC5F28A068EA00688497 /* AuthVC */,
 				1AB987AD289F2E6F00F56E76 /* Services */,
 				1ABCBC0128A4647400010460 /* NewsFeed */,
+				1ABCBC1B28AAF29D00010460 /* Helpers */,
 				1AD9F1E0289DBF9C0083730F /* Assets.xcassets */,
 				1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */,
 				1AD9F1E5289DBF9C0083730F /* Info.plist */,
@@ -231,7 +245,9 @@
 				1ABCBC0C28A464A900010460 /* NewsFeedModels.swift in Sources */,
 				1ABCBC0B28A464A900010460 /* NewsFeedRouter.swift in Sources */,
 				1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */,
+				1ABCBC1A28AAF27500010460 /* WebImageView.swift in Sources */,
 				1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */,
+				1ABCBC1D28AAF8E300010460 /* VKDateFormater.swift in Sources */,
 				1ABCBC0E28A464A900010460 /* NewsFeedInteractor.swift in Sources */,
 				1ABCBC0928A464A900010460 /* NewsFeedPresenter.swift in Sources */,
 				1ABCBC0A28A464A900010460 /* NewsFeedWorker.swift in Sources */,

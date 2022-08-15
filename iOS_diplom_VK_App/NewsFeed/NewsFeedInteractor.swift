@@ -25,8 +25,8 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
       switch request {
       case .getNewsFeed:
           NetworkService.shared.getFeed { [weak self] responce in
+
               guard let feedResponse = responce else { return }
-//              presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed)
               self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feedResponse))
 
           }

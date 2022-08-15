@@ -63,7 +63,6 @@ final class NetworkService {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
             
-            
             let responce = try? decoder.decode(FeedResponceWrapped.self, from: data)
             
             completion(responce)
