@@ -22,6 +22,8 @@
 		1ABCBC1828A5C53F00010460 /* NewsFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1728A5C53F00010460 /* NewsFeedCell.xib */; };
 		1ABCBC1A28AAF27500010460 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1928AAF27500010460 /* WebImageView.swift */; };
 		1ABCBC1D28AAF8E300010460 /* VKDateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */; };
+		1ABCBC1F28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC1E28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift */; };
+		1ABCBC2128AC542100010460 /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABCBC2028AC542100010460 /* String + Height.swift */; };
 		1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D7289DBF980083730F /* AppDelegate.swift */; };
 		1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1D9289DBF980083730F /* SceneDelegate.swift */; };
 		1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9F1DB289DBF980083730F /* AuthViewController.swift */; };
@@ -58,6 +60,8 @@
 		1ABCBC1728A5C53F00010460 /* NewsFeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedCell.xib; sourceTree = "<group>"; };
 		1ABCBC1928AAF27500010460 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDateFormater.swift; sourceTree = "<group>"; };
+		1ABCBC1E28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellLayoutCalculator.swift; sourceTree = "<group>"; };
+		1ABCBC2028AC542100010460 /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
 		1AD9F1D4289DBF980083730F /* iOS_diplom_VK_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_diplom_VK_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD9F1D7289DBF980083730F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AD9F1D9289DBF980083730F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,8 +126,9 @@
 		1ABCBC1428A5C50800010460 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				1ABCBC1528A5C52800010460 /* NewsFeedCell.swift */,
 				1ABCBC1728A5C53F00010460 /* NewsFeedCell.xib */,
+				1ABCBC1528A5C52800010460 /* NewsFeedCell.swift */,
+				1ABCBC1E28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 			children = (
 				1ABCBC1928AAF27500010460 /* WebImageView.swift */,
 				1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */,
+				1ABCBC2028AC542100010460 /* String + Height.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -256,7 +262,9 @@
 				1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */,
 				1ABCBBFC28A2FCAB00010460 /* API.swift in Sources */,
 				1ABCBC1628A5C52800010460 /* NewsFeedCell.swift in Sources */,
+				1ABCBC1F28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift in Sources */,
 				1ABCBC0D28A464A900010460 /* NewsFeedViewController.swift in Sources */,
+				1ABCBC2128AC542100010460 /* String + Height.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

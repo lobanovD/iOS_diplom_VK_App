@@ -14,7 +14,9 @@ final class WebImageView: UIImageView {
     
     // Метод возвращает UIImage из строки с URL
     func set(imageUrl: String?) {
-        guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else { return }
+        guard let imageUrl = imageUrl, let url = URL(string: imageUrl) else {
+            self.image = nil
+            return }
         
         // Проверка, существует ли изображение в кэше
         if let cachedResponse = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {

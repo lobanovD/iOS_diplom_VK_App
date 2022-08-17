@@ -17,6 +17,14 @@ protocol FeedCellViewModel {
     var shares: String? { get }
     var views: String? { get }
     var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+    var sizes: FeedCellSizes { get }
+}
+
+protocol FeedCellSizes {
+    var postLableFrame: CGRect { get }
+    var attachmentFrame: CGRect { get }
+    var buttonViewFrame: CGRect { get }
+    var totalHeight: CGFloat { get }
 }
 
 protocol FeedCellPhotoAttachmentViewModel {
@@ -38,11 +46,25 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     @IBOutlet weak var postImageView: WebImageView!
+    @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var buttonView: UIView!
+    
+    override func prepareForReuse() {
+        // убираем урл старой картинки перед переиспользованием
+        iconImageView.set(imageUrl: nil)
+        postImageView.set(imageUrl: nil)
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
         iconImageView.clipsToBounds = true
+        cardView.layer.cornerRadius = 10
+        cardView.clipsToBounds = true
+        cardView.backgroundColor = .white
+        backgroundColor = .clear
+        selectionStyle = .none
         // Initialization code
     }
 
@@ -61,6 +83,9 @@ class NewsFeedCell: UITableViewCell {
         commentsLabel.text = viewModel.comments
         sharesLabel.text = viewModel.shares
         viewsLabel.text = viewModel.views
+        postLabel.frame = viewModel.sizes.postLableFrame
+        postImageView.frame = viewModel.sizes.attachmentFrame
+        buttonView.frame = viewModel.sizes.buttonViewFrame
         
         if let photoAttachment = viewModel.photoAttachment {
             postImageView.set(imageUrl: photoAttachment.photoUrlString)

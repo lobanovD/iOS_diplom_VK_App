@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 protocol NewsFeedDisplayLogic: class {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
@@ -43,6 +44,11 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         super.viewDidLoad()
         view.backgroundColor = .orange
         setup()
+        
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
@@ -90,6 +96,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        return cellViewModel.sizes.totalHeight
     }
 }
