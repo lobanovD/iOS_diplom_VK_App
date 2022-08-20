@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6D471B28B0594B0059BA42 /* NewsFeedCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471A28B0594B0059BA42 /* NewsFeedCodeCell.swift */; };
 		1AB987A5289F23CB00F56E76 /* VKSdkFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; };
 		1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB987AB289F2E6900F56E76 /* VKAuthService.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A6D471A28B0594B0059BA42 /* NewsFeedCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCodeCell.swift; sourceTree = "<group>"; };
 		1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
 		1AB987AB289F2E6900F56E76 /* VKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAuthService.swift; sourceTree = "<group>"; };
 		1ABCBBF928A2FA0000010460 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				1ABCBC1728A5C53F00010460 /* NewsFeedCell.xib */,
+				1A6D471A28B0594B0059BA42 /* NewsFeedCodeCell.swift */,
 				1ABCBC1528A5C52800010460 /* NewsFeedCell.swift */,
 				1ABCBC1E28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift */,
 			);
@@ -261,6 +264,7 @@
 				1ABCBBFA28A2FA0000010460 /* NetworkService.swift in Sources */,
 				1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */,
 				1ABCBBFC28A2FCAB00010460 /* API.swift in Sources */,
+				1A6D471B28B0594B0059BA42 /* NewsFeedCodeCell.swift in Sources */,
 				1ABCBC1628A5C52800010460 /* NewsFeedCell.swift in Sources */,
 				1ABCBC1F28AC49CA00010460 /* NewsFeedCellLayoutCalculator.swift in Sources */,
 				1ABCBC0D28A464A900010460 /* NewsFeedViewController.swift in Sources */,

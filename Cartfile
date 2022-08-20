@@ -1,1 +1,2 @@
 github "VKCOM/vk-ios-sdk" >= 1.3.8
+github "roberthein/TinyConstraints"
