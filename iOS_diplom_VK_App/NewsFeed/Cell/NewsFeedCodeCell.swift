@@ -12,14 +12,11 @@ final class NewsFeedCodeCell: UITableViewCell {
     
     static let id = "NewsFeedCodeCell"
     
-    let cardView: UIView = {
-        
-    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-            
+        
     }
     
    

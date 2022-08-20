@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A6D471B28B0594B0059BA42 /* NewsFeedCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471A28B0594B0059BA42 /* NewsFeedCodeCell.swift */; };
+		1A6D471D28B05E620059BA42 /* TinyConstraints.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AB987A5289F23CB00F56E76 /* VKSdkFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; };
 		1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB987AB289F2E6900F56E76 /* VKAuthService.swift */; };
@@ -40,6 +41,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */,
+				1A6D471D28B05E620059BA42 /* TinyConstraints.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		1A6D471A28B0594B0059BA42 /* NewsFeedCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCodeCell.swift; sourceTree = "<group>"; };
+		1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TinyConstraints.xcframework; path = Carthage/Build/TinyConstraints.xcframework; sourceTree = "<group>"; };
 		1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
 		1AB987AB289F2E6900F56E76 /* VKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAuthService.swift; sourceTree = "<group>"; };
 		1ABCBBF928A2FA0000010460 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		1AB987A3289F23CB00F56E76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */,
 				1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */,
 			);
 			name = Frameworks;
