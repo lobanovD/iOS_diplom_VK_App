@@ -13,6 +13,8 @@ protocol NewsFeedDisplayLogic: class {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
 }
 
+
+
 class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     var interactor: NewsFeedBusinessLogic?
@@ -51,11 +53,16 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
+        //tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
         tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.id)
+
+
         view.addSubview(tableView)
-        
+  
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+
+//        tableView.rowHeight =  UITableView.automaticDimension
+        tableView.estimatedRowHeight =  UITableView.automaticDimension
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -94,12 +101,14 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
 //        let cellViewModel = feedViewModel.cells[indexPath.row]
 //        cell.set(viewModel: cellViewModel)
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.id, for: indexPath) as! NewsFeedCodeCell
-        cell.textLabel?.text = "\(indexPath.row)"
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        cell.setupCell(viewModel: cellViewModel)
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = feedViewModel.cells[indexPath.row]
-        return cellViewModel.sizes.totalHeight
+        return cellViewModel.totalHeight
     }
 }

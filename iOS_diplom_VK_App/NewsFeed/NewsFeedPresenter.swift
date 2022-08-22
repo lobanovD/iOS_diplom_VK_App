@@ -14,8 +14,7 @@ protocol NewsFeedPresentationLogic {
 
 class NewsFeedPresenter: NewsFeedPresentationLogic {
     weak var viewController: NewsFeedDisplayLogic?
-    
-    var cellLayoutCalculator: FeedCellLayoutCalculatorProtocol = FeedCellLayoutCalculator(screenWidth: UIScreen.main.bounds.width)
+        
     
     func presentData(response: NewsFeed.Model.Response.ResponseType) {
         
@@ -41,10 +40,14 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         let vkDateFormater = VKDateFormater()
         let date = vkDateFormater.formateDate(date: feedItem.date)
         
+        
         let photoAttacment = self.photoAttachment(feedItem: feedItem)
         
-        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachment: photoAttacment)
+        let cellHeightCalc = CalculateCellHeight()
+        let cellHeight = cellHeightCalc.calculateCellTotalHeight(photoAttachment: photoAttacment,
+                                                                 text: feedItem.text)
         
+
         return FeedViewModel.Cell.init(iconUrlString: profile?.photo ?? "",
                                        name: profile?.name ?? "Имя группы не получено",
                                        date: date,
@@ -54,7 +57,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                        shares: String(feedItem.reposts?.count ?? 0),
                                        views: String(feedItem.views?.count ?? 0),
                                        photoAttachment: photoAttacment,
-                                       sizes: sizes
+                                       totalHeight: cellHeight
+                            
         )
     }
     
