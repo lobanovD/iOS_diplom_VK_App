@@ -23,14 +23,17 @@ struct CellConstants {
     static let titleViewLeftOffset: CGFloat = 8
     static let titleViewRightOffset: CGFloat = 8
     
-    // MARK: TextView
+    // MARK: Text View
     static let postTextFontSize: UIFont = .systemFont(ofSize: 15)
     static let postTextTopOffset: CGFloat = 8
     static let postTextLeftOffset: CGFloat = 8
     static let postTextRightOffset: CGFloat = 8
     
-    // MARK: PostImageView (фото)
+    // MARK: Post Image View (фото)
     static let postImageViewTopOffset: CGFloat = 8
+    
+    // MARK: Buttons View
+    static let buttonViewHeight: CGFloat = 40
    
     
 }

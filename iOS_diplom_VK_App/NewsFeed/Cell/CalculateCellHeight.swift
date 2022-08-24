@@ -22,11 +22,17 @@ final class CalculateCellHeight {
         let attachmentHeight = calculatePhotoAttachmentHeight(photoAttachment: photoAttachment) + CellConstants.postImageViewTopOffset
         
         // Высота блока кнопок
-        // TODO
-        let buttonBlockHeight: CGFloat = 8
+        let buttonBlockHeight = CellConstants.buttonViewHeight
+        var topOffsetOfButtonsBlock: CGFloat = 0
+        
+        if photoAttachment != nil {
+            topOffsetOfButtonsBlock = 8
+        } else {
+            topOffsetOfButtonsBlock = 0
+        }
         
         // Общая высота
-        let totalHeight = titleHeight + attachmentHeight + textHeight + buttonBlockHeight
+        let totalHeight = titleHeight + attachmentHeight + textHeight + buttonBlockHeight + topOffsetOfButtonsBlock
         return totalHeight
     }
     

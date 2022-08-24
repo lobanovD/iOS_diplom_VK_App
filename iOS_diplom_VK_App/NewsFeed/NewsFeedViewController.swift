@@ -54,7 +54,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         tableView.delegate = self
         tableView.dataSource = self
         //tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
-        tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.id)
+        tableView.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
 
 
         view.addSubview(tableView)
@@ -97,13 +97,10 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.cellId, for: indexPath) as! NewsFeedCell
-//        let cellViewModel = feedViewModel.cells[indexPath.row]
-//        cell.set(viewModel: cellViewModel)
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.id, for: indexPath) as! NewsFeedCodeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.setupCell(viewModel: cellViewModel)
-
+        cell.layoutSubviews()
         return cell
     }
     
