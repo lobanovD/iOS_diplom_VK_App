@@ -26,7 +26,7 @@ final class CalculateCellHeight {
         var topOffsetOfButtonsBlock: CGFloat = 0
         
         if photoAttachment != nil {
-            topOffsetOfButtonsBlock = 8
+            topOffsetOfButtonsBlock = CellConstants.topOffsetOfButtonsBlock
         } else {
             topOffsetOfButtonsBlock = 0
         }
@@ -39,7 +39,7 @@ final class CalculateCellHeight {
     // Вычисление высоты текста
     func calculateTextHeight(text: String?) -> CGFloat {
         guard let text = text else { return 0 }
-
+        
         // Ширина текста
         let screenWidth = screenWidth - (CellConstants.cardViewLeftOffset + CellConstants.cardViewRightOffset + CellConstants.postTextLeftOffset + CellConstants.postTextRightOffset)
         
@@ -47,7 +47,6 @@ final class CalculateCellHeight {
         let textHeight = text.height(textWidth: screenWidth, font: CellConstants.postTextFontSize)
         
         return textHeight
-        
     }
     
     // вычисление высоты Photo Attachment

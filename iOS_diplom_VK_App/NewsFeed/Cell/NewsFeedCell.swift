@@ -33,10 +33,10 @@ final class NewsFeedCell: UITableViewCell {
     
     // Убираем данные ячейки перед переиспользованием
     override func prepareForReuse() {
-        iconImage.set(imageUrl: nil)
-        iconImage.set(imageUrl: nil)
-        titleLable.text = nil
-        timeLable.text = nil
+        titleIconImage.set(imageUrl: nil)
+        titleIconImage.set(imageUrl: nil)
+        titleLabel.text = nil
+        timeLabel.text = nil
         postText.text = nil
         postImageView.set(imageUrl: nil)
         likesLabel.text = nil
@@ -49,7 +49,7 @@ final class NewsFeedCell: UITableViewCell {
     private lazy var cardView: UIView = {
         let cardView = UIView()
         cardView.backgroundColor = .white
-        cardView.layer.cornerRadius = 10
+        cardView.layer.cornerRadius = CellConstants.cardViewLayerCornerRadius
         cardView.clipsToBounds = true
         return cardView
     }()
@@ -57,32 +57,29 @@ final class NewsFeedCell: UITableViewCell {
     // View заголовка (содержит иконку, название/имя пользователя и время поста)
     private lazy var titleView: UIView = {
         let titleView = UIView()
-        titleView.backgroundColor = .red
         return titleView
     }()
     
     // Иконка группы/пользователя
-    private lazy var iconImage: WebImageView = {
-        let iconImage = WebImageView()
-        iconImage.layer.cornerRadius = 20
-        iconImage.clipsToBounds = true
-        return iconImage
+    private lazy var titleIconImage: WebImageView = {
+        let titleIconImage = WebImageView()
+        titleIconImage.layer.cornerRadius = CellConstants.titleImageLayerCornerRadius
+        titleIconImage.clipsToBounds = true
+        return titleIconImage
     }()
     
     // Название группы/имя пользователя
-    private lazy var titleLable: UILabel = {
-        let titleLable = UILabel()
-        titleLable.text = "РИА Новости"
-        titleLable.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        return titleLable
+    private lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.font = CellConstants.titleLabelFont
+        return titleLabel
     }()
     
     // Время поста
-    private lazy var timeLable: UILabel = {
-        let timeLable = UILabel()
-        timeLable.text = "20 авг. в 16:04"
-        timeLable.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        return timeLable
+    private lazy var timeLabel: UILabel = {
+        let timeLabel = UILabel()
+        timeLabel.font = CellConstants.timeLabelFont
+        return timeLabel
     }()
     
     // Текст поста
@@ -100,30 +97,29 @@ final class NewsFeedCell: UITableViewCell {
     }()
     
     // Кнопки
-    private lazy var buttonView: UIView = {
-        let buttonView = UIView()
-        //buttonView.backgroundColor = .green
-        return buttonView
+    private lazy var buttonViewBlock: UIView = {
+        let buttonViewBlock = UIView()
+        return buttonViewBlock
     }()
     
     private lazy var likesView: UIView = {
         let likesView = UIView()
         likesView.backgroundColor = .systemGray5
-        likesView.layer.cornerRadius = 15
+        likesView.layer.cornerRadius = CellConstants.likesViewLayerCornerRadius
         likesView.clipsToBounds = true
         return likesView
     }()
     
     private lazy var likesImage: UIImageView = {
         let likesImage = UIImageView()
-        likesImage.image = UIImage(named: "like")
+        likesImage.image = UIImage(named: CellConstants.likesImageName)
         return likesImage
     }()
     
     private lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
-        likesLabel.font = UIFont.systemFont(ofSize: 14)
-        likesLabel.textColor = UIColor(named: "likesColor")
+        likesLabel.font = CellConstants.likesLabelFont
+        likesLabel.textColor = UIColor(named: CellConstants.likesLabelTextColor)
         return likesLabel
     }()
     
@@ -132,9 +128,9 @@ final class NewsFeedCell: UITableViewCell {
     func setupViewsAndConstraints() {
         
         contentView.addSubviews(views: cardView)
-        cardView.addSubviews(views: titleView, postText, postImageView, buttonView)
-        titleView.addSubviews(views: iconImage, titleLable, timeLable)
-        buttonView.addSubviews(views: likesView)
+        cardView.addSubviews(views: titleView, postText, postImageView, buttonViewBlock)
+        titleView.addSubviews(views: titleIconImage, titleLabel, timeLabel)
+        buttonViewBlock.addSubviews(views: likesView)
         likesView.addSubviews(views: likesImage, likesLabel)
         
         cardView.topToSuperview(offset: CellConstants.cardViewTopOffset)
@@ -147,16 +143,16 @@ final class NewsFeedCell: UITableViewCell {
         titleView.leadingToSuperview(offset: CellConstants.titleViewLeftOffset)
         titleView.height(CellConstants.titleViewHeight)
         
-        iconImage.centerYToSuperview()
-        iconImage.leadingToSuperview(offset: 6)
-        iconImage.height(40)
-        iconImage.width(40)
+        titleIconImage.centerYToSuperview()
+        titleIconImage.leadingToSuperview()
+        titleIconImage.height(CellConstants.titleIconImageHeight)
+        titleIconImage.width(CellConstants.titleIconImageWidth)
         
-        titleLable.topToSuperview(offset: 6)
-        titleLable.leadingToTrailing(of: iconImage, offset: 6)
+        titleLabel.topToSuperview(offset: CellConstants.titleLabelTopOffset)
+        titleLabel.leadingToTrailing(of: titleIconImage, offset: CellConstants.titleLabelLeftOffset)
         
-        timeLable.bottomToSuperview(offset: -6)
-        timeLable.leadingToTrailing(of: iconImage, offset: 6)
+        timeLabel.bottomToSuperview(offset: CellConstants.timeLabelBottomOffset)
+        timeLabel.leadingToTrailing(of: titleIconImage, offset: CellConstants.timeLabelRightOffset)
         
         postText.topToBottom(of: titleView, offset: CellConstants.postTextTopOffset)
         postText.leadingToSuperview(offset: CellConstants.postTextLeftOffset)
@@ -164,10 +160,10 @@ final class NewsFeedCell: UITableViewCell {
         
         photoAttachmentConstraintsSetup()
         
-        buttonView.leadingToSuperview()
-        buttonView.trailingToSuperview()
-        buttonView.bottomToSuperview()
-        buttonView.height(CellConstants.buttonViewHeight)
+        buttonViewBlock.leadingToSuperview()
+        buttonViewBlock.trailingToSuperview()
+        buttonViewBlock.bottomToSuperview()
+        buttonViewBlock.height(CellConstants.buttonViewHeight)
         
         likesViewConstraintsSetup(likesViewWidth: 0)
         
@@ -178,9 +174,9 @@ final class NewsFeedCell: UITableViewCell {
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedCellViewModel) {
         
-        titleLable.text = viewModel.name
-        iconImage.set(imageUrl: viewModel.iconUrlString)
-        timeLable.text = viewModel.date
+        titleLabel.text = viewModel.name
+        titleIconImage.set(imageUrl: viewModel.iconUrlString)
+        timeLabel.text = viewModel.date
         postText.text = viewModel.text
         likesLabel.text = viewModel.likes
         
@@ -191,7 +187,7 @@ final class NewsFeedCell: UITableViewCell {
         
     }
     
-
+    
     // MARK: Работа с Photo Attachment
     
     // Метод, изменяющий размер полученного фото
@@ -201,7 +197,6 @@ final class NewsFeedCell: UITableViewCell {
             postImageView.isHidden = false
             let heightCalculator = CalculateCellHeight()
             let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
-//            postImageView.height(cellHeight)
             self.photoAttachmentHeight = cellHeight
         } else {
             postImageView.isHidden = true
@@ -216,7 +211,7 @@ final class NewsFeedCell: UITableViewCell {
         postImageView.height(self.photoAttachmentHeight)
     }
     
-
+    
     
     
     // MARK: Работа с ячейкой лайков
@@ -231,18 +226,18 @@ final class NewsFeedCell: UITableViewCell {
     private func likesViewConstraintsSetup(likesViewWidth: CGFloat) {
         likesView.constraints.deActivate()
         
-        likesView.leadingToSuperview(offset: 8)
-        likesView.topToSuperview(offset: 6)
-        likesView.bottomToSuperview(offset: -6)
+        likesView.leadingToSuperview(offset: CellConstants.likesViewLeftOffset)
+        likesView.topToSuperview(offset: CellConstants.likesViewTopOffset)
+        likesView.bottomToSuperview(offset: CellConstants.likesViewBottomOffset)
         likesView.centerYToSuperview()
         likesView.width(likesViewWidth)
         
-        likesImage.leadingToSuperview(offset: 8)
+        likesImage.leadingToSuperview(offset: CellConstants.likesImageLeftOffset)
         likesImage.centerYToSuperview()
-        likesImage.width(20)
-        likesImage.height(20)
+        likesImage.width(CellConstants.likesImageWidth)
+        likesImage.height(CellConstants.likesImageHeight)
         
-        likesLabel.leadingToTrailing(of: likesImage, offset: 6)
+        likesLabel.leadingToTrailing(of: likesImage, offset: CellConstants.likesLabelLeftOffset)
         likesLabel.centerYToSuperview()
     }
     
@@ -250,13 +245,13 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthLikesView() {
         switch self.likes {
         case 0...9:
-            likesViewConstraintsSetup(likesViewWidth: 55)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForOneCountNumbers)
         case 10...99:
-            likesViewConstraintsSetup(likesViewWidth: 65)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForTwoCountNumbers)
         case 100...999:
-            likesViewConstraintsSetup(likesViewWidth: 75)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForThreeCountNumbers)
         case 1000...9999:
-            likesViewConstraintsSetup(likesViewWidth: 85)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForFourCountNumbers)
         default:
             break
         }
