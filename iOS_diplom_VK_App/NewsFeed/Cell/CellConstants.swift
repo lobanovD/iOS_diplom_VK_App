@@ -12,7 +12,7 @@ import UIKit
 struct CellConstants {
     
     
-    // TODO: Сделать для айпида другие параметры
+    // TODO: Сделать для айпада другие параметры
     init(){
         if UIScreen.main.bounds.width == 100 {
             

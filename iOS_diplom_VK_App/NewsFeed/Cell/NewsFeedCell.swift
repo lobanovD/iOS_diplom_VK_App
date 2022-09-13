@@ -123,6 +123,27 @@ final class NewsFeedCell: UITableViewCell {
         return likesLabel
     }()
     
+    private lazy var commentsView: UIView = {
+        let commentsView = UIView()
+        commentsView.backgroundColor = .systemGray5
+        commentsView.layer.cornerRadius = CellConstants.likesViewLayerCornerRadius
+        commentsView.clipsToBounds = true
+        return commentsView
+    }()
+    
+    private lazy var commentsImage: UIImageView = {
+        let commentsImage = UIImageView()
+        commentsImage.image = UIImage(named: CellConstants.likesImageName)
+        return commentsImage
+    }()
+    
+    private lazy var commentsLabel: UILabel = {
+        let commentsLabel = UILabel()
+        commentsLabel.font = CellConstants.likesLabelFont
+        commentsLabel.textColor = UIColor(named: CellConstants.likesLabelTextColor)
+        return commentsLabel
+    }()
+    
     // MARK: Constraints
     
     func setupViewsAndConstraints() {
@@ -130,8 +151,9 @@ final class NewsFeedCell: UITableViewCell {
         contentView.addSubviews(views: cardView)
         cardView.addSubviews(views: titleView, postText, postImageView, buttonViewBlock)
         titleView.addSubviews(views: titleIconImage, titleLabel, timeLabel)
-        buttonViewBlock.addSubviews(views: likesView)
+        buttonViewBlock.addSubviews(views: likesView, commentsView)
         likesView.addSubviews(views: likesImage, likesLabel)
+        commentsView.addSubviews(views: commentsImage, commentsLabel)
         
         cardView.topToSuperview(offset: CellConstants.cardViewTopOffset)
         cardView.leadingToSuperview(offset: CellConstants.cardViewLeftOffset)

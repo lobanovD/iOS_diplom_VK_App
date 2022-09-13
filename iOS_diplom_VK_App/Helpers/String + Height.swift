@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// Возвращает высоту, которую занимает текст, заданного размера
 extension String {
     func height(textWidth: CGFloat, font: UIFont) -> CGFloat {
         let textSize = CGSize(width: textWidth, height: .greatestFiniteMagnitude)

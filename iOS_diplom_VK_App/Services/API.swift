@@ -11,7 +11,7 @@ struct API {
     // Запрашиваемые разрешения (https://dev.vk.com/reference/access-rights)
     static let scope = ["offline", "wall", "friends"]
     // ID приложения
-    static let appID = "51395644"
+    static let appID = "51425771"
     // Протокол запросов к API
     static let scheme = "https"
     // Адрес API

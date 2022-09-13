@@ -9,7 +9,7 @@ import Foundation
 
 // Класс для работы с датами из API
 
-final class VKDateFormater {
+final class VKDateFormater: DateFormatter {
     
     let dateFormater = DateFormatter()
     
