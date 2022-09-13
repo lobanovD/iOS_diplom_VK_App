@@ -39,5 +39,7 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     
     func authServiceSignInDidFail() {
         print(#function)
+        
+        
     }
 }

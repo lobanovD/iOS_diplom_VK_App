@@ -55,6 +55,7 @@ final class VKAuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
                 delegate?.authServiceSignIn()
             default:
                 delegate?.authServiceSignInDidFail()
+                VKSdk.authorize(scope)
             }
         }
     }
