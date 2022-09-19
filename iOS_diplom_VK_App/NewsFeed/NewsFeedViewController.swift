@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-protocol NewsFeedDisplayLogic: class {
+protocol NewsFeedDisplayLogic: AnyObject {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
 }
 

@@ -17,6 +17,7 @@ final class NewsFeedCell: UITableViewCell {
     // Переменные и константы
     static let id = "NewsFeedCodeCell"
     private var likes: Int = 0
+    private var comments: Int = 0
     private var photoAttachmentHeight: CGFloat = 0
     
     // Инициализация ячейки
@@ -28,6 +29,7 @@ final class NewsFeedCell: UITableViewCell {
     // Обновление subviews
     override func layoutSubviews() {
         changeWidthLikesView()
+        changeWidthCommentsView()
         photoAttachmentConstraintsSetup()
     }
     
@@ -40,6 +42,7 @@ final class NewsFeedCell: UITableViewCell {
         postText.text = nil
         postImageView.set(imageUrl: nil)
         likesLabel.text = nil
+        commentsLabel.text = nil
     }
     
     
@@ -110,10 +113,10 @@ final class NewsFeedCell: UITableViewCell {
         return likesView
     }()
     
-    private lazy var likesImage: UIImageView = {
-        let likesImage = UIImageView()
-        likesImage.image = UIImage(named: CellConstants.likesImageName)
-        return likesImage
+    private lazy var likesIcon: UIImageView = {
+        let likesIcon = UIImageView()
+        likesIcon.image = UIImage(named: CellConstants.likesIconName)
+        return likesIcon
     }()
     
     private lazy var likesLabel: UILabel = {
@@ -126,21 +129,21 @@ final class NewsFeedCell: UITableViewCell {
     private lazy var commentsView: UIView = {
         let commentsView = UIView()
         commentsView.backgroundColor = .systemGray5
-        commentsView.layer.cornerRadius = CellConstants.likesViewLayerCornerRadius
+        commentsView.layer.cornerRadius = CellConstants.commentsViewLayerCornerRadius
         commentsView.clipsToBounds = true
         return commentsView
     }()
     
-    private lazy var commentsImage: UIImageView = {
-        let commentsImage = UIImageView()
-        commentsImage.image = UIImage(named: CellConstants.likesImageName)
-        return commentsImage
+    private lazy var commentsIcon: UIImageView = {
+        let commentsIcon = UIImageView()
+        commentsIcon.image = UIImage(named: CellConstants.commentsIconName)
+        return commentsIcon
     }()
     
     private lazy var commentsLabel: UILabel = {
         let commentsLabel = UILabel()
-        commentsLabel.font = CellConstants.likesLabelFont
-        commentsLabel.textColor = UIColor(named: CellConstants.likesLabelTextColor)
+        commentsLabel.font = CellConstants.commentsLabelFont
+        commentsLabel.textColor = UIColor(named: CellConstants.commentsLabelTextColor)
         return commentsLabel
     }()
     
@@ -152,8 +155,8 @@ final class NewsFeedCell: UITableViewCell {
         cardView.addSubviews(views: titleView, postText, postImageView, buttonViewBlock)
         titleView.addSubviews(views: titleIconImage, titleLabel, timeLabel)
         buttonViewBlock.addSubviews(views: likesView, commentsView)
-        likesView.addSubviews(views: likesImage, likesLabel)
-        commentsView.addSubviews(views: commentsImage, commentsLabel)
+        likesView.addSubviews(views: likesIcon, likesLabel)
+        commentsView.addSubviews(views: commentsIcon, commentsLabel)
         
         cardView.topToSuperview(offset: CellConstants.cardViewTopOffset)
         cardView.leadingToSuperview(offset: CellConstants.cardViewLeftOffset)
@@ -186,9 +189,7 @@ final class NewsFeedCell: UITableViewCell {
         buttonViewBlock.trailingToSuperview()
         buttonViewBlock.bottomToSuperview()
         buttonViewBlock.height(CellConstants.buttonViewHeight)
-        
-        likesViewConstraintsSetup(likesViewWidth: 0)
-        
+         
     }
     
     
@@ -201,10 +202,14 @@ final class NewsFeedCell: UITableViewCell {
         timeLabel.text = viewModel.date
         postText.text = viewModel.text
         likesLabel.text = viewModel.likes
+        commentsLabel.text = viewModel.comments
         
         getLikesCount(viewModel: viewModel)
+        getCommentsCount(viewModel: viewModel)
         
         changePhotoAttachmentHeight(viewModel: viewModel)
+        
+        
         
         
     }
@@ -236,7 +241,7 @@ final class NewsFeedCell: UITableViewCell {
     
     
     
-    // MARK: Работа с ячейкой лайков
+    // MARK: Работа с View лайков
     
     // Метод, изменяющий переменную likes
     private func getLikesCount(viewModel: FeedCellViewModel) {
@@ -254,12 +259,12 @@ final class NewsFeedCell: UITableViewCell {
         likesView.centerYToSuperview()
         likesView.width(likesViewWidth)
         
-        likesImage.leadingToSuperview(offset: CellConstants.likesImageLeftOffset)
-        likesImage.centerYToSuperview()
-        likesImage.width(CellConstants.likesImageWidth)
-        likesImage.height(CellConstants.likesImageHeight)
+        likesIcon.leadingToSuperview(offset: CellConstants.likesIconLeftOffset)
+        likesIcon.centerYToSuperview()
+        likesIcon.width(CellConstants.likesIconWidth)
+        likesIcon.height(CellConstants.likesIconHeight)
         
-        likesLabel.leadingToTrailing(of: likesImage, offset: CellConstants.likesLabelLeftOffset)
+        likesLabel.leadingToTrailing(of: likesIcon, offset: CellConstants.likesLabelLeftOffset)
         likesLabel.centerYToSuperview()
     }
     
@@ -274,6 +279,49 @@ final class NewsFeedCell: UITableViewCell {
             likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForThreeCountNumbers)
         case 1000...9999:
             likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForFourCountNumbers)
+        default:
+            break
+        }
+    }
+    
+    // MARK: Работа с View комментариев
+    
+    // Метод, изменяющий переменную comments
+    private func getCommentsCount(viewModel: FeedCellViewModel) {
+        guard let comments = Int(viewModel.comments ?? "0") else { return }
+        self.comments = comments
+    }
+    
+    // Метод, сбрасывающий и устанавливающий констрейнты для View с комментариями
+    private func commentsViewConstraintsSetup(commentsViewWidth: CGFloat) {
+        commentsView.constraints.deActivate()
+        
+        commentsView.leadingToTrailing(of: likesView, offset: CellConstants.commentsViewLeftOffset)
+        commentsView.topToSuperview(offset: CellConstants.commentsViewTopOffset)
+        commentsView.bottomToSuperview(offset: CellConstants.commentsViewBottomOffset)
+        commentsView.centerYToSuperview()
+        commentsView.width(commentsViewWidth)
+        
+        commentsIcon.leadingToSuperview(offset: CellConstants.commentsIconLeftOffset)
+        commentsIcon.centerYToSuperview()
+        commentsIcon.width(CellConstants.commentsIconWidth)
+        commentsIcon.height(CellConstants.commentsIconHeight)
+        
+        commentsLabel.leadingToTrailing(of: commentsIcon, offset: CellConstants.commentsLabelLeftOffset)
+        commentsLabel.centerYToSuperview()
+    }
+    
+    // Метод, изменяющий ширину view в зависимости от кол-ва комментариев
+    private func changeWidthCommentsView() {
+        switch self.comments {
+        case 0...9:
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForOneCountNumbers)
+        case 10...99:
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForTwoCountNumbers)
+        case 100...999:
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForThreeCountNumbers)
+        case 1000...9999:
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForFourCountNumbers)
         default:
             break
         }

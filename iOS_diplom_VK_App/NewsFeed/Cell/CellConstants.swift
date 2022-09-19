@@ -72,14 +72,39 @@ struct CellConstants {
     static let likesViewWidthForThreeCountNumbers: CGFloat = 75
     static let likesViewWidthForFourCountNumbers: CGFloat = 85
     
-    // MARK: Likes Image
-    static let likesImageName: String = "like"
-    static let likesImageLeftOffset: CGFloat = 8
-    static let likesImageWidth: CGFloat = 20
-    static let likesImageHeight: CGFloat = 20
+    // MARK: Likes Icon
+    static let likesIconName: String = "like"
+    static let likesIconLeftOffset: CGFloat = 8
+    static let likesIconWidth: CGFloat = 20
+    static let likesIconHeight: CGFloat = 20
     
     // MARK: Likes Label
     static let likesLabelFont: UIFont = .systemFont(ofSize: 14)
     static let likesLabelTextColor: String = "likesColor"
     static let likesLabelLeftOffset: CGFloat = 6
+    
+//    =========
+    // MARK: Comment View
+    static let commentsViewLayerCornerRadius: CGFloat = 15
+    static let commentsViewLeftOffset: CGFloat = 8
+    static let commentsViewTopOffset: CGFloat = 6
+    static let commentsViewBottomOffset: CGFloat = -6
+    
+    static let commentsViewWidthForOneCountNumbers: CGFloat = 55
+    static let commentsViewWidthForTwoCountNumbers: CGFloat = 65
+    static let commentsViewWidthForThreeCountNumbers: CGFloat = 75
+    static let commentsViewWidthForFourCountNumbers: CGFloat = 85
+    
+    // MARK: Comment Icon
+    static let commentsIconName: String = "comment"
+    static let commentsIconLeftOffset: CGFloat = 8
+    static let commentsIconWidth: CGFloat = 20
+    static let commentsIconHeight: CGFloat = 20
+    
+    // MARK: Comment Label
+    static let commentsLabelFont: UIFont = .systemFont(ofSize: 14)
+    static let commentsLabelTextColor: String = "commentColor"
+    static let commentsLabelLeftOffset: CGFloat = 6
+    
+    
 }
