@@ -9,10 +9,7 @@ import Foundation
 import UIKit
 import TinyConstraints
 
-
-
 final class NewsFeedCell: UITableViewCell {
-    
     
     // Переменные и константы
     static let id = "NewsFeedCodeCell"
@@ -44,7 +41,6 @@ final class NewsFeedCell: UITableViewCell {
         likesLabel.text = nil
         commentsLabel.text = nil
     }
-    
     
     // MARK: UI
     
@@ -192,8 +188,6 @@ final class NewsFeedCell: UITableViewCell {
          
     }
     
-    
-    
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedCellViewModel) {
         
@@ -209,11 +203,7 @@ final class NewsFeedCell: UITableViewCell {
         
         changePhotoAttachmentHeight(viewModel: viewModel)
         
-        
-        
-        
     }
-    
     
     // MARK: Работа с Photo Attachment
     
@@ -237,9 +227,6 @@ final class NewsFeedCell: UITableViewCell {
         postImageView.width(to: cardView)
         postImageView.height(self.photoAttachmentHeight)
     }
-    
-    
-    
     
     // MARK: Работа с View лайков
     
@@ -326,7 +313,6 @@ final class NewsFeedCell: UITableViewCell {
             break
         }
     }
-    
     
     
     required init?(coder: NSCoder) {
