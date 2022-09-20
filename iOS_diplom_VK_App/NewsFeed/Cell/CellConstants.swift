@@ -61,50 +61,30 @@ struct CellConstants {
     static let buttonViewHeight: CGFloat = 40
     static let topOffsetOfButtonsBlock: CGFloat = 8
     
-    // MARK: Likes View
-    static let likesViewLayerCornerRadius: CGFloat = 15
-    static let likesViewLeftOffset: CGFloat = 8
-    static let likesViewTopOffset: CGFloat = 6
-    static let likesViewBottomOffset: CGFloat = -6
     
-    static let likesViewWidthForOneCountNumbers: CGFloat = 55
-    static let likesViewWidthForTwoCountNumbers: CGFloat = 65
-    static let likesViewWidthForThreeCountNumbers: CGFloat = 75
-    static let likesViewWidthForFourCountNumbers: CGFloat = 85
+    // MARK: Buttons (Likes, Comments, Reposts, Views)
+    // View
+    static let buttonsViewLayerCornerRadius: CGFloat = 15
+    static let buttonsViewLeftOffset: CGFloat = 8
+    static let buttonsViewTopOffset: CGFloat = 6
+    static let buttonsViewBottomOffset: CGFloat = -6
     
-    // MARK: Likes Icon
-    static let likesIconName: String = "like"
-    static let likesIconLeftOffset: CGFloat = 8
-    static let likesIconWidth: CGFloat = 20
-    static let likesIconHeight: CGFloat = 20
+    static let buttonsViewWidthForOneCountNumbers: CGFloat = 55
+    static let buttonsViewWidthForTwoCountNumbers: CGFloat = 65
+    static let buttonsViewWidthForThreeCountNumbers: CGFloat = 75
+    static let buttonsViewWidthForFourCountNumbers: CGFloat = 85
     
-    // MARK: Likes Label
-    static let likesLabelFont: UIFont = .systemFont(ofSize: 14)
-    static let likesLabelTextColor: String = "likesColor"
-    static let likesLabelLeftOffset: CGFloat = 6
+    // Icon
+    static let buttonsLikesIconName: String = "like"
+    static let buttonsCommentsIconName: String = "comment"
+    static let buttonsRepostsIconName: String = "repost"
+    static let buttonsIconLeftOffset: CGFloat = 8
+    static let buttonsIconWidth: CGFloat = 20
+    static let buttonsIconHeight: CGFloat = 20
     
-//    =========
-    // MARK: Comment View
-    static let commentsViewLayerCornerRadius: CGFloat = 15
-    static let commentsViewLeftOffset: CGFloat = 8
-    static let commentsViewTopOffset: CGFloat = 6
-    static let commentsViewBottomOffset: CGFloat = -6
-    
-    static let commentsViewWidthForOneCountNumbers: CGFloat = 55
-    static let commentsViewWidthForTwoCountNumbers: CGFloat = 65
-    static let commentsViewWidthForThreeCountNumbers: CGFloat = 75
-    static let commentsViewWidthForFourCountNumbers: CGFloat = 85
-    
-    // MARK: Comment Icon
-    static let commentsIconName: String = "comment"
-    static let commentsIconLeftOffset: CGFloat = 8
-    static let commentsIconWidth: CGFloat = 20
-    static let commentsIconHeight: CGFloat = 20
-    
-    // MARK: Comment Label
-    static let commentsLabelFont: UIFont = .systemFont(ofSize: 14)
-    static let commentsLabelTextColor: String = "commentColor"
-    static let commentsLabelLeftOffset: CGFloat = 6
-    
+    // Label
+    static let buttonsLabelFont: UIFont = .systemFont(ofSize: 14)
+    static let buttonsLabelTextColor: String = "buttonsColor"
+    static let buttonsLabelLeftOffset: CGFloat = 6
     
 }

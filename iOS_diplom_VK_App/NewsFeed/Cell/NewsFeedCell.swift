@@ -4,7 +4,6 @@
 //
 //  Created by Dmitrii Lobanov on 20.08.2022.
 //
-
 import Foundation
 import UIKit
 import TinyConstraints
@@ -104,42 +103,42 @@ final class NewsFeedCell: UITableViewCell {
     private lazy var likesView: UIView = {
         let likesView = UIView()
         likesView.backgroundColor = .systemGray5
-        likesView.layer.cornerRadius = CellConstants.likesViewLayerCornerRadius
+        likesView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
         likesView.clipsToBounds = true
         return likesView
     }()
     
     private lazy var likesIcon: UIImageView = {
         let likesIcon = UIImageView()
-        likesIcon.image = UIImage(named: CellConstants.likesIconName)
+        likesIcon.image = UIImage(named: CellConstants.buttonsLikesIconName)
         return likesIcon
     }()
     
     private lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
-        likesLabel.font = CellConstants.likesLabelFont
-        likesLabel.textColor = UIColor(named: CellConstants.likesLabelTextColor)
+        likesLabel.font = CellConstants.buttonsLabelFont
+        likesLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
         return likesLabel
     }()
     
     private lazy var commentsView: UIView = {
         let commentsView = UIView()
         commentsView.backgroundColor = .systemGray5
-        commentsView.layer.cornerRadius = CellConstants.commentsViewLayerCornerRadius
+        commentsView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
         commentsView.clipsToBounds = true
         return commentsView
     }()
     
     private lazy var commentsIcon: UIImageView = {
         let commentsIcon = UIImageView()
-        commentsIcon.image = UIImage(named: CellConstants.commentsIconName)
+        commentsIcon.image = UIImage(named: CellConstants.buttonsCommentsIconName)
         return commentsIcon
     }()
     
     private lazy var commentsLabel: UILabel = {
         let commentsLabel = UILabel()
-        commentsLabel.font = CellConstants.commentsLabelFont
-        commentsLabel.textColor = UIColor(named: CellConstants.commentsLabelTextColor)
+        commentsLabel.font = CellConstants.buttonsLabelFont
+        commentsLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
         return commentsLabel
     }()
     
@@ -185,7 +184,7 @@ final class NewsFeedCell: UITableViewCell {
         buttonViewBlock.trailingToSuperview()
         buttonViewBlock.bottomToSuperview()
         buttonViewBlock.height(CellConstants.buttonViewHeight)
-         
+        
     }
     
     // Конфигурирование ячейки (наполнение данными)
@@ -240,18 +239,18 @@ final class NewsFeedCell: UITableViewCell {
     private func likesViewConstraintsSetup(likesViewWidth: CGFloat) {
         likesView.constraints.deActivate()
         
-        likesView.leadingToSuperview(offset: CellConstants.likesViewLeftOffset)
-        likesView.topToSuperview(offset: CellConstants.likesViewTopOffset)
-        likesView.bottomToSuperview(offset: CellConstants.likesViewBottomOffset)
+        likesView.leadingToSuperview(offset: CellConstants.buttonsViewLeftOffset)
+        likesView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
+        likesView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
         likesView.centerYToSuperview()
         likesView.width(likesViewWidth)
         
-        likesIcon.leadingToSuperview(offset: CellConstants.likesIconLeftOffset)
+        likesIcon.leadingToSuperview(offset: CellConstants.buttonsIconLeftOffset)
         likesIcon.centerYToSuperview()
-        likesIcon.width(CellConstants.likesIconWidth)
-        likesIcon.height(CellConstants.likesIconHeight)
+        likesIcon.width(CellConstants.buttonsIconWidth)
+        likesIcon.height(CellConstants.buttonsIconHeight)
         
-        likesLabel.leadingToTrailing(of: likesIcon, offset: CellConstants.likesLabelLeftOffset)
+        likesLabel.leadingToTrailing(of: likesIcon, offset: CellConstants.buttonsLabelLeftOffset)
         likesLabel.centerYToSuperview()
     }
     
@@ -259,13 +258,13 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthLikesView() {
         switch self.likes {
         case 0...9:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForOneCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
         case 10...99:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForTwoCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
         case 100...999:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForThreeCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.likesViewWidthForFourCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
         default:
             break
         }
@@ -283,18 +282,18 @@ final class NewsFeedCell: UITableViewCell {
     private func commentsViewConstraintsSetup(commentsViewWidth: CGFloat) {
         commentsView.constraints.deActivate()
         
-        commentsView.leadingToTrailing(of: likesView, offset: CellConstants.commentsViewLeftOffset)
-        commentsView.topToSuperview(offset: CellConstants.commentsViewTopOffset)
-        commentsView.bottomToSuperview(offset: CellConstants.commentsViewBottomOffset)
+        commentsView.leadingToTrailing(of: likesView, offset: CellConstants.buttonsViewLeftOffset)
+        commentsView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
+        commentsView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
         commentsView.centerYToSuperview()
         commentsView.width(commentsViewWidth)
         
-        commentsIcon.leadingToSuperview(offset: CellConstants.commentsIconLeftOffset)
+        commentsIcon.leadingToSuperview(offset: CellConstants.buttonsIconLeftOffset)
         commentsIcon.centerYToSuperview()
-        commentsIcon.width(CellConstants.commentsIconWidth)
-        commentsIcon.height(CellConstants.commentsIconHeight)
+        commentsIcon.width(CellConstants.buttonsIconWidth)
+        commentsIcon.height(CellConstants.buttonsIconHeight)
         
-        commentsLabel.leadingToTrailing(of: commentsIcon, offset: CellConstants.commentsLabelLeftOffset)
+        commentsLabel.leadingToTrailing(of: commentsIcon, offset: CellConstants.buttonsLabelLeftOffset)
         commentsLabel.centerYToSuperview()
     }
     
@@ -302,13 +301,13 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthCommentsView() {
         switch self.comments {
         case 0...9:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForOneCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
         case 10...99:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForTwoCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
         case 100...999:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForThreeCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.commentsViewWidthForFourCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
         default:
             break
         }
