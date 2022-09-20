@@ -6,6 +6,7 @@
 - carthage update --use-xcframeworks
 
 Для работы приложения необходимо создать Standalone-приложение тут https://vk.com/apps?act=manage
+
 ID приложения необходимо поместить в info.plist, а так же в конфиг Services\API.swift
 
 ### Стэк
