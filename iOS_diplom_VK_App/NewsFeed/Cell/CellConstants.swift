@@ -68,16 +68,20 @@ struct CellConstants {
     static let buttonsViewLeftOffset: CGFloat = 8
     static let buttonsViewTopOffset: CGFloat = 6
     static let buttonsViewBottomOffset: CGFloat = -6
+    static let buttonsViewRightOffset: CGFloat = -6
     
     static let buttonsViewWidthForOneCountNumbers: CGFloat = 55
     static let buttonsViewWidthForTwoCountNumbers: CGFloat = 65
     static let buttonsViewWidthForThreeCountNumbers: CGFloat = 75
     static let buttonsViewWidthForFourCountNumbers: CGFloat = 85
+    static let buttonsViewWidthForFiveCountNumbers: CGFloat = 90
+    static let buttonsViewWidthForSixCountNumbers: CGFloat = 95
     
     // Icon
     static let buttonsLikesIconName: String = "like"
     static let buttonsCommentsIconName: String = "comment"
-    static let buttonsRepostsIconName: String = "repost"
+    static let buttonsRepostsIconName: String = "share"
+    static let buttonsViewsIconName: String = "eye"
     static let buttonsIconLeftOffset: CGFloat = 8
     static let buttonsIconWidth: CGFloat = 20
     static let buttonsIconHeight: CGFloat = 20

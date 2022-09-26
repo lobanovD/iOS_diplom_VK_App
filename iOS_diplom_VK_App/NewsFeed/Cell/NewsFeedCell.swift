@@ -14,6 +14,8 @@ final class NewsFeedCell: UITableViewCell {
     static let id = "NewsFeedCodeCell"
     private var likes: Int = 0
     private var comments: Int = 0
+    private var reposts: Int = 0
+    private var views: Int = 0
     private var photoAttachmentHeight: CGFloat = 0
     
     // Инициализация ячейки
@@ -26,6 +28,8 @@ final class NewsFeedCell: UITableViewCell {
     override func layoutSubviews() {
         changeWidthLikesView()
         changeWidthCommentsView()
+        changeWidthRepostsView()
+        changeWidthViewsView()
         photoAttachmentConstraintsSetup()
     }
     
@@ -39,6 +43,8 @@ final class NewsFeedCell: UITableViewCell {
         postImageView.set(imageUrl: nil)
         likesLabel.text = nil
         commentsLabel.text = nil
+        repostsLabel.text = nil
+        viewsLabel.text = nil
     }
     
     // MARK: UI
@@ -142,6 +148,48 @@ final class NewsFeedCell: UITableViewCell {
         return commentsLabel
     }()
     
+    private lazy var repostsView: UIView = {
+        let repostsView = UIView()
+        repostsView.backgroundColor = .systemGray5
+        repostsView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
+        repostsView.clipsToBounds = true
+        return repostsView
+    }()
+    
+    private lazy var repostsIcon: UIImageView = {
+        let repostsIcon = UIImageView()
+        repostsIcon.image = UIImage(named: CellConstants.buttonsRepostsIconName)
+        return repostsIcon
+    }()
+    
+    private lazy var repostsLabel: UILabel = {
+        let repostsLabel = UILabel()
+        repostsLabel.font = CellConstants.buttonsLabelFont
+        repostsLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
+        return repostsLabel
+    }()
+    
+    private lazy var viewsView: UIView = {
+        let viewsView = UIView()
+        viewsView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
+        viewsView.clipsToBounds = true
+        return viewsView
+    }()
+    
+    private lazy var viewsIcon: UIImageView = {
+        let viewsIcon = UIImageView()
+        viewsIcon.image = UIImage(named: CellConstants.buttonsViewsIconName)
+        return viewsIcon
+    }()
+    
+    private lazy var viewsLabel: UILabel = {
+        let viewsLabel = UILabel()
+        viewsLabel.font = CellConstants.buttonsLabelFont
+        viewsLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
+        return viewsLabel
+    }()
+    
+    
     // MARK: Constraints
     
     func setupViewsAndConstraints() {
@@ -149,9 +197,12 @@ final class NewsFeedCell: UITableViewCell {
         contentView.addSubviews(views: cardView)
         cardView.addSubviews(views: titleView, postText, postImageView, buttonViewBlock)
         titleView.addSubviews(views: titleIconImage, titleLabel, timeLabel)
-        buttonViewBlock.addSubviews(views: likesView, commentsView)
+        buttonViewBlock.addSubviews(views: likesView, commentsView, repostsView, viewsView)
         likesView.addSubviews(views: likesIcon, likesLabel)
         commentsView.addSubviews(views: commentsIcon, commentsLabel)
+        repostsView.addSubviews(views: repostsIcon, repostsLabel)
+        viewsView.addSubviews(views: viewsIcon, viewsLabel)
+        
         
         cardView.topToSuperview(offset: CellConstants.cardViewTopOffset)
         cardView.leadingToSuperview(offset: CellConstants.cardViewLeftOffset)
@@ -196,15 +247,19 @@ final class NewsFeedCell: UITableViewCell {
         postText.text = viewModel.text
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
+        repostsLabel.text = viewModel.shares
+        viewsLabel.text = viewModel.views
         
         getLikesCount(viewModel: viewModel)
         getCommentsCount(viewModel: viewModel)
+        getRepostCount(viewModel: viewModel)
+        getViewsCount(viewModel: viewModel)
         
         changePhotoAttachmentHeight(viewModel: viewModel)
         
     }
     
-    // MARK: Работа с Photo Attachment
+    // MARK: Photo Attachment
     
     // Метод, изменяющий размер полученного фото
     private func changePhotoAttachmentHeight(viewModel: FeedCellViewModel) {
@@ -227,7 +282,7 @@ final class NewsFeedCell: UITableViewCell {
         postImageView.height(self.photoAttachmentHeight)
     }
     
-    // MARK: Работа с View лайков
+    // MARK: View лайков
     
     // Метод, изменяющий переменную likes
     private func getLikesCount(viewModel: FeedCellViewModel) {
@@ -270,7 +325,7 @@ final class NewsFeedCell: UITableViewCell {
         }
     }
     
-    // MARK: Работа с View комментариев
+    // MARK: View комментариев
     
     // Метод, изменяющий переменную comments
     private func getCommentsCount(viewModel: FeedCellViewModel) {
@@ -308,6 +363,106 @@ final class NewsFeedCell: UITableViewCell {
             commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
             commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+        case 10000...99999:
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForFiveCountNumbers)
+        case 100000...999999:
+            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForSixCountNumbers)
+        default:
+            break
+        }
+    }
+    
+    
+    // MARK: View репостов
+    
+    // Метод, изменяющий переменную reposts
+    private func getRepostCount(viewModel: FeedCellViewModel) {
+        guard let reposts = Int(viewModel.shares ?? "0") else { return }
+        self.reposts = reposts
+    }
+    
+    // Метод, сбрасывающий и устанавливающий констрейнты для View с репостами
+    private func repostsViewConstraintsSetup(repostsViewWidth: CGFloat) {
+        repostsView.constraints.deActivate()
+        
+        repostsView.leadingToTrailing(of: commentsView, offset: CellConstants.buttonsViewLeftOffset)
+        repostsView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
+        repostsView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
+        repostsView.centerYToSuperview()
+        repostsView.width(repostsViewWidth)
+        
+        repostsIcon.leadingToSuperview(offset: CellConstants.buttonsIconLeftOffset)
+        repostsIcon.centerYToSuperview()
+        repostsIcon.width(CellConstants.buttonsIconWidth)
+        repostsIcon.height(CellConstants.buttonsIconHeight)
+        
+        repostsLabel.leadingToTrailing(of: repostsIcon, offset: CellConstants.buttonsLabelLeftOffset)
+        repostsLabel.centerYToSuperview()
+    }
+    
+    // Метод, изменяющий ширину view в зависимости от кол-ва репостов
+    private func changeWidthRepostsView() {
+        switch self.reposts {
+        case 0...9:
+            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
+        case 10...99:
+            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
+        case 100...999:
+            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
+        case 1000...9999:
+            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+        case 10000...99999:
+            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForFiveCountNumbers)
+        case 100000...999999:
+            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForSixCountNumbers)
+        default:
+            break
+        }
+    }
+    
+    
+    // MARK: View просмотров
+    
+    // Метод, изменяющий переменную views
+    private func getViewsCount(viewModel: FeedCellViewModel) {
+        guard let views = Int(viewModel.views ?? "0") else { return }
+        self.views = views
+    }
+    
+    // Метод, сбрасывающий и устанавливающий констрейнты для View с просмотрами
+    private func viewsViewConstraintsSetup(viewsViewWidth: CGFloat) {
+        viewsView.constraints.deActivate()
+        
+        viewsView.trailing(to: buttonViewBlock, offset: CellConstants.buttonsViewRightOffset)
+        viewsView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
+        viewsView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
+        viewsView.centerYToSuperview()
+        viewsView.width(viewsViewWidth)
+        
+        viewsIcon.trailingToLeading(of: viewsLabel)
+        viewsIcon.centerYToSuperview()
+        viewsIcon.width(CellConstants.buttonsIconWidth)
+        viewsIcon.height(CellConstants.buttonsIconHeight)
+        
+        viewsLabel.trailing(to: viewsView, offset: CellConstants.buttonsViewRightOffset)
+        viewsLabel.centerYToSuperview()
+    }
+    
+    // Метод, изменяющий ширину view в зависимости от кол-ва просмотров
+    private func changeWidthViewsView() {
+        switch self.views {
+        case 0...9:
+            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
+        case 10...99:
+            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
+        case 100...999:
+            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
+        case 1000...9999:
+            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+        case 10000...99999:
+            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForFiveCountNumbers)
+        case 100000...999999:
+            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForSixCountNumbers)
         default:
             break
         }
