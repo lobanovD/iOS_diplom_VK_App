@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A13951428E39FC800806783 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13951328E39FC800806783 /* ProfileViewController.swift */; };
+		1A13951628E3A4C000806783 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13951528E3A4C000806783 /* CustomTabBar.swift */; };
+		1A13951828E3AC9900806783 /* CustomTabBarConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */; };
 		1A6D471B28B0594B0059BA42 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */; };
 		1A6D471D28B05E620059BA42 /* TinyConstraints.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1A6D471F28B111750059BA42 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471E28B111750059BA42 /* UIExtensions.swift */; };
@@ -50,6 +53,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A13951328E39FC800806783 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1A13951528E3A4C000806783 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarConstants.swift; sourceTree = "<group>"; };
 		1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TinyConstraints.xcframework; path = Carthage/Build/TinyConstraints.xcframework; sourceTree = "<group>"; };
 		1A6D471E28B111750059BA42 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
@@ -90,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A13951928E3ACAB00806783 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1A13951528E3A4C000806783 /* CustomTabBar.swift */,
+				1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
 		1A50CC5F28A068EA00688497 /* AuthVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +193,8 @@
 				1A50CC5F28A068EA00688497 /* AuthVC */,
 				1AB987AD289F2E6F00F56E76 /* Services */,
 				1ABCBC0128A4647400010460 /* NewsFeed */,
+				1A13951328E39FC800806783 /* ProfileViewController.swift */,
+				1A13951928E3ACAB00806783 /* CustomTabBar */,
 				1ABCBC1B28AAF29D00010460 /* Helpers */,
 				1AD9F1E0289DBF9C0083730F /* Assets.xcassets */,
 				1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */,
@@ -266,15 +283,18 @@
 				1ABCBC1D28AAF8E300010460 /* VKDateFormater.swift in Sources */,
 				1ABCBC0E28A464A900010460 /* NewsFeedInteractor.swift in Sources */,
 				1ABCBC0928A464A900010460 /* NewsFeedPresenter.swift in Sources */,
+				1A13951828E3AC9900806783 /* CustomTabBarConstants.swift in Sources */,
 				1ABCBC0A28A464A900010460 /* NewsFeedWorker.swift in Sources */,
 				1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */,
 				1ABCBBFA28A2FA0000010460 /* NetworkService.swift in Sources */,
 				1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */,
 				1ABCBBFC28A2FCAB00010460 /* API.swift in Sources */,
+				1A13951628E3A4C000806783 /* CustomTabBar.swift in Sources */,
 				1A6D471B28B0594B0059BA42 /* NewsFeedCell.swift in Sources */,
 				1ABCBC0D28A464A900010460 /* NewsFeedViewController.swift in Sources */,
 				1ABCBC2128AC542100010460 /* String + Height.swift in Sources */,
 				1AEE563428B43C0D00D6CC1A /* CalculateCellHeight.swift in Sources */,
+				1A13951428E39FC800806783 /* ProfileViewController.swift in Sources */,
 				1AEE563628B43D7900D6CC1A /* CellConstants.swift in Sources */,
 				1AEE563828B6C17D00D6CC1A /* CellsProtocols.swift in Sources */,
 			);

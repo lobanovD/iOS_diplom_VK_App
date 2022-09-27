@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import TinyConstraints
 
 protocol NewsFeedDisplayLogic: AnyObject {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
@@ -42,28 +43,35 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     // MARK: View lifecycle
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
         setup()
+
+
         
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
+        feedTableView.separatorStyle = .none
+        feedTableView.backgroundColor = .clear
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        feedTableView.delegate = self
+        feedTableView.dataSource = self
         //tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
-        tableView.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
+        feedTableView.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
+        
 
-
-        view.addSubview(tableView)
+        view.addSubview(feedTableView)
   
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
 
-//        tableView.rowHeight =  UITableView.automaticDimension
-        tableView.estimatedRowHeight =  UITableView.automaticDimension
+        feedTableView.estimatedRowHeight =  UITableView.automaticDimension
+        
+       
+
+
     }
+    
+
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
         
@@ -71,21 +79,20 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
        
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
-            tableView.reloadData()
+            feedTableView.reloadData()
         }
         
     }
     
     // MARK: UI
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), style: .plain)
+    private lazy var feedTableView: UITableView = {
+        let table = UITableView(frame: CGRect(x: 0, y: 4, width: self.view.frame.size.width, height: self.view.frame.size.height), style: .plain)
         return table
     }()
     
-    private func updateLayout(with size: CGSize) {
-       self.tableView.frame = CGRect.init(origin: .zero, size: size)
-    }
+
+
     
 }
 

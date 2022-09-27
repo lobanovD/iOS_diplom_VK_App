@@ -44,6 +44,10 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         let photoAttacment = self.photoAttachment(feedItem: feedItem)
         
         let cellHeightCalc = CalculateCellHeight()
+        
+       
+ 
+       
         let cellHeight = cellHeightCalc.calculateCellTotalHeight(photoAttachment: photoAttacment,
                                                                  text: feedItem.text)
         

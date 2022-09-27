@@ -12,6 +12,8 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -24,17 +26,18 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     func authServiceShouldShow(viewController: UIViewController) {
         print(#function)
         navigationController?.navigationBar.isHidden = true
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
         navigationController?.pushViewController(viewController, animated: false)
     }
     
     func authServiceSignIn() {
         print(#function)
-        let feedVC = NewsFeedViewController()
-        navigationController?.pushViewController(feedVC, animated: false)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
+        
+        let tabBarVC = CustomTabBar()
+        navigationController?.pushViewController(tabBarVC, animated: false)
+        navigationController?.navigationBar.isHidden = false
+        
     }
     
     func authServiceSignInDidFail() {

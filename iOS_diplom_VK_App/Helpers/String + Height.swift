@@ -18,4 +18,17 @@ extension String {
                                      context: nil)
         return size.height
     }
+
+
+    func truncated(after count: Int) -> String {
+        let truncateAfter = index(startIndex, offsetBy: count)
+        guard endIndex > truncateAfter else { return self }
+        return String(self[startIndex..<truncateAfter]) + "…"
+    }
+
+    
 }
+
+
+
+

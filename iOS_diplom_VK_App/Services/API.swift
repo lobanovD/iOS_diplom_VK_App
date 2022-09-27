@@ -32,5 +32,5 @@ enum APIParams: String {
 struct GetFeed {
     static let path = "/method/newsfeed.get"
     static let name = "filters"
-    static let value = "post,photo"
+    static let value = "post,photo,video"
 }

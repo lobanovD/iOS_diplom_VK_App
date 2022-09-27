@@ -41,6 +41,8 @@ final class VKAuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     }
     
     func wakeUpSession() {
+        
+//        VKSdk.forceLogout()
 
         let scope = API.scope
         

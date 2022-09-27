@@ -22,6 +22,7 @@ final class NewsFeedCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViewsAndConstraints()
+        
     }
     
     // Обновление subviews
@@ -190,6 +191,7 @@ final class NewsFeedCell: UITableViewCell {
     }()
     
     
+    
     // MARK: Constraints
     
     func setupViewsAndConstraints() {
@@ -202,7 +204,6 @@ final class NewsFeedCell: UITableViewCell {
         commentsView.addSubviews(views: commentsIcon, commentsLabel)
         repostsView.addSubviews(views: repostsIcon, repostsLabel)
         viewsView.addSubviews(views: viewsIcon, viewsLabel)
-        
         
         cardView.topToSuperview(offset: CellConstants.cardViewTopOffset)
         cardView.leadingToSuperview(offset: CellConstants.cardViewLeftOffset)
@@ -229,6 +230,7 @@ final class NewsFeedCell: UITableViewCell {
         postText.leadingToSuperview(offset: CellConstants.postTextLeftOffset)
         postText.trailingToSuperview(offset:CellConstants.postTextRightOffset)
         
+        
         photoAttachmentConstraintsSetup()
         
         buttonViewBlock.leadingToSuperview()
@@ -236,7 +238,15 @@ final class NewsFeedCell: UITableViewCell {
         buttonViewBlock.bottomToSuperview()
         buttonViewBlock.height(CellConstants.buttonViewHeight)
         
+        
+        
     }
+    
+    // Метод нажатии на кнопку "Показать полностью"
+    @objc func moreTextButtonTap() {
+        print(1)
+    }
+    
     
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedCellViewModel) {
@@ -244,7 +254,11 @@ final class NewsFeedCell: UITableViewCell {
         titleLabel.text = viewModel.name
         titleIconImage.set(imageUrl: viewModel.iconUrlString)
         timeLabel.text = viewModel.date
+        
         postText.text = viewModel.text
+        
+    
+
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
         repostsLabel.text = viewModel.shares

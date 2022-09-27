@@ -91,4 +91,11 @@ struct CellConstants {
     static let buttonsLabelTextColor: String = "buttonsColor"
     static let buttonsLabelLeftOffset: CGFloat = 6
     
+    // Full Text Button
+    static let fullTextButtonColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+    static let fullTextButtonTitle = "Показать полностью"
+    static let fullTextButtonFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+    
+    // Post text
+    static let charCount = 400
 }
