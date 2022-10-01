@@ -20,6 +20,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
+    var refreshControl:UIRefreshControl!
     
     private var feedViewModel = FeedViewModel(cells: [])
     
@@ -66,10 +67,21 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 
         feedTableView.estimatedRowHeight =  UITableView.automaticDimension
         
-       
-
-
+        refreshControl = UIRefreshControl()
+                refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
+        refreshControl.addTarget(self, action: #selector(feedRefresh), for: UIControl.Event.valueChanged)
+        feedTableView.addSubview(refreshControl)
+        
+    
     }
+    
+    @objc func feedRefresh() {
+        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+        self.feedTableView.reloadData()
+        refreshControl.endRefreshing()
+        }
+    
+
     
 
     
