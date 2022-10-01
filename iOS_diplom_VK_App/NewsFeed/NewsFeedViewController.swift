@@ -87,7 +87,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     // MARK: UI
     
     private lazy var feedTableView: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 4, width: self.view.frame.size.width, height: self.view.frame.size.height), style: .plain)
+        let table = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), style: .plain)
         return table
     }()
     

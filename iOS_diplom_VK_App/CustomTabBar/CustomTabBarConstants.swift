@@ -10,8 +10,8 @@ import UIKit
 
 struct CustomTabBarConstants {
     static let feedVCTitle: String = "Новости"
-    static let feedVCIcon: UIImage = UIImage(systemName: "face.smiling")!
+    static let feedVCIcon: UIImage = UIImage(systemName: "house")!
     
     static let profileVCTitle: String = "Профиль"
-    static let profileVCIcon: UIImage = UIImage(systemName: "face.smiling")!
+    static let profileVCIcon: UIImage = UIImage(systemName: "person.crop.circle")!
 }

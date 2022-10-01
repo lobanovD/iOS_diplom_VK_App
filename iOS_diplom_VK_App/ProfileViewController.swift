@@ -12,8 +12,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBarItem.title = "Профиль"
-        self.tabBarItem.image = UIImage(systemName: "face.smiling")
+//        self.tabBarItem.title = "Профиль"
+//        self.tabBarItem.image = UIImage(systemName: "face.smiling")
     }
     
 
