@@ -22,12 +22,13 @@ final class CustomTabBar: UITabBarController {
     override func viewDidLoad() {
         // Контроллеры
         let feedVC = NewsFeedViewController()
-        let profileVC = ProfileViewController()
+        let profileVC = UserProfileViewController()
         // Настройки контроллеров
         feedVC.tabBarItem.title  = CustomTabBarConstants.feedVCTitle
         feedVC.tabBarItem.image = CustomTabBarConstants.feedVCIcon
         profileVC.tabBarItem.title  = CustomTabBarConstants.profileVCTitle
         profileVC.tabBarItem.image = CustomTabBarConstants.profileVCIcon
         self.viewControllers = [feedVC, profileVC]
+        self.tabBar.backgroundColor = CustomTabBarConstants.TBBackground
     }
 }

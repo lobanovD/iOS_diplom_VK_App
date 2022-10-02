@@ -14,8 +14,6 @@ protocol NewsFeedDisplayLogic: AnyObject {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
 }
 
-
-
 class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     var interactor: NewsFeedBusinessLogic?
@@ -40,74 +38,59 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     // MARK: Routing
     
-    
-    
     // MARK: View lifecycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         setup()
-
-
-        
+        tableSetup()
+        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+        refreshControlSetup()
+    }
+    
+    private func tableSetup() {
+        view.addSubview(feedTableView)
         feedTableView.separatorStyle = .none
         feedTableView.backgroundColor = .clear
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        
         feedTableView.delegate = self
         feedTableView.dataSource = self
-        //tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.cellId)
         feedTableView.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
-        
-
-        view.addSubview(feedTableView)
-  
-        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
-
         feedTableView.estimatedRowHeight =  UITableView.automaticDimension
-        
+        feedTableView.topToSuperview(usingSafeArea: true)
+        feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
+        feedTableView.widthToSuperview()
+    }
+    
+    private func refreshControlSetup() {
         refreshControl = UIRefreshControl()
-                refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
+        refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
         refreshControl.addTarget(self, action: #selector(feedRefresh), for: UIControl.Event.valueChanged)
         feedTableView.addSubview(refreshControl)
-        
-    
     }
     
     @objc func feedRefresh() {
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
         self.feedTableView.reloadData()
         refreshControl.endRefreshing()
-        }
-    
-
-    
-
+    }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
         
         switch viewModel {
-       
+            
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
             feedTableView.reloadData()
         }
-        
     }
     
     // MARK: UI
-    
     private lazy var feedTableView: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), style: .plain)
+        let table = UITableView()
         return table
     }()
-    
-
-
-    
 }
-
 
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     

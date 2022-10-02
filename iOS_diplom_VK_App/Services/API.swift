@@ -34,3 +34,7 @@ struct GetFeed {
     static let name = "filters"
     static let value = "post,photo,video"
 }
+
+struct GetUserInfo {
+    static let path = "/method/account.getProfileInfo"
+}

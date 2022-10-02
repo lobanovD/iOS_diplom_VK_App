@@ -54,7 +54,7 @@ final class NewsFeedCell: UITableViewCell {
     private lazy var cardView: UIView = {
         let cardView = UIView()
         cardView.backgroundColor = .white
-        cardView.layer.cornerRadius = CellConstants.cardViewLayerCornerRadius
+        cardView.layer.cornerRadius = FeedVCConstants.cardViewLayerCornerRadius
         cardView.clipsToBounds = true
         return cardView
     }()
@@ -68,7 +68,7 @@ final class NewsFeedCell: UITableViewCell {
     // Иконка группы/пользователя
     private lazy var titleIconImage: WebImageView = {
         let titleIconImage = WebImageView()
-        titleIconImage.layer.cornerRadius = CellConstants.titleImageLayerCornerRadius
+        titleIconImage.layer.cornerRadius = FeedVCConstants.titleImageLayerCornerRadius
         titleIconImage.clipsToBounds = true
         return titleIconImage
     }()
@@ -76,21 +76,21 @@ final class NewsFeedCell: UITableViewCell {
     // Название группы/имя пользователя
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = CellConstants.titleLabelFont
+        titleLabel.font = FeedVCConstants.titleLabelFont
         return titleLabel
     }()
     
     // Время поста
     private lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.font = CellConstants.timeLabelFont
+        timeLabel.font = FeedVCConstants.timeLabelFont
         return timeLabel
     }()
     
     // Текст поста
     private lazy var postText: UILabel = {
         let postText = UILabel()
-        postText.font = CellConstants.postTextFontSize
+        postText.font = FeedVCConstants.postTextFontSize
         postText.numberOfLines = 0
         return postText
     }()
@@ -110,90 +110,87 @@ final class NewsFeedCell: UITableViewCell {
     private lazy var likesView: UIView = {
         let likesView = UIView()
         likesView.backgroundColor = .systemGray5
-        likesView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
+        likesView.layer.cornerRadius = FeedVCConstants.buttonsViewLayerCornerRadius
         likesView.clipsToBounds = true
         return likesView
     }()
     
     private lazy var likesIcon: UIImageView = {
         let likesIcon = UIImageView()
-        likesIcon.image = UIImage(named: CellConstants.buttonsLikesIconName)
+        likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconName)
         return likesIcon
     }()
     
     private lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
-        likesLabel.font = CellConstants.buttonsLabelFont
-        likesLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
+        likesLabel.font = FeedVCConstants.buttonsLabelFont
+        likesLabel.textColor = UIColor(named: FeedVCConstants.buttonsLabelTextColor)
         return likesLabel
     }()
     
     private lazy var commentsView: UIView = {
         let commentsView = UIView()
         commentsView.backgroundColor = .systemGray5
-        commentsView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
+        commentsView.layer.cornerRadius = FeedVCConstants.buttonsViewLayerCornerRadius
         commentsView.clipsToBounds = true
         return commentsView
     }()
     
     private lazy var commentsIcon: UIImageView = {
         let commentsIcon = UIImageView()
-        commentsIcon.image = UIImage(named: CellConstants.buttonsCommentsIconName)
+        commentsIcon.image = UIImage(named: FeedVCConstants.buttonsCommentsIconName)
         return commentsIcon
     }()
     
     private lazy var commentsLabel: UILabel = {
         let commentsLabel = UILabel()
-        commentsLabel.font = CellConstants.buttonsLabelFont
-        commentsLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
+        commentsLabel.font = FeedVCConstants.buttonsLabelFont
+        commentsLabel.textColor = UIColor(named: FeedVCConstants.buttonsLabelTextColor)
         return commentsLabel
     }()
     
     private lazy var repostsView: UIView = {
         let repostsView = UIView()
         repostsView.backgroundColor = .systemGray5
-        repostsView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
+        repostsView.layer.cornerRadius = FeedVCConstants.buttonsViewLayerCornerRadius
         repostsView.clipsToBounds = true
         return repostsView
     }()
     
     private lazy var repostsIcon: UIImageView = {
         let repostsIcon = UIImageView()
-        repostsIcon.image = UIImage(named: CellConstants.buttonsRepostsIconName)
+        repostsIcon.image = UIImage(named: FeedVCConstants.buttonsRepostsIconName)
         return repostsIcon
     }()
     
     private lazy var repostsLabel: UILabel = {
         let repostsLabel = UILabel()
-        repostsLabel.font = CellConstants.buttonsLabelFont
-        repostsLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
+        repostsLabel.font = FeedVCConstants.buttonsLabelFont
+        repostsLabel.textColor = UIColor(named: FeedVCConstants.buttonsLabelTextColor)
         return repostsLabel
     }()
     
     private lazy var viewsView: UIView = {
         let viewsView = UIView()
-        viewsView.layer.cornerRadius = CellConstants.buttonsViewLayerCornerRadius
+        viewsView.layer.cornerRadius = FeedVCConstants.buttonsViewLayerCornerRadius
         viewsView.clipsToBounds = true
         return viewsView
     }()
     
     private lazy var viewsIcon: UIImageView = {
         let viewsIcon = UIImageView()
-        viewsIcon.image = UIImage(named: CellConstants.buttonsViewsIconName)
+        viewsIcon.image = UIImage(named: FeedVCConstants.buttonsViewsIconName)
         return viewsIcon
     }()
     
     private lazy var viewsLabel: UILabel = {
         let viewsLabel = UILabel()
-        viewsLabel.font = CellConstants.buttonsLabelFont
-        viewsLabel.textColor = UIColor(named: CellConstants.buttonsLabelTextColor)
+        viewsLabel.font = FeedVCConstants.buttonsLabelFont
+        viewsLabel.textColor = UIColor(named: FeedVCConstants.buttonsLabelTextColor)
         return viewsLabel
     }()
     
-    
-    
     // MARK: Constraints
-    
     func setupViewsAndConstraints() {
         
         contentView.addSubviews(views: cardView)
@@ -205,48 +202,38 @@ final class NewsFeedCell: UITableViewCell {
         repostsView.addSubviews(views: repostsIcon, repostsLabel)
         viewsView.addSubviews(views: viewsIcon, viewsLabel)
         
-        cardView.topToSuperview(offset: CellConstants.cardViewTopOffset)
-        cardView.leadingToSuperview(offset: CellConstants.cardViewLeftOffset)
-        cardView.trailingToSuperview(offset: CellConstants.cardViewRightOffset)
-        cardView.bottomToSuperview(offset: CellConstants.cardViewBottomOffset)
+        cardView.topToSuperview(offset: FeedVCConstants.cardViewTopOffset)
+        cardView.leadingToSuperview(offset: FeedVCConstants.cardViewLeftOffset)
+        cardView.trailingToSuperview(offset: FeedVCConstants.cardViewRightOffset)
+        cardView.bottomToSuperview(offset: FeedVCConstants.cardViewBottomOffset)
         
-        titleView.topToSuperview(offset: CellConstants.titleViewTopOffset)
-        titleView.trailingToSuperview(offset: CellConstants.titleViewRightOffset)
-        titleView.leadingToSuperview(offset: CellConstants.titleViewLeftOffset)
-        titleView.height(CellConstants.titleViewHeight)
+        titleView.topToSuperview(offset: FeedVCConstants.titleViewTopOffset)
+        titleView.trailingToSuperview(offset: FeedVCConstants.titleViewRightOffset)
+        titleView.leadingToSuperview(offset: FeedVCConstants.titleViewLeftOffset)
+        titleView.height(FeedVCConstants.titleViewHeight)
         
         titleIconImage.centerYToSuperview()
         titleIconImage.leadingToSuperview()
-        titleIconImage.height(CellConstants.titleIconImageHeight)
-        titleIconImage.width(CellConstants.titleIconImageWidth)
+        titleIconImage.height(FeedVCConstants.titleIconImageHeight)
+        titleIconImage.width(FeedVCConstants.titleIconImageWidth)
         
-        titleLabel.topToSuperview(offset: CellConstants.titleLabelTopOffset)
-        titleLabel.leadingToTrailing(of: titleIconImage, offset: CellConstants.titleLabelLeftOffset)
+        titleLabel.topToSuperview(offset: FeedVCConstants.titleLabelTopOffset)
+        titleLabel.leadingToTrailing(of: titleIconImage, offset: FeedVCConstants.titleLabelLeftOffset)
         
-        timeLabel.bottomToSuperview(offset: CellConstants.timeLabelBottomOffset)
-        timeLabel.leadingToTrailing(of: titleIconImage, offset: CellConstants.timeLabelRightOffset)
+        timeLabel.bottomToSuperview(offset: FeedVCConstants.timeLabelBottomOffset)
+        timeLabel.leadingToTrailing(of: titleIconImage, offset: FeedVCConstants.timeLabelRightOffset)
         
-        postText.topToBottom(of: titleView, offset: CellConstants.postTextTopOffset)
-        postText.leadingToSuperview(offset: CellConstants.postTextLeftOffset)
-        postText.trailingToSuperview(offset:CellConstants.postTextRightOffset)
-        
+        postText.topToBottom(of: titleView, offset: FeedVCConstants.postTextTopOffset)
+        postText.leadingToSuperview(offset: FeedVCConstants.postTextLeftOffset)
+        postText.trailingToSuperview(offset:FeedVCConstants.postTextRightOffset)
         
         photoAttachmentConstraintsSetup()
         
         buttonViewBlock.leadingToSuperview()
         buttonViewBlock.trailingToSuperview()
         buttonViewBlock.bottomToSuperview()
-        buttonViewBlock.height(CellConstants.buttonViewHeight)
-        
-        
-        
+        buttonViewBlock.height(FeedVCConstants.buttonViewHeight)
     }
-    
-    // Метод нажатии на кнопку "Показать полностью"
-    @objc func moreTextButtonTap() {
-        print(1)
-    }
-    
     
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedCellViewModel) {
@@ -254,11 +241,7 @@ final class NewsFeedCell: UITableViewCell {
         titleLabel.text = viewModel.name
         titleIconImage.set(imageUrl: viewModel.iconUrlString)
         timeLabel.text = viewModel.date
-        
         postText.text = viewModel.text
-        
-    
-
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
         repostsLabel.text = viewModel.shares
@@ -270,7 +253,6 @@ final class NewsFeedCell: UITableViewCell {
         getViewsCount(viewModel: viewModel)
         
         changePhotoAttachmentHeight(viewModel: viewModel)
-        
     }
     
     // MARK: Photo Attachment
@@ -291,7 +273,7 @@ final class NewsFeedCell: UITableViewCell {
     // Метод, сбрасывающий и устанавливающий констрейнты для Photo Attachment
     private func photoAttachmentConstraintsSetup() {
         postImageView.constraints.deActivate()
-        postImageView.topToBottom(of: postText, offset: CellConstants.postImageViewTopOffset)
+        postImageView.topToBottom(of: postText, offset: FeedVCConstants.postImageViewTopOffset)
         postImageView.width(to: cardView)
         postImageView.height(self.photoAttachmentHeight)
     }
@@ -308,18 +290,18 @@ final class NewsFeedCell: UITableViewCell {
     private func likesViewConstraintsSetup(likesViewWidth: CGFloat) {
         likesView.constraints.deActivate()
         
-        likesView.leadingToSuperview(offset: CellConstants.buttonsViewLeftOffset)
-        likesView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
-        likesView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
+        likesView.leadingToSuperview(offset: FeedVCConstants.buttonsViewLeftOffset)
+        likesView.topToSuperview(offset: FeedVCConstants.buttonsViewTopOffset)
+        likesView.bottomToSuperview(offset: FeedVCConstants.buttonsViewBottomOffset)
         likesView.centerYToSuperview()
         likesView.width(likesViewWidth)
         
-        likesIcon.leadingToSuperview(offset: CellConstants.buttonsIconLeftOffset)
+        likesIcon.leadingToSuperview(offset: FeedVCConstants.buttonsIconLeftOffset)
         likesIcon.centerYToSuperview()
-        likesIcon.width(CellConstants.buttonsIconWidth)
-        likesIcon.height(CellConstants.buttonsIconHeight)
+        likesIcon.width(FeedVCConstants.buttonsIconWidth)
+        likesIcon.height(FeedVCConstants.buttonsIconHeight)
         
-        likesLabel.leadingToTrailing(of: likesIcon, offset: CellConstants.buttonsLabelLeftOffset)
+        likesLabel.leadingToTrailing(of: likesIcon, offset: FeedVCConstants.buttonsLabelLeftOffset)
         likesLabel.centerYToSuperview()
     }
     
@@ -327,13 +309,13 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthLikesView() {
         switch self.likes {
         case 0...9:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: FeedVCConstants.buttonsViewWidthForOneCountNumbers)
         case 10...99:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: FeedVCConstants.buttonsViewWidthForTwoCountNumbers)
         case 100...999:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: FeedVCConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
-            likesViewConstraintsSetup(likesViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+            likesViewConstraintsSetup(likesViewWidth: FeedVCConstants.buttonsViewWidthForFourCountNumbers)
         default:
             break
         }
@@ -351,18 +333,18 @@ final class NewsFeedCell: UITableViewCell {
     private func commentsViewConstraintsSetup(commentsViewWidth: CGFloat) {
         commentsView.constraints.deActivate()
         
-        commentsView.leadingToTrailing(of: likesView, offset: CellConstants.buttonsViewLeftOffset)
-        commentsView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
-        commentsView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
+        commentsView.leadingToTrailing(of: likesView, offset: FeedVCConstants.buttonsViewLeftOffset)
+        commentsView.topToSuperview(offset: FeedVCConstants.buttonsViewTopOffset)
+        commentsView.bottomToSuperview(offset: FeedVCConstants.buttonsViewBottomOffset)
         commentsView.centerYToSuperview()
         commentsView.width(commentsViewWidth)
         
-        commentsIcon.leadingToSuperview(offset: CellConstants.buttonsIconLeftOffset)
+        commentsIcon.leadingToSuperview(offset: FeedVCConstants.buttonsIconLeftOffset)
         commentsIcon.centerYToSuperview()
-        commentsIcon.width(CellConstants.buttonsIconWidth)
-        commentsIcon.height(CellConstants.buttonsIconHeight)
+        commentsIcon.width(FeedVCConstants.buttonsIconWidth)
+        commentsIcon.height(FeedVCConstants.buttonsIconHeight)
         
-        commentsLabel.leadingToTrailing(of: commentsIcon, offset: CellConstants.buttonsLabelLeftOffset)
+        commentsLabel.leadingToTrailing(of: commentsIcon, offset: FeedVCConstants.buttonsLabelLeftOffset)
         commentsLabel.centerYToSuperview()
     }
     
@@ -370,22 +352,21 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthCommentsView() {
         switch self.comments {
         case 0...9:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: FeedVCConstants.buttonsViewWidthForOneCountNumbers)
         case 10...99:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: FeedVCConstants.buttonsViewWidthForTwoCountNumbers)
         case 100...999:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: FeedVCConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: FeedVCConstants.buttonsViewWidthForFourCountNumbers)
         case 10000...99999:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForFiveCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: FeedVCConstants.buttonsViewWidthForFiveCountNumbers)
         case 100000...999999:
-            commentsViewConstraintsSetup(commentsViewWidth: CellConstants.buttonsViewWidthForSixCountNumbers)
+            commentsViewConstraintsSetup(commentsViewWidth: FeedVCConstants.buttonsViewWidthForSixCountNumbers)
         default:
             break
         }
     }
-    
     
     // MARK: View репостов
     
@@ -399,18 +380,18 @@ final class NewsFeedCell: UITableViewCell {
     private func repostsViewConstraintsSetup(repostsViewWidth: CGFloat) {
         repostsView.constraints.deActivate()
         
-        repostsView.leadingToTrailing(of: commentsView, offset: CellConstants.buttonsViewLeftOffset)
-        repostsView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
-        repostsView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
+        repostsView.leadingToTrailing(of: commentsView, offset: FeedVCConstants.buttonsViewLeftOffset)
+        repostsView.topToSuperview(offset: FeedVCConstants.buttonsViewTopOffset)
+        repostsView.bottomToSuperview(offset: FeedVCConstants.buttonsViewBottomOffset)
         repostsView.centerYToSuperview()
         repostsView.width(repostsViewWidth)
         
-        repostsIcon.leadingToSuperview(offset: CellConstants.buttonsIconLeftOffset)
+        repostsIcon.leadingToSuperview(offset: FeedVCConstants.buttonsIconLeftOffset)
         repostsIcon.centerYToSuperview()
-        repostsIcon.width(CellConstants.buttonsIconWidth)
-        repostsIcon.height(CellConstants.buttonsIconHeight)
+        repostsIcon.width(FeedVCConstants.buttonsIconWidth)
+        repostsIcon.height(FeedVCConstants.buttonsIconHeight)
         
-        repostsLabel.leadingToTrailing(of: repostsIcon, offset: CellConstants.buttonsLabelLeftOffset)
+        repostsLabel.leadingToTrailing(of: repostsIcon, offset: FeedVCConstants.buttonsLabelLeftOffset)
         repostsLabel.centerYToSuperview()
     }
     
@@ -418,22 +399,21 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthRepostsView() {
         switch self.reposts {
         case 0...9:
-            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
+            repostsViewConstraintsSetup(repostsViewWidth: FeedVCConstants.buttonsViewWidthForOneCountNumbers)
         case 10...99:
-            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
+            repostsViewConstraintsSetup(repostsViewWidth: FeedVCConstants.buttonsViewWidthForTwoCountNumbers)
         case 100...999:
-            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
+            repostsViewConstraintsSetup(repostsViewWidth: FeedVCConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
-            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+            repostsViewConstraintsSetup(repostsViewWidth: FeedVCConstants.buttonsViewWidthForFourCountNumbers)
         case 10000...99999:
-            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForFiveCountNumbers)
+            repostsViewConstraintsSetup(repostsViewWidth: FeedVCConstants.buttonsViewWidthForFiveCountNumbers)
         case 100000...999999:
-            repostsViewConstraintsSetup(repostsViewWidth: CellConstants.buttonsViewWidthForSixCountNumbers)
+            repostsViewConstraintsSetup(repostsViewWidth: FeedVCConstants.buttonsViewWidthForSixCountNumbers)
         default:
             break
         }
     }
-    
     
     // MARK: View просмотров
     
@@ -447,18 +427,18 @@ final class NewsFeedCell: UITableViewCell {
     private func viewsViewConstraintsSetup(viewsViewWidth: CGFloat) {
         viewsView.constraints.deActivate()
         
-        viewsView.trailing(to: buttonViewBlock, offset: CellConstants.buttonsViewRightOffset)
-        viewsView.topToSuperview(offset: CellConstants.buttonsViewTopOffset)
-        viewsView.bottomToSuperview(offset: CellConstants.buttonsViewBottomOffset)
+        viewsView.trailing(to: buttonViewBlock, offset: FeedVCConstants.buttonsViewRightOffset)
+        viewsView.topToSuperview(offset: FeedVCConstants.buttonsViewTopOffset)
+        viewsView.bottomToSuperview(offset: FeedVCConstants.buttonsViewBottomOffset)
         viewsView.centerYToSuperview()
         viewsView.width(viewsViewWidth)
         
         viewsIcon.trailingToLeading(of: viewsLabel)
         viewsIcon.centerYToSuperview()
-        viewsIcon.width(CellConstants.buttonsIconWidth)
-        viewsIcon.height(CellConstants.buttonsIconHeight)
+        viewsIcon.width(FeedVCConstants.buttonsIconWidth)
+        viewsIcon.height(FeedVCConstants.buttonsIconHeight)
         
-        viewsLabel.trailing(to: viewsView, offset: CellConstants.buttonsViewRightOffset)
+        viewsLabel.trailing(to: viewsView, offset: FeedVCConstants.buttonsViewRightOffset)
         viewsLabel.centerYToSuperview()
     }
     
@@ -466,22 +446,21 @@ final class NewsFeedCell: UITableViewCell {
     private func changeWidthViewsView() {
         switch self.views {
         case 0...9:
-            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForOneCountNumbers)
+            viewsViewConstraintsSetup(viewsViewWidth: FeedVCConstants.buttonsViewWidthForOneCountNumbers)
         case 10...99:
-            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForTwoCountNumbers)
+            viewsViewConstraintsSetup(viewsViewWidth: FeedVCConstants.buttonsViewWidthForTwoCountNumbers)
         case 100...999:
-            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForThreeCountNumbers)
+            viewsViewConstraintsSetup(viewsViewWidth: FeedVCConstants.buttonsViewWidthForThreeCountNumbers)
         case 1000...9999:
-            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForFourCountNumbers)
+            viewsViewConstraintsSetup(viewsViewWidth: FeedVCConstants.buttonsViewWidthForFourCountNumbers)
         case 10000...99999:
-            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForFiveCountNumbers)
+            viewsViewConstraintsSetup(viewsViewWidth: FeedVCConstants.buttonsViewWidthForFiveCountNumbers)
         case 100000...999999:
-            viewsViewConstraintsSetup(viewsViewWidth: CellConstants.buttonsViewWidthForSixCountNumbers)
+            viewsViewConstraintsSetup(viewsViewWidth: FeedVCConstants.buttonsViewWidthForSixCountNumbers)
         default:
             break
         }
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -69,4 +69,24 @@ final class NetworkService {
             
         }
     }
+    
+    // Метод получения данных пользователя
+    func getUserProfile(completion: @escaping (_ responce: UserProfileResponseWrapped?) -> Void) {
+        
+        let params = URLQueryItem(name: "", value: "")
+
+        NetworkService.shared.request(path: GetUserInfo.path, methodParams: params) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let data = data else { return }
+            
+            let responce = try? decoder.decode(UserProfileResponseWrapped.self, from: data)
+            
+            completion(responce)
+            
+        }
+    }
 }

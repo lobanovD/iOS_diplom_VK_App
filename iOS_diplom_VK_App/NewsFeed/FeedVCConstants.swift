@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct CellConstants {
+struct FeedVCConstants {
     
     
     // TODO: Сделать для айпада другие параметры
@@ -19,12 +19,14 @@ struct CellConstants {
         }
     }
     
+    // MARK: Table View
+    static let tableViewBottomOffset: CGFloat = 0
     
     // MARK: Card View
-    static let cardViewTopOffset: CGFloat = 4
+    static let cardViewTopOffset: CGFloat = 8
     static let cardViewLeftOffset: CGFloat = 8
     static let cardViewRightOffset: CGFloat = 8
-    static let cardViewBottomOffset: CGFloat = -4
+    static let cardViewBottomOffset: CGFloat = 0
     static let cardViewLayerCornerRadius: CGFloat = 10
     
     // MARK: Title View
