@@ -24,10 +24,10 @@ class UserProfilePresenter: UserProfilePresentationLogic {
           
           let currentUser = UserInfoViewModel(firstName: firstName, lastName: lastName)
           
-          print(9)
-          print(currentUser)
+
           
           viewController?.displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData.displayUserInfo(viewModel: currentUser))
+          
       }
   
   }

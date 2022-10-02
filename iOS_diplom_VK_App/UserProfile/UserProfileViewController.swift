@@ -10,7 +10,8 @@ import UIKit
 import TinyConstraints
 
 protocol UserProfileDisplayLogic: AnyObject {
-  func displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData)
+    func displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData)
+   
 }
 
 class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
@@ -70,6 +71,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
           
       case .displayUserInfo(viewModel: let model):
           self.userInfoViewModel = model
+          print("данные получены")
           self.userProfileTable.reloadData()
       }
   }
@@ -95,8 +97,12 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         let table = UITableView()
         return table
     }()
+    
+
   
 }
+
+
 
 
 extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -106,6 +112,7 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "ddd")
+        cell.textLabel?.text = self.userInfoViewModel.firstName
         return cell
     }
     
