@@ -3,7 +3,7 @@
 ### Установка
 1. brew install carthage 
 2. В папке проекта выполнить
-Carthage update --platform ios --use-xcframeworks
+- Carthage update --platform ios --use-xcframeworks
 
 Для работы приложения необходимо создать Standalone-приложение тут https://vk.com/apps?act=manage
 
