@@ -37,6 +37,7 @@ struct UserProfileResponseWrapped: Decodable {
 struct UserProfileResponse: Decodable {
     var firstName: String
     var lastName: String
+    var relation: Int
 }
 
 struct UserInfoViewModel {

@@ -54,11 +54,14 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         setup()
 //        setupUserProfileTable()
         
     }
     
+    // UI
+    let userProfileTable = UITableView(frame: .zero, style: .grouped)
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,25 +82,19 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
 
     private func setupUserProfileTable() {
         view.addSubviews(views: userProfileTable)
-        userProfileTable.separatorStyle = .none
-        userProfileTable.backgroundColor = .clear
+//        userProfileTable.separatorStyle = .none
+//        userProfileTable.backgroundColor = .clear
         userProfileTable.delegate = self
         userProfileTable.dataSource = self
-        userProfileTable.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
+//        userProfileTable.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
+        userProfileTable.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
         userProfileTable.estimatedRowHeight =  UITableView.automaticDimension
         userProfileTable.topToSuperview(usingSafeArea: true)
         userProfileTable.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
         userProfileTable.widthToSuperview()
-        print(3456)
-        print(self.userInfoViewModel.firstName)
     }
-    
-//MARK: UI
-    private lazy var userProfileTable: UITableView = {
-        let table = UITableView()
-        return table
-    }()
-    
+ 
+
 
   
 }
@@ -115,6 +112,31 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
         cell.textLabel?.text = self.userInfoViewModel.firstName
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id) as! ProfileHeaderView
+            
+//            if let name = userInfoViewModel.firstName, let surname = userInfoViewModel.lastName {
+//                headerView.fullNameLabel.text = "\(name) \(surname)"
+//            }
+            
+            
+            return headerView
+            
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 250
+        } else {
+            return 0
+        }
+    }
+
     
     
 }

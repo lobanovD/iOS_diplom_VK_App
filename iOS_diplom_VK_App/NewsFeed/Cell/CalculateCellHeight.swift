@@ -32,8 +32,8 @@ final class CalculateCellHeight {
         }
         
         // Общая высота
-            let totalHeight = titleHeight + attachmentHeight + textHeight + buttonBlockHeight + topOffsetOfButtonsBlock
-            return totalHeight
+        let totalHeight = titleHeight + attachmentHeight + textHeight + buttonBlockHeight + topOffsetOfButtonsBlock
+        return totalHeight
     }
     
     // Вычисление высоты текста
@@ -45,7 +45,7 @@ final class CalculateCellHeight {
         
         //  Высота текста
         let textHeight = text.height(textWidth: screenWidth, font: FeedVCConstants.postTextFontSize)
-            return textHeight
+        return textHeight
     }
     
     // вычисление высоты Photo Attachment
