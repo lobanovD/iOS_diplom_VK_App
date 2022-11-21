@@ -16,7 +16,7 @@ final class NetworkService {
     static let shared = NetworkService()
     
     // Метод получения URL запроса к API
-    private func url(path: String, methodParams: URLQueryItem) -> URL? {
+    private func url(path: String, parameters:[URLQueryItem]) -> URL? {
         
         guard let authToken = VKAuthService.shared.token else { return nil }
         
@@ -27,17 +27,23 @@ final class NetworkService {
         components.scheme = API.scheme
         components.host = API.host
         components.path = path
-        components.queryItems = [methodParams, token, version]
-        
+
+        components.queryItems = []
+        for parameter in parameters {
+            components.queryItems?.append(parameter)
+        }
+        components.queryItems?.append(token)
+        components.queryItems?.append(version)
+            
         guard let url = components.url else { return nil }
         print(url)
         return url
     }
     
     // Общий метод запроса данных с API
-    private func request(path: String, methodParams: URLQueryItem, completion: @escaping (Data?, Error?) -> Void) {
+    private func request(path: String, parameters: [URLQueryItem], completion: @escaping (Data?, Error?) -> Void) {
         
-        guard let url = url(path: path, methodParams: methodParams) else { return }
+        guard let url = url(path: path, parameters: parameters) else { return }
         let session = URLSession.init(configuration: .default)
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { data, responce, error in
@@ -53,9 +59,10 @@ final class NetworkService {
     // Метод получения новостной ленты пользователя
     func getFeed(completion: @escaping (_ responce: FeedResponceWrapped?) -> Void) {
         
-        let params = URLQueryItem(name: GetFeed.name, value: GetFeed.value)
+        let params1 = URLQueryItem(name: GetFeed.name, value: GetFeed.value)
+        let params2 = URLQueryItem(name: "count", value: "100")
         
-        NetworkService.shared.request(path: GetFeed.path, methodParams: params) { data, error in
+        NetworkService.shared.request(path: GetFeed.path, parameters: [params1, params2]) { data, error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -73,9 +80,10 @@ final class NetworkService {
     // Метод получения данных пользователя
     func getUserProfile(completion: @escaping (_ responce: UserProfileResponseWrapped?) -> Void) {
         
-        let params = URLQueryItem(name: "", value: "")
+//        let params = URLQueryItem(name: "", value: "")
+//        let params2 = URLQueryItem(name: "", value: "")
 
-        NetworkService.shared.request(path: GetUserInfo.path, methodParams: params) { data, error in
+        NetworkService.shared.request(path: GetUserInfo.path, parameters: []) { data, error in
             if let error = error {
                 print(error.localizedDescription)
             }
