@@ -49,6 +49,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                        date: date,
                                        text: feedItem.text,
                                        likes: String(feedItem.likes?.count ?? 0),
+                                       userLikes: feedItem.likes?.userLikes,
                                        comments: String(feedItem.comments?.count ?? 0),
                                        shares: String(feedItem.reposts?.count ?? 0),
                                        views: String(feedItem.views?.count ?? 0),

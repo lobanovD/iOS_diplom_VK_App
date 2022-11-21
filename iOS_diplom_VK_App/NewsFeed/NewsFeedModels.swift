@@ -39,6 +39,8 @@ struct FeedViewModel {
         var date: String
         var text: String?
         var likes: String?
+        var userLikes: Int?
+        var canLike: Int?
         var comments: String?
         var shares: String?
         var views: String?
@@ -71,10 +73,16 @@ struct FeedItem: Decodable {
     let text: String?
     let date: Double
     let comments: CountableItem?
-    let likes: CountableItem?
+    let likes: CountableLikes?
     let reposts: CountableItem?
     let views: CountableItem?
     let attachments: [Attachment]?
+}
+
+struct CountableLikes: Decodable {
+    let count: Int
+    let userLikes: Int
+    let canLike: Int
 }
 
 struct CountableItem: Decodable {

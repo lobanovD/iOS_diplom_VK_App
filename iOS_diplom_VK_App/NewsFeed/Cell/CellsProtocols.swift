@@ -14,6 +14,7 @@ protocol FeedCellViewModel {
     var date: String { get }
     var text: String? { get }
     var likes:String? { get }
+    var userLikes: Int? { get }
     var comments: String? { get }
     var shares: String? { get }
     var views: String? { get }

@@ -17,6 +17,7 @@ final class NewsFeedCell: UITableViewCell {
     private var reposts: Int = 0
     private var views: Int = 0
     private var photoAttachmentHeight: CGFloat = 0
+    private var userLikes: Int = 0
     
     // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -243,6 +244,12 @@ final class NewsFeedCell: UITableViewCell {
         timeLabel.text = viewModel.date
         postText.text = viewModel.text
         likesLabel.text = viewModel.likes
+        if viewModel.userLikes == 1 {
+            likesIcon.image = UIImage(named: "liked")
+        } else {
+            likesIcon.image = UIImage(named: "like")
+        }
+        
         commentsLabel.text = viewModel.comments
         repostsLabel.text = viewModel.shares
         viewsLabel.text = viewModel.views
