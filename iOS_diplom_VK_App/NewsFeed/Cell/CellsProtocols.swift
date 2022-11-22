@@ -20,6 +20,8 @@ protocol FeedCellViewModel {
     var views: String? { get }
     var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
     var totalHeight: CGFloat { get }
+    var postID: Int { get }
+    var sourceID: Int { get }
 }
 
 protocol FeedCellPhotoAttachmentViewModel {

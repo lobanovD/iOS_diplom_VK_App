@@ -38,3 +38,11 @@ struct GetFeed {
 struct GetUserInfo {
     static let path = "/method/account.getProfileInfo"
 }
+
+struct AddLike {
+    static let path = "/method/likes.add"
+    static let ownerID = "owner_id"
+    static let itemID = "item_id"
+    static let type = "type"
+    static let post = "post"
+}

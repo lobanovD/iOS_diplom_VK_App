@@ -97,4 +97,21 @@ final class NetworkService {
             
         }
     }
+    
+   // Метод добавления лайка к посту
+    func addLike(sourceID: Int, postID: Int, completion: @escaping () -> Void) {
+        
+        let params1 = URLQueryItem(name: AddLike.ownerID, value: "\(sourceID)")
+        let params2 = URLQueryItem(name: AddLike.itemID, value: "\(postID)")
+        let params3 = URLQueryItem(name: AddLike.type, value: AddLike.post)
+        
+        NetworkService.shared.request(path: AddLike.path, parameters: [params1, params2, params3]) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+
+            completion()
+            
+        }
+    }
 }

@@ -103,6 +103,13 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.setupCell(viewModel: cellViewModel)
         cell.layoutSubviews()
+        cell.tapLike = {
+            print(cellViewModel.postID)
+            print(cellViewModel.sourceID)
+            NetworkService.shared.addLike(sourceID: cellViewModel.sourceID, postID: cellViewModel.postID) {
+                tableView.reloadData() // ничего не делает
+            }
+        }
         return cell
     }
     

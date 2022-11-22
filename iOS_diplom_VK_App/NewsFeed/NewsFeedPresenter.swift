@@ -54,7 +54,9 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                        shares: String(feedItem.reposts?.count ?? 0),
                                        views: String(feedItem.views?.count ?? 0),
                                        photoAttachment: photoAttacment,
-                                       totalHeight: cellHeight
+                                       totalHeight: cellHeight,
+                                       postID: feedItem.postId,
+                                       sourceID: feedItem.sourceId
         )
     }
     

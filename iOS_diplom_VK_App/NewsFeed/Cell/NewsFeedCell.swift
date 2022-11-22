@@ -19,6 +19,8 @@ final class NewsFeedCell: UITableViewCell {
     private var photoAttachmentHeight: CGFloat = 0
     private var userLikes: Int = 0
     
+    @objc var tapLike : (()->())?
+    
     // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -116,11 +118,16 @@ final class NewsFeedCell: UITableViewCell {
         return likesView
     }()
     
-    private lazy var likesIcon: UIImageView = {
-        let likesIcon = UIImageView()
-        likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconName)
-        return likesIcon
-    }()
+//    private lazy var likesIcon: UIImageView = {
+//        let likesIcon = UIImageView()
+//        likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconName)
+//        return likesIcon
+//    }()
+        private lazy var likesIcon: UIButton = {
+            let likesIcon = UIButton()
+            likesIcon.setImage(UIImage(named: FeedVCConstants.buttonsLikesIconName), for: .normal)
+            return likesIcon
+        }()
     
     private lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
@@ -244,11 +251,21 @@ final class NewsFeedCell: UITableViewCell {
         timeLabel.text = viewModel.date
         postText.text = viewModel.text
         likesLabel.text = viewModel.likes
+        
+//        if viewModel.userLikes == 1 {
+//            likesIcon.image = UIImage(named: "liked")
+//        } else {
+//            likesIcon.image = UIImage(named: "like")
+//        }
+        
         if viewModel.userLikes == 1 {
-            likesIcon.image = UIImage(named: "liked")
+            likesIcon.setImage(UIImage(named: "liked"), for: .normal)
         } else {
-            likesIcon.image = UIImage(named: "like")
+            likesIcon.setImage(UIImage(named: "like"), for: .normal)
         }
+        
+        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
+        likesIcon.addGestureRecognizer(tapLikeGesture)
         
         commentsLabel.text = viewModel.comments
         repostsLabel.text = viewModel.shares
@@ -260,6 +277,10 @@ final class NewsFeedCell: UITableViewCell {
         getViewsCount(viewModel: viewModel)
         
         changePhotoAttachmentHeight(viewModel: viewModel)
+    }
+    
+    @objc func setLike() {
+        tapLike?()
     }
     
     // MARK: Photo Attachment
