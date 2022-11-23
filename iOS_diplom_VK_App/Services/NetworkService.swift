@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol Networking {
-    func request(path: String, methodParams: URLQueryItem, completion: @escaping (Data?, Error?) -> Void)
-}
-
 final class NetworkService {
     
     static let shared = NetworkService()
@@ -27,14 +23,14 @@ final class NetworkService {
         components.scheme = API.scheme
         components.host = API.host
         components.path = path
-
+        
         components.queryItems = []
         for parameter in parameters {
             components.queryItems?.append(parameter)
         }
         components.queryItems?.append(token)
         components.queryItems?.append(version)
-            
+        
         guard let url = components.url else { return nil }
         print(url)
         return url
@@ -51,16 +47,14 @@ final class NetworkService {
                 completion(data, error)
             }
         }
-        
         task.resume()
-        
     }
     
     // Метод получения новостной ленты пользователя
     func getFeed(completion: @escaping (_ responce: FeedResponceWrapped?) -> Void) {
         
-        let params1 = URLQueryItem(name: GetFeed.name, value: GetFeed.value)
-        let params2 = URLQueryItem(name: "count", value: "100")
+        let params1 = URLQueryItem(name: GetFeed.filtersName, value: GetFeed.filtersValue)
+        let params2 = URLQueryItem(name: GetFeed.countName, value: GetFeed.countValue)
         
         NetworkService.shared.request(path: GetFeed.path, parameters: [params1, params2]) { data, error in
             if let error = error {
@@ -69,20 +63,14 @@ final class NetworkService {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
-            
             let responce = try? decoder.decode(FeedResponceWrapped.self, from: data)
-            
             completion(responce)
-            
         }
     }
     
     // Метод получения данных пользователя
     func getUserProfile(completion: @escaping (_ responce: UserProfileResponseWrapped?) -> Void) {
         
-//        let params = URLQueryItem(name: "", value: "")
-//        let params2 = URLQueryItem(name: "", value: "")
-
         NetworkService.shared.request(path: GetUserInfo.path, parameters: []) { data, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -98,20 +86,34 @@ final class NetworkService {
         }
     }
     
-   // Метод добавления лайка к посту
-    func addLike(sourceID: Int, postID: Int, completion: @escaping () -> Void) {
+    // Метод добавления лайка к посту
+    func addLike(sourceID: Int, postID: Int) {
         
-        let params1 = URLQueryItem(name: AddLike.ownerID, value: "\(sourceID)")
-        let params2 = URLQueryItem(name: AddLike.itemID, value: "\(postID)")
-        let params3 = URLQueryItem(name: AddLike.type, value: AddLike.post)
+        let params1 = URLQueryItem(name: LikeActions.ownerID, value: "\(sourceID)")
+        let params2 = URLQueryItem(name: LikeActions.itemID, value: "\(postID)")
+        let params3 = URLQueryItem(name: LikeActions.type, value: LikeActions.post)
         
-        NetworkService.shared.request(path: AddLike.path, parameters: [params1, params2, params3]) { data, error in
+        NetworkService.shared.request(path: LikeActions.addLikePath, parameters: [params1, params2, params3]) { _, error in
             if let error = error {
                 print(error.localizedDescription)
             }
-
-            completion()
-            
         }
     }
+    
+    // Метод удаления лайка у поста
+    func removeLike(sourceID: Int, postID: Int) {
+        
+        let params1 = URLQueryItem(name: LikeActions.ownerID, value: "\(sourceID)")
+        let params2 = URLQueryItem(name: LikeActions.itemID, value: "\(postID)")
+        let params3 = URLQueryItem(name: LikeActions.type, value: LikeActions.post)
+        
+        NetworkService.shared.request(path: LikeActions.removeLikePath, parameters: [params1, params2, params3]) { _, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+ 
+    
 }

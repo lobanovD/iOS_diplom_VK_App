@@ -9,7 +9,7 @@ import Foundation
 
 struct API {
     // Запрашиваемые разрешения (https://dev.vk.com/reference/access-rights)
-    static let scope = ["offline", "wall", "friends", "photos"]
+    static let scope = ["offline", "wall", "friends"]
     // ID приложения
     static let appID = "51425771"
     // Протокол запросов к API
@@ -31,16 +31,21 @@ enum APIParams: String {
 // Получение ленты пользователя
 struct GetFeed {
     static let path = "/method/newsfeed.get"
-    static let name = "filters"
-    static let value = "post,photo,video"
+    static let filtersName = "filters"
+    static let filtersValue = "post,photo,video"
+    static let countName = "count"
+    static let countValue = "90"
 }
 
+// Получение данных о пользователе
 struct GetUserInfo {
     static let path = "/method/account.getProfileInfo"
 }
 
-struct AddLike {
-    static let path = "/method/likes.add"
+// Обработка лайков
+struct LikeActions {
+    static let addLikePath = "/method/likes.add"
+    static let removeLikePath = "/method/likes.delete"
     static let ownerID = "owner_id"
     static let itemID = "item_id"
     static let type = "type"

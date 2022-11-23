@@ -80,7 +80,8 @@ struct FeedVCConstants {
     static let buttonsViewWidthForSixCountNumbers: CGFloat = 95
     
     // Icon
-    static let buttonsLikesIconName: String = "like"
+    static let buttonsLikesIconNameSet: String = "liked"
+    static let buttonsLikesIconNameUnset: String = "like"
     static let buttonsCommentsIconName: String = "comment"
     static let buttonsRepostsIconName: String = "share"
     static let buttonsViewsIconName: String = "eye"

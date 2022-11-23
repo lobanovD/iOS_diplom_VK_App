@@ -23,7 +23,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     private var feedViewModel = FeedViewModel(cells: [])
     
     // MARK: Setup
-    
+
     private func setup() {
         let viewController        = self
         let interactor            = NewsFeedInteractor()
@@ -34,9 +34,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         interactor.presenter      = presenter
         presenter.viewController  = viewController
         router.viewController     = viewController
+        
     }
     
     // MARK: Routing
+    
+
     
     // MARK: View lifecycle
     
@@ -46,7 +49,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         setup()
         tableSetup()
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
-        refreshControlSetup()
+//        refreshControlSetup()
+        
+        // Наблюдатели
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: "reloadNews"), object: nil)
     }
     
     private func tableSetup() {
@@ -62,17 +68,23 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         feedTableView.widthToSuperview()
     }
     
-    private func refreshControlSetup() {
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
-        refreshControl.addTarget(self, action: #selector(feedRefresh), for: UIControl.Event.valueChanged)
-        feedTableView.addSubview(refreshControl)
-    }
+//    func refreshControlSetup() {
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
+//        refreshControl.addTarget(self, action: #selector(feedRefresh), for: UIControl.Event.valueChanged)
+//        feedTableView.addSubview(refreshControl)
+//    }
     
-    @objc func feedRefresh() {
+//    @objc func feedRefresh() {
+//        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+//        self.feedTableView.reloadData()
+//        refreshControl.endRefreshing()
+//    }
+    
+    
+    @objc func reloadNews() {
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
         self.feedTableView.reloadData()
-        refreshControl.endRefreshing()
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -86,7 +98,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     }
     
     // MARK: UI
-    private lazy var feedTableView: UITableView = {
+    lazy var feedTableView: UITableView = {
         let table = UITableView()
         return table
     }()
@@ -104,11 +116,8 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setupCell(viewModel: cellViewModel)
         cell.layoutSubviews()
         cell.tapLike = {
-            print(cellViewModel.postID)
-            print(cellViewModel.sourceID)
-            NetworkService.shared.addLike(sourceID: cellViewModel.sourceID, postID: cellViewModel.postID) {
-                tableView.reloadData() // ничего не делает
-            }
+            cell.changeLikeStatus(viewModel: cellViewModel)
+       
         }
         return cell
     }

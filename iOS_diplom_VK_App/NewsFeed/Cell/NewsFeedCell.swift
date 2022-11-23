@@ -17,7 +17,6 @@ final class NewsFeedCell: UITableViewCell {
     private var reposts: Int = 0
     private var views: Int = 0
     private var photoAttachmentHeight: CGFloat = 0
-    private var userLikes: Int = 0
     
     @objc var tapLike : (()->())?
     
@@ -35,6 +34,7 @@ final class NewsFeedCell: UITableViewCell {
         changeWidthRepostsView()
         changeWidthViewsView()
         photoAttachmentConstraintsSetup()
+        
     }
     
     // Убираем данные ячейки перед переиспользованием
@@ -46,9 +46,11 @@ final class NewsFeedCell: UITableViewCell {
         postText.text = nil
         postImageView.set(imageUrl: nil)
         likesLabel.text = nil
+//        likesIcon.image = nil
         commentsLabel.text = nil
         repostsLabel.text = nil
         viewsLabel.text = nil
+        
     }
     
     // MARK: UI
@@ -118,16 +120,17 @@ final class NewsFeedCell: UITableViewCell {
         return likesView
     }()
     
-//    private lazy var likesIcon: UIImageView = {
-//        let likesIcon = UIImageView()
-//        likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconName)
-//        return likesIcon
-//    }()
-        private lazy var likesIcon: UIButton = {
-            let likesIcon = UIButton()
-            likesIcon.setImage(UIImage(named: FeedVCConstants.buttonsLikesIconName), for: .normal)
-            return likesIcon
-        }()
+    private  lazy var likeActionButton: UIButton = {
+        let likeActionButton = UIButton()
+        likeActionButton.layer.cornerRadius = FeedVCConstants.buttonsViewLayerCornerRadius
+        likeActionButton.clipsToBounds = true
+        return likeActionButton
+    }()
+    
+    private lazy var likesIcon: UIImageView = {
+        let likesIcon = UIImageView()
+        return likesIcon
+    }()
     
     private lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
@@ -205,7 +208,7 @@ final class NewsFeedCell: UITableViewCell {
         cardView.addSubviews(views: titleView, postText, postImageView, buttonViewBlock)
         titleView.addSubviews(views: titleIconImage, titleLabel, timeLabel)
         buttonViewBlock.addSubviews(views: likesView, commentsView, repostsView, viewsView)
-        likesView.addSubviews(views: likesIcon, likesLabel)
+        likesView.addSubviews(views: likesIcon, likesLabel, likeActionButton)
         commentsView.addSubviews(views: commentsIcon, commentsLabel)
         repostsView.addSubviews(views: repostsIcon, repostsLabel)
         viewsView.addSubviews(views: viewsIcon, viewsLabel)
@@ -241,32 +244,40 @@ final class NewsFeedCell: UITableViewCell {
         buttonViewBlock.trailingToSuperview()
         buttonViewBlock.bottomToSuperview()
         buttonViewBlock.height(FeedVCConstants.buttonViewHeight)
+        
+        
     }
     
+    
+    
+    
     // Конфигурирование ячейки (наполнение данными)
-    func setupCell(viewModel: FeedCellViewModel) {
+    func setupCell(viewModel: FeedViewModel.Cell) {
+
+                        if viewModel.userLikes == 1 {
+                            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
+            
+                        } else {
+                            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
+                        }
+    
+        
+       
+
+//
+        
+        
+        
+        
+        
+        likesLabel.text = viewModel.likes
+        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
+        likeActionButton.addGestureRecognizer(tapLikeGesture)
         
         titleLabel.text = viewModel.name
         titleIconImage.set(imageUrl: viewModel.iconUrlString)
         timeLabel.text = viewModel.date
         postText.text = viewModel.text
-        likesLabel.text = viewModel.likes
-        
-//        if viewModel.userLikes == 1 {
-//            likesIcon.image = UIImage(named: "liked")
-//        } else {
-//            likesIcon.image = UIImage(named: "like")
-//        }
-        
-        if viewModel.userLikes == 1 {
-            likesIcon.setImage(UIImage(named: "liked"), for: .normal)
-        } else {
-            likesIcon.setImage(UIImage(named: "like"), for: .normal)
-        }
-        
-        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
-        likesIcon.addGestureRecognizer(tapLikeGesture)
-        
         commentsLabel.text = viewModel.comments
         repostsLabel.text = viewModel.shares
         viewsLabel.text = viewModel.views
@@ -277,10 +288,6 @@ final class NewsFeedCell: UITableViewCell {
         getViewsCount(viewModel: viewModel)
         
         changePhotoAttachmentHeight(viewModel: viewModel)
-    }
-    
-    @objc func setLike() {
-        tapLike?()
     }
     
     // MARK: Photo Attachment
@@ -314,6 +321,61 @@ final class NewsFeedCell: UITableViewCell {
         self.likes = likes
     }
     
+
+    
+    // Метод изменения иконки и количества лайков и отправки запроса в API при нажатии
+    
+    func changeLikeStatus(viewModel: FeedCellViewModel) {
+        if likesIcon.image == UIImage(named: "like") {
+            likesIcon.image = UIImage(named: "liked")
+            NetworkService.shared.addLike(sourceID: viewModel.sourceID, postID: viewModel.postID)
+            
+        } else {
+            likesIcon.image = UIImage(named: "like")
+            NetworkService.shared.removeLike(sourceID: viewModel.sourceID, postID: viewModel.postID)
+            
+        }
+    }
+    
+ 
+        
+        
+        
+    
+//    func changeLikeStatus(sourceID: Int, postID: Int, likeStatus: Int) {
+//
+//        print(999, likeStatus)
+//
+//        if likeStatus == 0 {
+//            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
+//            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
+//
+//
+//        } else {
+//            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
+//            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
+//
+//        }
+        
+//        if likesIcon.image == UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset) {
+//
+//            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
+//            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
+//
+//            guard let likesCount = Int(likesLabel.text ?? "") else { return }
+//            likesLabel.text = "\(likesCount + 1)"
+//
+//        } else {
+//
+//            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
+//            //likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
+//
+//            guard let likesCount = Int(likesLabel.text ?? "") else { return }
+//            likesLabel.text = "\(likesCount - 1)"
+//
+//        }
+//    }
+    
     // Метод, сбрасывающий и устанавливающий констрейнты для View с лайками
     private func likesViewConstraintsSetup(likesViewWidth: CGFloat) {
         likesView.constraints.deActivate()
@@ -331,6 +393,8 @@ final class NewsFeedCell: UITableViewCell {
         
         likesLabel.leadingToTrailing(of: likesIcon, offset: FeedVCConstants.buttonsLabelLeftOffset)
         likesLabel.centerYToSuperview()
+        
+        likeActionButton.edgesToSuperview()
     }
     
     // Метод, изменяющий ширину view в зависимости от кол-ва лайков
@@ -347,6 +411,10 @@ final class NewsFeedCell: UITableViewCell {
         default:
             break
         }
+    }
+    
+    @objc func setLike() {
+        tapLike?()
     }
     
     // MARK: View комментариев

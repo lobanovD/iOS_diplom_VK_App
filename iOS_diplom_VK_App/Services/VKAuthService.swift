@@ -42,13 +42,13 @@ final class VKAuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
     func wakeUpSession() {
         
+        // При смене ID приложения нужно разлогиниться на текущем устройстве, раскомментировав эту строку
 //        VKSdk.forceLogout()
-
+        
         let scope = API.scope
         
         VKSdk.wakeUpSession(scope) { [delegate] (state, error) in
             switch state {
-       
             case .initialized:
                 print("initialized")
                 VKSdk.authorize(scope)
@@ -64,23 +64,19 @@ final class VKAuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
     // Обязательные методы делегата
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        print(#function)
         if result.token != nil {
             delegate?.authServiceSignIn()
         }
     }
     
     func vkSdkUserAuthorizationFailed() {
-        print(#function)
         delegate?.authServiceSignInDidFail()
     }
     
     func vkSdkShouldPresent(_ controller: UIViewController!) {
-        print(#function)
         delegate?.authServiceShouldShow(viewController: controller)
     }
     
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
-        print(#function)
     }
 }
