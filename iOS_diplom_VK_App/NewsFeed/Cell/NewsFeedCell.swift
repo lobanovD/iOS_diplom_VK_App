@@ -46,7 +46,7 @@ final class NewsFeedCell: UITableViewCell {
         postText.text = nil
         postImageView.set(imageUrl: nil)
         likesLabel.text = nil
-//        likesIcon.image = nil
+        likesIcon.image = nil
         commentsLabel.text = nil
         repostsLabel.text = nil
         viewsLabel.text = nil
@@ -253,6 +253,7 @@ final class NewsFeedCell: UITableViewCell {
     
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedViewModel.Cell) {
+        
 
                         if viewModel.userLikes == 1 {
                             likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
@@ -327,12 +328,25 @@ final class NewsFeedCell: UITableViewCell {
     
     func changeLikeStatus(viewModel: FeedCellViewModel) {
         if likesIcon.image == UIImage(named: "like") {
+            
             likesIcon.image = UIImage(named: "liked")
-            NetworkService.shared.addLike(sourceID: viewModel.sourceID, postID: viewModel.postID)
+            
+            guard let likesCount = viewModel.likes else { return }
+                likesLabel.text = "\((Int(likesCount) ?? 0) + 1)"
+            
+            
+            
+            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
+            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
+            
             
         } else {
             likesIcon.image = UIImage(named: "like")
-            NetworkService.shared.removeLike(sourceID: viewModel.sourceID, postID: viewModel.postID)
+            guard let likesCount = viewModel.likes else { return }
+                likesLabel.text = "\((Int(likesCount) ?? 0) - 1)"
+            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
+            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
+            
             
         }
     }

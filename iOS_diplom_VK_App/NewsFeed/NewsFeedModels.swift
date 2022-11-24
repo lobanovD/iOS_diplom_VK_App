@@ -37,8 +37,8 @@ struct FeedViewModel {
         
         
         var iconUrlString: String
-        var name: String
-        var date: String
+        var name: String?
+        var date: String?
         var text: String?
         var likes: String?
         var userLikes: Int?
@@ -47,9 +47,9 @@ struct FeedViewModel {
         var shares: String?
         var views: String?
         var photoAttachment: FeedCellPhotoAttachmentViewModel?
-        var totalHeight: CGFloat
-        var postID: Int
-        var sourceID: Int
+        var totalHeight: CGFloat?
+        var postID: Int?
+        var sourceID: Int?
     }
     
     struct FeedCellPhotoAttachment: FeedCellPhotoAttachmentViewModel {

@@ -84,7 +84,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     @objc func reloadNews() {
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
-        self.feedTableView.reloadData()
+//        self.feedTableView.reloadData()
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -117,13 +117,22 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.layoutSubviews()
         cell.tapLike = {
             cell.changeLikeStatus(viewModel: cellViewModel)
+            
+            DispatchQueue.main.async {
+                self.interactor?.makeRequest(request: .getNewsFeed)
+            }
+            
+      
+                
+            }
+//
        
-        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = feedViewModel.cells[indexPath.row]
-        return cellViewModel.totalHeight
+        return cellViewModel.totalHeight ?? 0
     }
 }
