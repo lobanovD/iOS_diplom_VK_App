@@ -327,68 +327,20 @@ final class NewsFeedCell: UITableViewCell {
     // Метод изменения иконки и количества лайков и отправки запроса в API при нажатии
     
     func changeLikeStatus(viewModel: FeedCellViewModel) {
-        if likesIcon.image == UIImage(named: "like") {
-            
+        if viewModel.userLikes == 0 {
             likesIcon.image = UIImage(named: "liked")
-            
-            guard let likesCount = viewModel.likes else { return }
-                likesLabel.text = "\((Int(likesCount) ?? 0) + 1)"
-            
-            
-            
-            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
-            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
-            
-            
+            NetworkService.shared.addLike(sourceID: viewModel.sourceID!, postID: viewModel.postID!)
         } else {
             likesIcon.image = UIImage(named: "like")
-            guard let likesCount = viewModel.likes else { return }
-                likesLabel.text = "\((Int(likesCount) ?? 0) - 1)"
-            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
-            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
-            
-            
         }
     }
     
+   
  
         
         
         
-    
-//    func changeLikeStatus(sourceID: Int, postID: Int, likeStatus: Int) {
-//
-//        print(999, likeStatus)
-//
-//        if likeStatus == 0 {
-//            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
-//            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
-//
-//
-//        } else {
-//            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
-//            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
-//
-//        }
-        
-//        if likesIcon.image == UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset) {
-//
-//            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
-//            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
-//
-//            guard let likesCount = Int(likesLabel.text ?? "") else { return }
-//            likesLabel.text = "\(likesCount + 1)"
-//
-//        } else {
-//
-//            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
-//            //likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
-//
-//            guard let likesCount = Int(likesLabel.text ?? "") else { return }
-//            likesLabel.text = "\(likesCount - 1)"
-//
-//        }
-//    }
+   
     
     // Метод, сбрасывающий и устанавливающий констрейнты для View с лайками
     private func likesViewConstraintsSetup(likesViewWidth: CGFloat) {
