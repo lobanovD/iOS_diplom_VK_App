@@ -19,24 +19,73 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         
         switch response {
             
-        case .presentNewsFeed(feed: let feed):
             
-            let cells = feed.response.items.map { feedItem in
-                cellViewModel(feedItem: feedItem, profiles: feed.response.profiles, group: feed.response.groups)
+        case .saveAndPresentNewsFeed(feed: let feed):
+            
+        
+            
+            let posts = feed.response.items.map { feedItem in
+                postViewModel(feedItem: feedItem, profiles: feed.response.profiles, group: feed.response.groups)
             }
             
-            let feedViewModel = FeedViewModel(cells: cells)
+       
             
+            for post in posts {
+                guard
+                    let postId = post.postID,
+                    let sourceId = post.sourceID,
+                    let text = post.text,
+                    let date = post.date,
+                    let commentsCount = post.comments,
+                    let likesCount = post.likes,
+                    let userLikes = post.userLikes,
+                    let userCanLike = post.canLike,
+                    let repostsCount = post.shares,
+                    let viewsCount = post.views
+                        
+                else {
+                    print("Ошибка")
+                    return }
+                let currentPost = Post(sourceId: sourceId,
+                                       postId: postId,
+                                       text: text,
+                                       date: date,
+                                       commentsCount: commentsCount,
+                                       likesCount: likesCount,
+                                       userLikes: userLikes,
+                                       userCanLike: userCanLike,
+                                       repostsCount: repostsCount,
+                                       viewsCount: viewsCount)
+                
+                LocalStorage.shared.addPostsToLocalStorage(post: currentPost)
+            }
+            
+//
+//            self.text = text
+//            self.date = date
+//            self.commentsCount = commentsCount
+//            self.likesCount
+//            self.userLikes = userLikes
+//            self.userCanLike = userCanLike
+//            self.repostsCount = repostsCount
+//            self.viewsCount = viewsCount
+            
+            // тут идет получение данных из бд
+            let feedViewModel = FeedViewModel(posts: posts)
+            
+            
+            // и отображение их в контроллере
             viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayNewsFeed(feedViewModel: feedViewModel))
+            
         }
     }
     
-    private func cellViewModel(feedItem: FeedItem, profiles: [Profile], group: [Group]) -> FeedViewModel.Cell {
+    private func postViewModel(feedItem: FeedItem, profiles: [Profile], group: [Group]) -> FeedViewModel.Post {
         
-        let profile = self.profile(sourceID: feedItem.sourceId, profiles: profiles, groups: group)
+        let profile = self.profile(sourceID: feedItem.sourceId ?? 0, profiles: profiles, groups: group)
         
-        let vkDateFormater = VKDateFormater()
-        let date = vkDateFormater.formateDate(date: feedItem.date)
+//        let vkDateFormater = VKDateFormater()
+//        let date = vkDateFormater.formateDate(date: feedItem.date)
         
         let photoAttacment = self.photoAttachment(feedItem: feedItem)
         
@@ -44,15 +93,16 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         
         let cellHeight = cellHeightCalc.calculateCellTotalHeight(photoAttachment: photoAttacment,
                                                                  text: feedItem.text)
-        return FeedViewModel.Cell.init(iconUrlString: profile?.photo ?? "",
-                                       name: profile?.name ?? "Имя группы не получено",
-                                       date: date,
+        return FeedViewModel.Post.init(iconUrlString: profile?.photo ?? "",
+                                       name: profile?.name,
+                                       date: feedItem.date,
                                        text: feedItem.text,
-                                       likes: String(feedItem.likes?.count ?? 0),
-                                       userLikes: feedItem.likes?.userLikes,
-                                       comments: String(feedItem.comments?.count ?? 0),
-                                       shares: String(feedItem.reposts?.count ?? 0),
-                                       views: String(feedItem.views?.count ?? 0),
+                                       likes: feedItem.likes?.count,
+                                       userLikes: feedItem.likes?.userLikes ,
+                                       canLike: feedItem.likes?.canLike,
+                                       comments: feedItem.comments?.count,
+                                       shares: feedItem.reposts?.count,
+                                       views: feedItem.views?.count,
                                        photoAttachment: photoAttacment,
                                        totalHeight: cellHeight,
                                        postID: feedItem.postId,
@@ -70,11 +120,11 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         return profileRepresentable
     }
     
-    private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
+    private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedPostPhotoAttachment? {
         guard let photos = feedItem.attachments?.compactMap({ attachment in
             attachment.photo
         }), let firstPhoto = photos.first else { return nil }
         
-        return FeedViewModel.FeedCellPhotoAttachment(photoUrlString: firstPhoto.url, width: firstPhoto.width, height: firstPhoto.height)
+        return FeedViewModel.FeedPostPhotoAttachment(photoUrlString: firstPhoto.url, width: firstPhoto.width, height: firstPhoto.height)
     }
 }

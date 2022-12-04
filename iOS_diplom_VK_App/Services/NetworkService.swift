@@ -32,7 +32,7 @@ final class NetworkService {
         components.queryItems?.append(version)
         
         guard let url = components.url else { return nil }
-        print(url)
+//        print(url)
         return url
     }
     

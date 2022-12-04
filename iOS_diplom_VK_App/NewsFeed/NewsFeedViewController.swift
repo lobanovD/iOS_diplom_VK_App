@@ -20,7 +20,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
     var refreshControl:UIRefreshControl!
     
-    private var feedViewModel = FeedViewModel(cells: [])
+    private var feedViewModel = FeedViewModel(posts: [])
     
     // MARK: Setup
 
@@ -34,6 +34,9 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         interactor.presenter      = presenter
         presenter.viewController  = viewController
         router.viewController     = viewController
+        
+        
+        
         
     }
     
@@ -107,12 +110,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        feedViewModel.cells.count
+        feedViewModel.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
-        let cellViewModel = feedViewModel.cells[indexPath.row]
+        let cellViewModel = feedViewModel.posts[indexPath.row]
         cell.setupCell(viewModel: cellViewModel)
         cell.layoutSubviews()
         cell.tapLike = {
@@ -132,7 +135,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellViewModel = feedViewModel.cells[indexPath.row]
+        let cellViewModel = feedViewModel.posts[indexPath.row]
         return cellViewModel.totalHeight ?? 0
     }
 }

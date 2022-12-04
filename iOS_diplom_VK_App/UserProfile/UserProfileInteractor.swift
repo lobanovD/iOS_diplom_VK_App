@@ -25,7 +25,7 @@ class UserProfileInteractor: UserProfileBusinessLogic {
       switch request {
       case .getUserInfo:
           NetworkService.shared.getUserProfile { [weak self] responce in
-              print(responce)
+              //print(responce)
               guard let responce = responce else { return }
               self?.presenter?.presentData(response: UserProfile.Model.Response.ResponseType.presentUserInfo(user: responce))
 

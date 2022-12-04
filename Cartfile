@@ -1,2 +1,3 @@
 github "VKCOM/vk-ios-sdk" == 1.6.2
 github "roberthein/TinyConstraints"
+github "realm/realm-swift"

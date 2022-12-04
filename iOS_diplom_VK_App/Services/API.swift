@@ -32,9 +32,9 @@ enum APIParams: String {
 struct GetFeed {
     static let path = "/method/newsfeed.get"
     static let filtersName = "filters"
-    static let filtersValue = "post,photo,video"
+    static let filtersValue = "post,photo"
     static let countName = "count"
-    static let countValue = "90"
+    static let countValue = "100"
 }
 
 // Получение данных о пользователе

@@ -18,7 +18,7 @@ enum NewsFeed {
         }
         struct Response {
             enum ResponseType {
-                case presentNewsFeed(feed: FeedResponceWrapped)
+                case saveAndPresentNewsFeed(feed: FeedResponceWrapped)
             }
         }
         struct ViewModel {
@@ -33,31 +33,35 @@ enum NewsFeed {
 
 struct FeedViewModel {
     
-    struct Cell: FeedCellViewModel {
+    struct Post: FeedPostViewModel {
         
-        
-        var iconUrlString: String
+        var iconUrlString: String?
         var name: String?
-        var date: String?
+        var date: Int?
         var text: String?
-        var likes: String?
+        var likes: Int?
         var userLikes: Int?
         var canLike: Int?
-        var comments: String?
-        var shares: String?
-        var views: String?
+        var comments: Int?
+        var shares: Int?
+        var views: Int?
         var photoAttachment: FeedCellPhotoAttachmentViewModel?
         var totalHeight: CGFloat?
         var postID: Int?
         var sourceID: Int?
     }
     
-    struct FeedCellPhotoAttachment: FeedCellPhotoAttachmentViewModel {
+
+    
+    
+    
+    
+    struct FeedPostPhotoAttachment: FeedCellPhotoAttachmentViewModel {
         var photoUrlString: String?
         var width: Int
         var height: Int
     }
-    let cells: [Cell]
+    let posts: [Post]
 }
 
 
@@ -72,10 +76,10 @@ struct FeedResponce: Decodable {
 }
 
 struct FeedItem: Decodable {
-    let sourceId: Int
-    let postId: Int
+    let sourceId: Int?
+    let postId: Int?
     let text: String?
-    let date: Double
+    let date: Int?
     let comments: CountableItem?
     let likes: CountableLikes?
     let reposts: CountableItem?
@@ -84,13 +88,13 @@ struct FeedItem: Decodable {
 }
 
 struct CountableLikes: Decodable {
-    let count: Int
-    let userLikes: Int
-    let canLike: Int
+    let count: Int?
+    let userLikes: Int?
+    let canLike: Int?
 }
 
 struct CountableItem: Decodable {
-    let count: Int
+    let count: Int?
 }
 
 struct Attachment: Decodable {

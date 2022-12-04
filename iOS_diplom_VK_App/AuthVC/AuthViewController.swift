@@ -24,7 +24,7 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     
     // MARK: AuthServiceDelegate
     func authServiceShouldShow(viewController: UIViewController) {
-        print(#function)
+        //print(#function)
         navigationController?.navigationBar.isHidden = true
 //        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 //        navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
@@ -32,7 +32,7 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     }
     
     func authServiceSignIn() {
-        print(#function)
+        //print(#function)
         
         let tabBarVC = CustomTabBar()
         navigationController?.pushViewController(tabBarVC, animated: false)
@@ -41,7 +41,7 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     }
     
     func authServiceSignInDidFail() {
-        print(#function)
+        //print(#function)
         
         
     }

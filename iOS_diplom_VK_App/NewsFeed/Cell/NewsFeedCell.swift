@@ -252,7 +252,7 @@ final class NewsFeedCell: UITableViewCell {
     
     
     // Конфигурирование ячейки (наполнение данными)
-    func setupCell(viewModel: FeedViewModel.Cell) {
+    func setupCell(viewModel: FeedViewModel.Post) {
         
 
                         if viewModel.userLikes == 1 {
@@ -271,17 +271,17 @@ final class NewsFeedCell: UITableViewCell {
         
         
         
-        likesLabel.text = viewModel.likes
+//        likesLabel.text = viewModel.likes
         let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
         likeActionButton.addGestureRecognizer(tapLikeGesture)
         
         titleLabel.text = viewModel.name
         titleIconImage.set(imageUrl: viewModel.iconUrlString)
-        timeLabel.text = viewModel.date
+//        timeLabel.text = viewModel.date
         postText.text = viewModel.text
-        commentsLabel.text = viewModel.comments
-        repostsLabel.text = viewModel.shares
-        viewsLabel.text = viewModel.views
+//        commentsLabel.text = viewModel.comments
+//        repostsLabel.text = viewModel.shares
+//        viewsLabel.text = viewModel.views
         
         getLikesCount(viewModel: viewModel)
         getCommentsCount(viewModel: viewModel)
@@ -294,7 +294,7 @@ final class NewsFeedCell: UITableViewCell {
     // MARK: Photo Attachment
     
     // Метод, изменяющий размер полученного фото
-    private func changePhotoAttachmentHeight(viewModel: FeedCellViewModel) {
+    private func changePhotoAttachmentHeight(viewModel: FeedPostViewModel) {
         if let photoAttachment = viewModel.photoAttachment {
             postImageView.set(imageUrl: photoAttachment.photoUrlString)
             postImageView.isHidden = false
@@ -317,8 +317,8 @@ final class NewsFeedCell: UITableViewCell {
     // MARK: View лайков
     
     // Метод, изменяющий переменную likes
-    private func getLikesCount(viewModel: FeedCellViewModel) {
-        guard let likes = Int(viewModel.likes ?? "0") else { return }
+    private func getLikesCount(viewModel: FeedPostViewModel) {
+        guard let likes = viewModel.likes else { return }
         self.likes = likes
     }
     
@@ -326,7 +326,7 @@ final class NewsFeedCell: UITableViewCell {
     
     // Метод изменения иконки и количества лайков и отправки запроса в API при нажатии
     
-    func changeLikeStatus(viewModel: FeedCellViewModel) {
+    func changeLikeStatus(viewModel: FeedPostViewModel) {
         if likesIcon.image == UIImage(named: "like") {
             
             likesIcon.image = UIImage(named: "liked")
@@ -434,8 +434,8 @@ final class NewsFeedCell: UITableViewCell {
     // MARK: View комментариев
     
     // Метод, изменяющий переменную comments
-    private func getCommentsCount(viewModel: FeedCellViewModel) {
-        guard let comments = Int(viewModel.comments ?? "0") else { return }
+    private func getCommentsCount(viewModel: FeedPostViewModel) {
+        guard let comments = viewModel.comments else { return }
         self.comments = comments
     }
     
@@ -481,8 +481,8 @@ final class NewsFeedCell: UITableViewCell {
     // MARK: View репостов
     
     // Метод, изменяющий переменную reposts
-    private func getRepostCount(viewModel: FeedCellViewModel) {
-        guard let reposts = Int(viewModel.shares ?? "0") else { return }
+    private func getRepostCount(viewModel: FeedPostViewModel) {
+        guard let reposts = viewModel.shares else { return }
         self.reposts = reposts
     }
     
@@ -528,8 +528,8 @@ final class NewsFeedCell: UITableViewCell {
     // MARK: View просмотров
     
     // Метод, изменяющий переменную views
-    private func getViewsCount(viewModel: FeedCellViewModel) {
-        guard let views = Int(viewModel.views ?? "0") else { return }
+    private func getViewsCount(viewModel: FeedPostViewModel) {
+        guard let views = viewModel.views else { return }
         self.views = views
     }
     
