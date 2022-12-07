@@ -22,13 +22,14 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
             
         case .saveAndPresentNewsFeed(feed: let feed):
             
-        
-            
+          
             let posts = feed.response.items.map { feedItem in
                 postViewModel(feedItem: feedItem, profiles: feed.response.profiles, group: feed.response.groups)
             }
             
-       
+//            let localStorage = LocalStorage()
+            
+            print(posts[0].totalHeight)
             
             for post in posts {
                 guard
@@ -41,21 +42,26 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                     let userLikes = post.userLikes,
                     let userCanLike = post.canLike,
                     let repostsCount = post.shares,
-                    let viewsCount = post.views
+                    let viewsCount = post.views,
+                    let iconUrlString = post.iconUrlString
+                        
                         
                 else {
                     print("Ошибка")
                     return }
-                let currentPost = Post(sourceId: sourceId,
-                                       postId: postId,
-                                       text: text,
-                                       date: date,
-                                       commentsCount: commentsCount,
-                                       likesCount: likesCount,
-                                       userLikes: userLikes,
-                                       userCanLike: userCanLike,
-                                       repostsCount: repostsCount,
-                                       viewsCount: viewsCount)
+              
+                
+                let currentPost = FeedPost(sourceId: sourceId,
+                                           postId: postId,
+                                           text: text,
+                                           date: date,
+                                           commentsCount: commentsCount,
+                                           likesCount: likesCount,
+                                           userLikes: userLikes,
+                                           userCanLike: userCanLike,
+                                           repostsCount: repostsCount,
+                                           viewsCount: viewsCount,
+                                           iconUrlString: iconUrlString)
                 
                 LocalStorage.shared.addPostsToLocalStorage(post: currentPost)
             }
@@ -71,12 +77,16 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
 //            self.viewsCount = viewsCount
             
             // тут идет получение данных из бд
-            let feedViewModel = FeedViewModel(posts: posts)
-            
-            
+ 
+            LocalStorage.shared.getFeedModel()
+
+            guard let feedViewModel = LocalStorage.shared.feedViewModel else { return }
+
+
+
             // и отображение их в контроллере
             viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayNewsFeed(feedViewModel: feedViewModel))
-            
+
         }
     }
     

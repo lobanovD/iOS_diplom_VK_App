@@ -33,6 +33,8 @@ enum NewsFeed {
 
 struct FeedViewModel {
     
+    let posts: [Post]
+    
     struct Post: FeedPostViewModel {
         
         var iconUrlString: String?
@@ -61,7 +63,7 @@ struct FeedViewModel {
         var width: Int
         var height: Int
     }
-    let posts: [Post]
+    
 }
 
 

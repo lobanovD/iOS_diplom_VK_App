@@ -22,6 +22,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     private var feedViewModel = FeedViewModel(posts: [])
     
+    private func getNews() {
+        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+    }
+    
     // MARK: Setup
 
     private func setup() {
@@ -46,12 +50,16 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     // MARK: View lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        getNews()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         setup()
         tableSetup()
-        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+//        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
 //        refreshControlSetup()
         
         // Наблюдатели
@@ -86,7 +94,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     
     @objc func reloadNews() {
-        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+        getNews()
 //        self.feedTableView.reloadData()
     }
     
@@ -117,6 +125,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
         let cellViewModel = feedViewModel.posts[indexPath.row]
         cell.setupCell(viewModel: cellViewModel)
+        
         cell.layoutSubviews()
         cell.tapLike = {
             cell.changeLikeStatus(viewModel: cellViewModel)
