@@ -27,9 +27,6 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                 postViewModel(feedItem: feedItem, profiles: feed.response.profiles, group: feed.response.groups)
             }
             
-//            let localStorage = LocalStorage()
-            
-            print(posts[0].totalHeight)
             
             for post in posts {
                 guard
@@ -43,12 +40,15 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                     let userCanLike = post.canLike,
                     let repostsCount = post.shares,
                     let viewsCount = post.views,
-                    let iconUrlString = post.iconUrlString
+                    let iconUrlString = post.iconUrlString,
+                    let name = post.name,
+                    let totalHeight = post.totalHeight,
+                    let photoAttachmentURL = post.photoAttachment?.photoUrlString,
+                    let photoAttachmentWidth = post.photoAttachment?.width,
+                    let photoAttachmentHeight = post.photoAttachment?.height
                         
                         
-                else {
-                    print("Ошибка")
-                    return }
+                else { continue }
               
                 
                 let currentPost = FeedPost(sourceId: sourceId,
@@ -61,20 +61,17 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                            userCanLike: userCanLike,
                                            repostsCount: repostsCount,
                                            viewsCount: viewsCount,
-                                           iconUrlString: iconUrlString)
+                                           iconUrlString: iconUrlString,
+                                           name: name,
+                                           totalHeight: totalHeight,
+                                           photoAttachmentURL: photoAttachmentURL,
+                                           photoAttachmentWidth: photoAttachmentWidth,
+                                           photoAttachmentHeight: photoAttachmentHeight
+                )
                 
                 LocalStorage.shared.addPostsToLocalStorage(post: currentPost)
             }
-            
-//
-//            self.text = text
-//            self.date = date
-//            self.commentsCount = commentsCount
-//            self.likesCount
-//            self.userLikes = userLikes
-//            self.userCanLike = userCanLike
-//            self.repostsCount = repostsCount
-//            self.viewsCount = viewsCount
+
             
             // тут идет получение данных из бд
  
@@ -95,7 +92,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         let profile = self.profile(sourceID: feedItem.sourceId ?? 0, profiles: profiles, groups: group)
         
 //        let vkDateFormater = VKDateFormater()
-//        let date = vkDateFormater.formateDate(date: feedItem.date)
+//        let date = vkDateFormater.formateDate(date: feedItem.date ?? 0)
         
         let photoAttacment = self.photoAttachment(feedItem: feedItem)
         

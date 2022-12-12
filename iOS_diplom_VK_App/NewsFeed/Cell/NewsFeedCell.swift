@@ -253,35 +253,48 @@ final class NewsFeedCell: UITableViewCell {
     
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedViewModel.Post) {
-        
-
-                        if viewModel.userLikes == 1 {
-                            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
+        // Иконка автора(группы)
+        titleIconImage.set(imageUrl: viewModel.iconUrlString)
+        // Имя автора (группы)
+        titleLabel.text = viewModel.name
+        // Дата
+        let vkDateFormater = VKDateFormater()
+        let date = vkDateFormater.formateDate(date: viewModel.date ?? 0)
+        timeLabel.text = date
+        // Текст
+        postText.text = viewModel.text
+        // Иконка лайков
+        if viewModel.userLikes == 1 {
+            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
             
-                        } else {
-                            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
-                        }
-    
+        } else {
+            likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
+        }
+        // Количество лайков
+        likesLabel.text = "\(viewModel.likes ?? -100)"
         
-       
+        // Количество комментариев
+        commentsLabel.text = "\(viewModel.comments ?? -100)"
+        // Количество репостов
+        repostsLabel.text = "\(viewModel.shares ?? -100)"
+        // Количество просмотров
+        viewsLabel.text = "\(viewModel.views ?? -100)"
+   
+        
+        
+        
+        
+        
+        
+        
 
-//
-        
-        
-        
-        
-        
-//        likesLabel.text = viewModel.likes
         let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
         likeActionButton.addGestureRecognizer(tapLikeGesture)
         
-        titleLabel.text = viewModel.name
-        titleIconImage.set(imageUrl: viewModel.iconUrlString)
-//        timeLabel.text = viewModel.date
-        postText.text = viewModel.text
-//        commentsLabel.text = viewModel.comments
-//        repostsLabel.text = viewModel.shares
-//        viewsLabel.text = viewModel.views
+
+
+        
+
         
         getLikesCount(viewModel: viewModel)
         getCommentsCount(viewModel: viewModel)

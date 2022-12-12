@@ -21,8 +21,11 @@ class FeedPost: Object {
     @Persisted var repostsCount: Int
     @Persisted var viewsCount: Int
     @Persisted var iconUrlString: String
-    @Persisted var totalHeight: String
+    @Persisted var totalHeight: Double
     @Persisted var name: String
+    @Persisted var photoAttachmentURL: String
+    @Persisted var photoAttachmentWidth: Int
+    @Persisted var photoAttachmentHeight: Int
   
     
     
@@ -36,7 +39,12 @@ class FeedPost: Object {
                      userCanLike: Int,
                      repostsCount: Int,
                      viewsCount: Int,
-                     iconUrlString: String
+                     iconUrlString: String,
+                     name: String,
+                     totalHeight: Double,
+                     photoAttachmentURL: String,
+                     photoAttachmentWidth: Int,
+                     photoAttachmentHeight: Int
     ) {
         
         self.init()
@@ -51,6 +59,11 @@ class FeedPost: Object {
         self.repostsCount = repostsCount
         self.viewsCount = viewsCount
         self.iconUrlString = iconUrlString
+        self.name = name
+        self.totalHeight = totalHeight
+        self.photoAttachmentURL = photoAttachmentURL
+        self.photoAttachmentWidth = photoAttachmentWidth
+        self.photoAttachmentHeight = photoAttachmentHeight
         
     }
 }
@@ -101,6 +114,10 @@ class FeedPost: Object {
                         currentPost?.likesCount = post.likesCount
                         currentPost?.commentsCount = post.commentsCount
                         currentPost?.iconUrlString = post.iconUrlString
+                        currentPost?.name = post.name
+                        currentPost?.photoAttachmentURL = post.photoAttachmentURL
+                        currentPost?.photoAttachmentHeight = post.photoAttachmentHeight
+                        currentPost?.photoAttachmentWidth = post.photoAttachmentWidth
                     }
                     
                     return }
@@ -142,6 +159,7 @@ class FeedPost: Object {
             for post in allPosts {
                 
                 var currentPost = FeedViewModel.Post()
+                let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
                 
                 currentPost.postID = post.postId
                 currentPost.sourceID = post.sourceId
@@ -154,9 +172,10 @@ class FeedPost: Object {
                 currentPost.shares = post.repostsCount
                 currentPost.comments = post.commentsCount
                 currentPost.iconUrlString = post.iconUrlString
-                currentPost.name = ""
-                currentPost.photoAttachment = nil
-                currentPost.totalHeight = 100
+                currentPost.name = post.name
+                currentPost.photoAttachment = photoAttachment
+                currentPost.totalHeight = post.totalHeight
+                
                 
                
                 self.posts.append(currentPost)

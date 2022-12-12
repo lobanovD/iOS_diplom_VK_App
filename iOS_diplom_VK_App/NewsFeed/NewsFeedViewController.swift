@@ -127,6 +127,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setupCell(viewModel: cellViewModel)
         
         cell.layoutSubviews()
+        
         cell.tapLike = {
             cell.changeLikeStatus(viewModel: cellViewModel)
             
