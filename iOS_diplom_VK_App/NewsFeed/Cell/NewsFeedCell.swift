@@ -24,7 +24,6 @@ final class NewsFeedCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViewsAndConstraints()
-        
     }
     
     // Обновление subviews
@@ -34,7 +33,6 @@ final class NewsFeedCell: UITableViewCell {
         changeWidthRepostsView()
         changeWidthViewsView()
         photoAttachmentConstraintsSetup()
-        
     }
     
     // Убираем данные ячейки перед переиспользованием
@@ -50,7 +48,6 @@ final class NewsFeedCell: UITableViewCell {
         commentsLabel.text = nil
         repostsLabel.text = nil
         viewsLabel.text = nil
-        
     }
     
     // MARK: UI
@@ -244,12 +241,7 @@ final class NewsFeedCell: UITableViewCell {
         buttonViewBlock.trailingToSuperview()
         buttonViewBlock.bottomToSuperview()
         buttonViewBlock.height(FeedVCConstants.buttonViewHeight)
-        
-        
     }
-    
-    
-    
     
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: FeedViewModel.Post) {
@@ -266,13 +258,11 @@ final class NewsFeedCell: UITableViewCell {
         // Иконка лайков
         if viewModel.userLikes == 1 {
             likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameSet)
-            
         } else {
             likesIcon.image = UIImage(named: FeedVCConstants.buttonsLikesIconNameUnset)
         }
         // Количество лайков
         likesLabel.text = "\(viewModel.likes ?? -100)"
-        
         // Количество комментариев
         commentsLabel.text = "\(viewModel.comments ?? -100)"
         // Количество репостов
@@ -280,27 +270,17 @@ final class NewsFeedCell: UITableViewCell {
         // Количество просмотров
         viewsLabel.text = "\(viewModel.views ?? -100)"
    
-        
-        
-        
-        
-        
-        
-        
-
+        // Жест нажатия на область "лайков"
         let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
         likeActionButton.addGestureRecognizer(tapLikeGesture)
-        
-
-
-        
-
-        
+ 
+        // Обработка количества лайков, репостов, комментариев для установки ширины области каждого из них
         getLikesCount(viewModel: viewModel)
         getCommentsCount(viewModel: viewModel)
         getRepostCount(viewModel: viewModel)
         getViewsCount(viewModel: viewModel)
         
+        // Обработка размеров фото
         changePhotoAttachmentHeight(viewModel: viewModel)
     }
     
@@ -308,12 +288,16 @@ final class NewsFeedCell: UITableViewCell {
     
     // Метод, изменяющий размер полученного фото
     private func changePhotoAttachmentHeight(viewModel: FeedPostViewModel) {
+        
         if let photoAttachment = viewModel.photoAttachment {
-            postImageView.set(imageUrl: photoAttachment.photoUrlString)
-            postImageView.isHidden = false
-            let heightCalculator = CalculateCellHeight()
-            let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
-            self.photoAttachmentHeight = cellHeight
+            
+                postImageView.set(imageUrl: photoAttachment.photoUrlString)
+                postImageView.isHidden = false
+                let heightCalculator = CalculateCellHeight()
+                let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
+                self.photoAttachmentHeight = cellHeight
+            
+            
         } else {
             postImageView.isHidden = true
         }
@@ -329,40 +313,45 @@ final class NewsFeedCell: UITableViewCell {
     
     // MARK: View лайков
     
+    @objc func setLike() {
+        tapLike?()
+    }
+    
     // Метод, изменяющий переменную likes
     private func getLikesCount(viewModel: FeedPostViewModel) {
         guard let likes = viewModel.likes else { return }
         self.likes = likes
     }
     
-
-    
     // Метод изменения иконки и количества лайков и отправки запроса в API при нажатии
-    
-    func changeLikeStatus(viewModel: FeedPostViewModel) {
-        if likesIcon.image == UIImage(named: "like") {
-            
-            likesIcon.image = UIImage(named: "liked")
-            
-            guard let likesCount = viewModel.likes else { return }
-                likesLabel.text = "\((Int(likesCount) ?? 0) + 1)"
-            
-            
-            
-            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
-            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
-            
-            
-        } else {
-            likesIcon.image = UIImage(named: "like")
-            guard let likesCount = viewModel.likes else { return }
-                likesLabel.text = "\((Int(likesCount) ?? 0) - 1)"
-            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
-            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
-            
-            
-        }
-    }
+//    func changeLikeStatus(viewModel: FeedPostViewModel) {
+//
+//        guard let postId = viewModel.postID, let userLikes = viewModel.userLikes else { return }
+//
+//        LocalStorage.shared.likeUpdate(postId: postId, currentStatus: userLikes)
+//
+////        if likesIcon.image == UIImage(named: "like") {
+////
+////            likesIcon.image = UIImage(named: "liked")
+////
+////            guard let likesCount = viewModel.likes else { return }
+////                likesLabel.text = "\((Int(likesCount) ?? 0) + 1)"
+////
+////
+////
+////            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
+////            NetworkService.shared.addLike(sourceID: sourceID, postID: postID)
+//
+//
+////        } else {
+////            likesIcon.image = UIImage(named: "like")
+////            guard let likesCount = viewModel.likes else { return }
+////                likesLabel.text = "\((Int(likesCount) ?? 0) - 1)"
+////            guard let sourceID = viewModel.sourceID, let postID = viewModel.postID else { return }
+////            NetworkService.shared.removeLike(sourceID: sourceID, postID: postID)
+//
+//
+//        }
     
  
         
@@ -440,9 +429,7 @@ final class NewsFeedCell: UITableViewCell {
         }
     }
     
-    @objc func setLike() {
-        tapLike?()
-    }
+
     
     // MARK: View комментариев
     

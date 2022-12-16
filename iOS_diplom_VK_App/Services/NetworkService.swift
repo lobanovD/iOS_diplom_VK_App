@@ -32,7 +32,7 @@ final class NetworkService {
         components.queryItems?.append(version)
         
         guard let url = components.url else { return nil }
-//        print(url)
+        print(url)
         return url
     }
     
@@ -65,6 +65,7 @@ final class NetworkService {
             guard let data = data else { return }
             let responce = try? decoder.decode(FeedResponceWrapped.self, from: data)
             completion(responce)
+            
         }
     }
     

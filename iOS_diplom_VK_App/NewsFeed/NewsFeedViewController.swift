@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import TinyConstraints
+import RealmSwift
 
 protocol NewsFeedDisplayLogic: AnyObject {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
@@ -79,23 +80,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         feedTableView.widthToSuperview()
     }
     
-//    func refreshControlSetup() {
-//        refreshControl = UIRefreshControl()
-//        refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
-//        refreshControl.addTarget(self, action: #selector(feedRefresh), for: UIControl.Event.valueChanged)
-//        feedTableView.addSubview(refreshControl)
-//    }
-    
-//    @objc func feedRefresh() {
-//        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
-//        self.feedTableView.reloadData()
-//        refreshControl.endRefreshing()
-//    }
-    
     
     @objc func reloadNews() {
         getNews()
-//        self.feedTableView.reloadData()
+        self.feedTableView.reloadData()
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -123,24 +111,19 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
-        let cellViewModel = feedViewModel.posts[indexPath.row]
-        cell.setupCell(viewModel: cellViewModel)
-        
+        guard var feedViewModel = LocalStorage.shared.feedViewModel?.posts[indexPath.row] else { return cell }
+               
+        cell.setupCell(viewModel: feedViewModel)
         cell.layoutSubviews()
-        
-        cell.tapLike = {
-            cell.changeLikeStatus(viewModel: cellViewModel)
-            
-            DispatchQueue.main.async {
-                self.interactor?.makeRequest(request: .getNewsFeed)
-            }
-            
-      
-                
-            }
-//
        
-        
+        cell.tapLike = {
+            LocalStorage.shared.likeStatusUpdate(index: indexPath.row)
+            feedViewModel = (LocalStorage.shared.feedViewModel?.posts[indexPath.row])!
+            cell.setupCell(viewModel: feedViewModel)
+            tableView.reloadRows(at: [indexPath], with: .none)
+            cell.layoutSubviews()
+            }
+
         return cell
     }
     

@@ -27,9 +27,7 @@ enum NewsFeed {
             }
         }
     }
-    
 }
-
 
 struct FeedViewModel {
     
@@ -53,19 +51,12 @@ struct FeedViewModel {
         var sourceID: Int?
     }
     
-
-    
-    
-    
-    
     struct FeedPostPhotoAttachment: FeedCellPhotoAttachmentViewModel {
         var photoUrlString: String?
         var width: Int
         var height: Int
     }
-    
 }
-
 
 struct FeedResponceWrapped: Decodable {
     let response: FeedResponce
@@ -132,7 +123,6 @@ struct PhotoSize: Decodable {
     let url: String
     let width: Int
     let height: Int
-    
 }
 
 protocol ProfileRepresentable {

@@ -26,8 +26,6 @@ class FeedPost: Object {
     @Persisted var photoAttachmentURL: String
     @Persisted var photoAttachmentWidth: Int
     @Persisted var photoAttachmentHeight: Int
-  
-    
     
     convenience init(sourceId: Int,
                      postId: Int,
@@ -44,8 +42,7 @@ class FeedPost: Object {
                      totalHeight: Double,
                      photoAttachmentURL: String,
                      photoAttachmentWidth: Int,
-                     photoAttachmentHeight: Int
-    ) {
+                     photoAttachmentHeight: Int) {
         
         self.init()
         self.postId = postId
@@ -64,100 +61,72 @@ class FeedPost: Object {
         self.photoAttachmentURL = photoAttachmentURL
         self.photoAttachmentWidth = photoAttachmentWidth
         self.photoAttachmentHeight = photoAttachmentHeight
-        
     }
 }
-    
 
+final class LocalStorage {
     
-
+    static let shared = LocalStorage()
     
-    final class LocalStorage {
-        
-        static let shared = LocalStorage()
-        
-        
-        // При изменении модели (моделей) нужно увеличить данный параметр
-        let config = Realm.Configuration(schemaVersion: 1)
-            var posts: [FeedViewModel.Post]
-            var feedViewModel: FeedViewModel?
-        
-        init() {
-            Realm.Configuration.defaultConfiguration = config
-            // Вывести адрес базы данных
-//            print(Realm.Configuration.defaultConfiguration.fileURL?.path)
-            
-            posts = []
-//            feedViewModel = FeedViewModel(posts: posts)
-        }
-        
-        
-        // Метод добавления постов в локальное хранилище
-        func addPostsToLocalStorage(post: FeedPost) {
-            checkPostInRealmAndAdd(post: post)
-        }
-        
-        // Метод проверки существует ли пост в локальном хранилище
-        private func checkPostInRealmAndAdd(post: FeedPost) {
-            do {
-                
-                
-                let realm = try Realm()
-                guard realm.object(ofType: FeedPost.self, forPrimaryKey: post.postId) == nil else {
-                    let currentPost = realm.object(ofType: FeedPost.self, forPrimaryKey: post.postId)
-                    try realm.write{
-                        currentPost?.text = post.text
-                        currentPost?.viewsCount = post.viewsCount
-                        currentPost?.repostsCount = post.repostsCount
-                        currentPost?.userCanLike = post.userCanLike
-                        currentPost?.userLikes = post.userLikes
-                        currentPost?.likesCount = post.likesCount
-                        currentPost?.commentsCount = post.commentsCount
-                        currentPost?.iconUrlString = post.iconUrlString
-                        currentPost?.name = post.name
-                        currentPost?.photoAttachmentURL = post.photoAttachmentURL
-                        currentPost?.photoAttachmentHeight = post.photoAttachmentHeight
-                        currentPost?.photoAttachmentWidth = post.photoAttachmentWidth
-                    }
-                    
-                    return }
-                
+    // При изменении модели (моделей) нужно увеличить данный параметр
+    let config = Realm.Configuration(schemaVersion: 1)
+    var posts: [FeedViewModel.Post]
+    var feedViewModel: FeedViewModel?
+    
+    init() {
+        Realm.Configuration.defaultConfiguration = config
+        posts = []
+        // Вывести адрес базы данных
+        //            print(Realm.Configuration.defaultConfiguration.fileURL?.path)
+    }
+    
+    
+    // Метод добавления постов в локальное хранилище
+    func addPostsToLocalStorage(post: FeedPost) {
+        do {
+            let realm = try Realm()
+            guard realm.object(ofType: FeedPost.self, forPrimaryKey: post.postId) == nil else {
+                let currentPost = realm.object(ofType: FeedPost.self, forPrimaryKey: post.postId)
                 try realm.write {
-                    realm.add(post)
+                    currentPost?.text = post.text
+                    currentPost?.viewsCount = post.viewsCount
+                    currentPost?.repostsCount = post.repostsCount
+                    currentPost?.userCanLike = post.userCanLike
+                    currentPost?.userLikes = post.userLikes
+                    currentPost?.likesCount = post.likesCount
+                    currentPost?.commentsCount = post.commentsCount
+                    currentPost?.iconUrlString = post.iconUrlString
+                    currentPost?.name = post.name
+                    currentPost?.photoAttachmentURL = post.photoAttachmentURL
+                    currentPost?.photoAttachmentHeight = post.photoAttachmentHeight
+                    currentPost?.photoAttachmentWidth = post.photoAttachmentWidth
                 }
-                
-                
-            } catch {
-                //            print(error.localizedDescription)
+                return }
+            
+            try realm.write {
+                realm.add(post)
             }
-        }
-        
-        
-        
-        // Метод записи поста в Local Storage
-        private func writeToRealm(post: FeedPost) {
-            do {
-                let realm = try Realm()
-                
-                try realm.write {
-                    realm.add(post)
-                }
-            } catch {
-                //            print(error.localizedDescription)
+        } catch {}
+    }
+    
+    // Метод записи поста в Local Storage
+    private func writeToRealm(post: FeedPost) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(post)
             }
-        }
-        
-        
-        
-        // метод получения постов из хранилища
-        func getFeedModel() {
-            
-            let realm = try! Realm()
-            
-            let allPosts = realm.objects(FeedPost.self)
-            
+        } catch {}
+    }
+    
+    // метод получения постов из хранилища
+    func getFeedModel() {
+        feedViewModel = nil
+        posts = []
+        do {
+            let realm = try Realm()
+            let allPosts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
             for post in allPosts {
-                
                 var currentPost = FeedViewModel.Post()
                 let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
                 
@@ -176,26 +145,36 @@ class FeedPost: Object {
                 currentPost.photoAttachment = photoAttachment
                 currentPost.totalHeight = post.totalHeight
                 
-                
-               
-                self.posts.append(currentPost)
-                
-                
+                // ограничиваем вывод из базы только постами с фото
+                if photoAttachment.photoUrlString != "" {
+                    self.posts.append(currentPost)
+                }
             }
-            
             feedViewModel = FeedViewModel(posts: posts)
-//            print(feedViewModel)
-            
-     
-   
-        }
-        
-        
-        
-        
-        
-        
-        
+        } catch {}
     }
     
-
+    // Метод обновления статуса "лайка"
+    func likeStatusUpdate(index: Int) {
+        do {
+            let realm = try Realm()
+            let posts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
+            let currentPost = posts[index]
+            let status = currentPost.userLikes
+            if status == 0 {
+                try! realm.write {
+                    currentPost.userLikes = 1
+                    currentPost.likesCount += 1
+                }
+                NetworkService.shared.addLike(sourceID: currentPost.sourceId, postID: currentPost.postId)
+            } else {
+                try! realm.write {
+                    currentPost.userLikes = 0
+                    currentPost.likesCount -= 1
+                }
+                NetworkService.shared.addLike(sourceID: currentPost.sourceId, postID: currentPost.postId)
+            }
+            LocalStorage.shared.getFeedModel()
+        } catch {}
+    }
+}

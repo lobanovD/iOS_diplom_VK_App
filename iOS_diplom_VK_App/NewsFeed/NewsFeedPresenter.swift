@@ -27,6 +27,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                 postViewModel(feedItem: feedItem, profiles: feed.response.profiles, group: feed.response.groups)
             }
             
+          
+            
             
             for post in posts {
                 guard
@@ -67,8 +69,10 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                            photoAttachmentURL: photoAttachmentURL,
                                            photoAttachmentWidth: photoAttachmentWidth,
                                            photoAttachmentHeight: photoAttachmentHeight
+                                           
+                                         
                 )
-                
+               
                 LocalStorage.shared.addPostsToLocalStorage(post: currentPost)
             }
 
