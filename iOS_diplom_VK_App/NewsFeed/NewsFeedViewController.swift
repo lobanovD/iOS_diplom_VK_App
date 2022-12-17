@@ -23,6 +23,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     private var feedViewModel = FeedViewModel(posts: [])
     
+    let defaults = UserDefaults.standard
+    
+   
+    
     private func getNews() {
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
     }
@@ -39,10 +43,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         interactor.presenter      = presenter
         presenter.viewController  = viewController
         router.viewController     = viewController
-        
-        
-        
-        
     }
     
     // MARK: Routing
@@ -65,7 +65,14 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         
         // Наблюдатели
         NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: "reloadNews"), object: nil)
+        
+        
     }
+    
+ 
+    
+   
+    
     
     private func tableSetup() {
         view.addSubview(feedTableView)
@@ -78,12 +85,16 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         feedTableView.topToSuperview(usingSafeArea: true)
         feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
         feedTableView.widthToSuperview()
+        
+       
+        
     }
     
     
     @objc func reloadNews() {
         getNews()
         self.feedTableView.reloadData()
+        
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -93,6 +104,23 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
             feedTableView.reloadData()
+            print("таблица загружена")
+            
+            // перемещаем область видимости на последний пост
+            print("2текущее значение", UserDefaults.standard.integer(forKey: "index"))
+            
+//            if UserDefaults.standard.integer(forKey: "index") == nil {
+//                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - 1], at: .top, animated: false)
+//            } else if UserDefaults.standard.integer(forKey: "index") == 1 || UserDefaults.standard.integer(forKey: "index") == 0 {
+//                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (feedViewModel.posts.count - UserDefaults.standard.integer(forKey: "index") - 1)], at: .top, animated: false)
+//            } else {
+//                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (feedViewModel.posts.count - UserDefaults.standard.integer(forKey: "index") + 1)], at: .top, animated: false)
+//            }
+            
+            if UserDefaults.standard.integer(forKey: "index") != 0 {
+                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (feedViewModel.posts.count - UserDefaults.standard.integer(forKey: "index"))], at: .top, animated: false)
+            }
+            
         }
     }
     
@@ -109,13 +137,26 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         feedViewModel.posts.count
     }
     
+  
+ 
+    
+ 
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
         guard var feedViewModel = LocalStorage.shared.feedViewModel?.posts[indexPath.row] else { return cell }
                
         cell.setupCell(viewModel: feedViewModel)
         cell.layoutSubviews()
-       
+        
+        
+              
+        
+        
+        
+        
+        
         cell.tapLike = {
             LocalStorage.shared.likeStatusUpdate(index: indexPath.row)
             feedViewModel = (LocalStorage.shared.feedViewModel?.posts[indexPath.row])!
@@ -131,4 +172,37 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = feedViewModel.posts[indexPath.row]
         return cellViewModel.totalHeight ?? 0
     }
+    
+    
+//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        print(indexPath.row)
+//
+//        let currentPostIndex = UserDefaults.standard.integer(forKey: "index")
+//
+//            UserDefaults.standard.set(indexPath.row, forKey: "index")
+//            print("текущее значение", UserDefaults.standard.integer(forKey: "index"))
+//
+//    }
+//
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let currentPostIndex = UserDefaults.standard.integer(forKey: "index")
+//
+//            UserDefaults.standard.set(indexPath.row, forKey: "index")
+//            print("текущее значение", UserDefaults.standard.integer(forKey: "index"))
+//
+//    }
+    
+
+
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let firstVisibleIndexPath = self.feedTableView.indexPathsForVisibleRows?[0]
+        print("First visible cell section=\(firstVisibleIndexPath?.section), and row=\(firstVisibleIndexPath?.row)")
+        
+        UserDefaults.standard.set(firstVisibleIndexPath?.row, forKey: "index")
+        print("текущее значение", UserDefaults.standard.integer(forKey: "index"))
+    }
+ 
+    
 }

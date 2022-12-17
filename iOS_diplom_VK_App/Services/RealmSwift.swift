@@ -42,7 +42,8 @@ class FeedPost: Object {
                      totalHeight: Double,
                      photoAttachmentURL: String,
                      photoAttachmentWidth: Int,
-                     photoAttachmentHeight: Int) {
+                     photoAttachmentHeight: Int)
+    {
         
         self.init()
         self.postId = postId
@@ -77,7 +78,7 @@ final class LocalStorage {
         Realm.Configuration.defaultConfiguration = config
         posts = []
         // Вывести адрес базы данных
-        //            print(Realm.Configuration.defaultConfiguration.fileURL?.path)
+//                    print(Realm.Configuration.defaultConfiguration.fileURL?.path)
     }
     
     
@@ -121,6 +122,7 @@ final class LocalStorage {
     
     // метод получения постов из хранилища
     func getFeedModel() {
+        
         feedViewModel = nil
         posts = []
         do {
@@ -128,10 +130,12 @@ final class LocalStorage {
             let allPosts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
             for post in allPosts {
                 var currentPost = FeedViewModel.Post()
-                let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
+                var photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
                 
                 currentPost.postID = post.postId
                 currentPost.sourceID = post.sourceId
+                currentPost.iconUrlString = post.iconUrlString
+                currentPost.name = post.name
                 currentPost.text = post.text
                 currentPost.userLikes = post.userLikes
                 currentPost.date = post.date
@@ -140,19 +144,33 @@ final class LocalStorage {
                 currentPost.views = post.viewsCount
                 currentPost.shares = post.repostsCount
                 currentPost.comments = post.commentsCount
-                currentPost.iconUrlString = post.iconUrlString
-                currentPost.name = post.name
-                currentPost.photoAttachment = photoAttachment
-                currentPost.totalHeight = post.totalHeight
                 
-                // ограничиваем вывод из базы только постами с фото
-                if photoAttachment.photoUrlString != "" {
-                    self.posts.append(currentPost)
+                if photoAttachment.photoUrlString == "" {
+                    currentPost.photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: "", width: 604, height: 340)
+                } else {
+                    
+                    currentPost.photoAttachment = photoAttachment
                 }
+               
+                currentPost.totalHeight = post.totalHeight
+
+            
+                
+                self.posts.append(currentPost)
+                
+                
+//                // ограничиваем вывод из базы только постами с фото
+//                if photoAttachment.photoUrlString != "" {
+//                    self.posts.append(currentPost)
+//                }
+                
             }
             feedViewModel = FeedViewModel(posts: posts)
         } catch {}
     }
+    
+    
+    
     
     // Метод обновления статуса "лайка"
     func likeStatusUpdate(index: Int) {
@@ -162,17 +180,17 @@ final class LocalStorage {
             let currentPost = posts[index]
             let status = currentPost.userLikes
             if status == 0 {
-                try! realm.write {
+                try realm.write {
                     currentPost.userLikes = 1
                     currentPost.likesCount += 1
                 }
                 NetworkService.shared.addLike(sourceID: currentPost.sourceId, postID: currentPost.postId)
             } else {
-                try! realm.write {
+                try realm.write {
                     currentPost.userLikes = 0
                     currentPost.likesCount -= 1
                 }
-                NetworkService.shared.addLike(sourceID: currentPost.sourceId, postID: currentPost.postId)
+                NetworkService.shared.removeLike(sourceID: currentPost.sourceId, postID: currentPost.postId)
             }
             LocalStorage.shared.getFeedModel()
         } catch {}

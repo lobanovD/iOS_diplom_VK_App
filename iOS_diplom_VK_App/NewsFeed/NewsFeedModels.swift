@@ -49,6 +49,7 @@ struct FeedViewModel {
         var totalHeight: CGFloat?
         var postID: Int?
         var sourceID: Int?
+        var current: Bool?
     }
     
     struct FeedPostPhotoAttachment: FeedCellPhotoAttachmentViewModel {
