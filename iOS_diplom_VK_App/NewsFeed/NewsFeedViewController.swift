@@ -59,7 +59,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         setup()
-        tableSetup()
+        UISetup()
 //        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
 //        refreshControlSetup()
         
@@ -74,8 +74,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
    
     
     
-    private func tableSetup() {
-        view.addSubview(feedTableView)
+    private func UISetup() {
+        view.addSubviews(views: feedTableView, allertAboutNewFeed)
         feedTableView.separatorStyle = .none
         feedTableView.backgroundColor = .clear
         feedTableView.delegate = self
@@ -85,6 +85,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         feedTableView.topToSuperview(usingSafeArea: true)
         feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
         feedTableView.widthToSuperview()
+        
+        allertAboutNewFeed.topToSuperview(usingSafeArea: true)
+        allertAboutNewFeed.leftToSuperview(offset: 50)
+        allertAboutNewFeed.rightToSuperview(offset: -50)
         
        
         
@@ -118,13 +122,17 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             }
             
             // Получаем индекс последнего просмотренного сообщения из памяти
-            let finalPostIndex = UserDefaults.standard.integer(forKey: "index")
+            let finalPostIndex = defaults.integer(forKey: "index")
             // Получаем значение количества постов, которое было до обновления таблицы
             let oldPostCount = defaults.integer(forKey: "oldPostCount")
             // Перемещаем область видимости на последний просмотренный пост
+            
             feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (oldPostCount - finalPostIndex)], at: .top, animated: false)
-            
-            
+            // Показываем аллерт о новых сообщениях
+            let newPostCount = feedViewModel.posts.count
+            if newPostCount > oldPostCount {
+                allertAboutNewFeed.isHidden = false
+            }
         }
     }
     
@@ -132,6 +140,20 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     lazy var feedTableView: UITableView = {
         let table = UITableView()
         return table
+    }()
+    
+    private lazy var allertAboutNewFeed: UILabel = {
+        let allertAboutNewFeed = UILabel()
+        allertAboutNewFeed.text = "Свежие новости"
+        allertAboutNewFeed.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.4965524673, blue: 0.7551663518, alpha: 1)
+        allertAboutNewFeed.textAlignment = .center
+        allertAboutNewFeed.textColor = .white
+        allertAboutNewFeed.layer.cornerRadius = 5
+        allertAboutNewFeed.layer.borderWidth = 1
+        allertAboutNewFeed.layer.borderColor = CGColor(srgbRed: 45, green: 127, blue: 193, alpha: 1)
+        allertAboutNewFeed.clipsToBounds = true
+        allertAboutNewFeed.isHidden = true
+        return allertAboutNewFeed
     }()
 }
 
@@ -143,7 +165,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
   
  
-    
+   
  
     
     
@@ -182,34 +204,18 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        print(indexPath.row)
-//
-//        let currentPostIndex = UserDefaults.standard.integer(forKey: "index")
-//
-//            UserDefaults.standard.set(indexPath.row, forKey: "index")
-//            print("текущее значение", UserDefaults.standard.integer(forKey: "index"))
-//
-//    }
-//
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let currentPostIndex = UserDefaults.standard.integer(forKey: "index")
-//
-//            UserDefaults.standard.set(indexPath.row, forKey: "index")
-//            print("текущее значение", UserDefaults.standard.integer(forKey: "index"))
-//
-//    }
-    
 
 
-    
+
+    // Сохраняем индекс поста, на котором находится пользователь
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let firstVisibleIndexPath = self.feedTableView.indexPathsForVisibleRows?[0]
-        print("First visible cell section=\(firstVisibleIndexPath?.section), and row=\(firstVisibleIndexPath?.row)")
+        defaults.set(firstVisibleIndexPath?.row, forKey: "index")
         
-        UserDefaults.standard.set(firstVisibleIndexPath?.row, forKey: "index")
-        print("текущее значение", UserDefaults.standard.integer(forKey: "index"))
+        // Скрываем аллерт о новых постах при показе самого "свежего" поста
+        if firstVisibleIndexPath == [0, 0] {
+            allertAboutNewFeed.isHidden = true
+        }
     }
  
     
