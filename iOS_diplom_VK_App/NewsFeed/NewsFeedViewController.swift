@@ -106,20 +106,24 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             feedTableView.reloadData()
             print("таблица загружена")
             
-            // перемещаем область видимости на последний пост
-            print("2текущее значение", UserDefaults.standard.integer(forKey: "index"))
-            
-//            if UserDefaults.standard.integer(forKey: "index") == nil {
-//                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - 1], at: .top, animated: false)
-//            } else if UserDefaults.standard.integer(forKey: "index") == 1 || UserDefaults.standard.integer(forKey: "index") == 0 {
-//                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (feedViewModel.posts.count - UserDefaults.standard.integer(forKey: "index") - 1)], at: .top, animated: false)
-//            } else {
-//                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (feedViewModel.posts.count - UserDefaults.standard.integer(forKey: "index") + 1)], at: .top, animated: false)
-//            }
-            
-            if UserDefaults.standard.integer(forKey: "index") != 0 {
-                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (feedViewModel.posts.count - UserDefaults.standard.integer(forKey: "index"))], at: .top, animated: false)
+            // Сохраняем количество постов в память
+            if defaults.integer(forKey: "oldPostsCount") ==  0 {
+                defaults.set(feedViewModel.posts.count, forKey: "newPostCount")
+                defaults.set(feedViewModel.posts.count, forKey: "oldPostsCount")
+            } else {
+                let oldPostCountForSave = defaults.integer(forKey: "newPostCount")
+                let newPostCountForSave = feedViewModel.posts.count
+                defaults.set(oldPostCountForSave, forKey: "oldPostCount")
+                defaults.set(newPostCountForSave, forKey: "newPostCount")
             }
+            
+            // Получаем индекс последнего просмотренного сообщения из памяти
+            let finalPostIndex = UserDefaults.standard.integer(forKey: "index")
+            // Получаем значение количества постов, которое было до обновления таблицы
+            let oldPostCount = defaults.integer(forKey: "oldPostCount")
+            // Перемещаем область видимости на последний просмотренный пост
+            feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (oldPostCount - finalPostIndex)], at: .top, animated: false)
+            
             
         }
     }
@@ -134,7 +138,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        feedViewModel.posts.count
+        return feedViewModel.posts.count
     }
     
   
@@ -164,6 +168,10 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadRows(at: [indexPath], with: .none)
             cell.layoutSubviews()
             }
+        
+
+
+        
 
         return cell
     }
