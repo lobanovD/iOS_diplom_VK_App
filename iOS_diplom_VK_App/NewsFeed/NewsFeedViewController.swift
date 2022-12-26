@@ -136,7 +136,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             
             // Получаем индекс последнего просмотренного сообщения из памяти
             let finalPostIndex = defaults.integer(forKey: "index")
-            print("finalPostIndex - ", finalPostIndex)
             // Получаем значение количества постов, которое было до обновления таблицы
             let oldPostCount = defaults.integer(forKey: "oldPostCount")
             // Перемещаем область видимости на последний просмотренный пост
@@ -187,7 +186,6 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let firstVisibleIndexPath = self.feedTableView.indexPathsForVisibleRows?[0]
         defaults.set(firstVisibleIndexPath?.row, forKey: "index")
         
-        print("finalPostIndex", defaults.integer(forKey: "index"))
         // Скрываем аллерт о новых постах при показе самого "свежего" поста
         if firstVisibleIndexPath == [0, 0] {
             allertAboutNewFeed.isHidden = true

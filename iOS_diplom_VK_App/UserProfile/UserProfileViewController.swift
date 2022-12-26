@@ -65,6 +65,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        
             interactor?.makeRequest(request: UserProfile.Model.Request.RequestType.getUserInfo)
         setupUserProfileTable()
     }
@@ -109,13 +110,17 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "ddd")
-        cell.textLabel?.text = self.userInfoViewModel.firstName
+//        cell.textLabel?.text = self.userInfoViewModel.firstName
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id) as! ProfileHeaderView
+            
+            headerView.avatarImage.image = UIImage(named: "avatar")
+            
+            headerView.setupHeader(viewModel: userInfoViewModel)
             
 //            if let name = userInfoViewModel.firstName, let surname = userInfoViewModel.lastName {
 //                headerView.fullNameLabel.text = "\(name) \(surname)"

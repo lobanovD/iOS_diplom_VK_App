@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: Основное
 struct API {
     // Запрашиваемые разрешения (https://dev.vk.com/reference/access-rights)
     static let scope = ["offline", "wall", "friends"]
@@ -26,8 +27,7 @@ enum APIParams: String {
     case apiVersion = "v"
 }
 
-// MARK: Структуры методов API
-
+// MARK: Лента
 // Получение ленты пользователя
 struct GetFeed {
     static let path = "/method/newsfeed.get"
@@ -35,11 +35,6 @@ struct GetFeed {
     static let filtersValue = "post,photo"
     static let countName = "count"
     static let countValue = "100"
-}
-
-// Получение данных о пользователе
-struct GetUserInfo {
-    static let path = "/method/account.getProfileInfo"
 }
 
 // Обработка лайков
@@ -50,4 +45,10 @@ struct LikeActions {
     static let itemID = "item_id"
     static let type = "type"
     static let post = "post"
+}
+
+// MARK: Пользователь
+// Получение данных о пользователе
+struct GetUserInfo {
+    static let path = "/method/users.get"
 }

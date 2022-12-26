@@ -19,17 +19,12 @@ class UserProfilePresenter: UserProfilePresentationLogic {
      
       switch response {
       case .presentUserInfo(user: let user):
-          let firstName = user.response.firstName
-          let lastName = user.response.lastName
-          
-          let currentUser = UserInfoViewModel(firstName: firstName, lastName: lastName)
-          
-
-          
+          let avatar = user.response[0].photo200
+          let firstName = user.response[0].firstName
+          let lastName =  user.response[0].lastName
+          let currentUser = UserInfoViewModel(firstName: firstName, lastName: lastName, photo200: avatar)
+        
           viewController?.displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData.displayUserInfo(viewModel: currentUser))
-          
       }
-  
   }
-  
 }

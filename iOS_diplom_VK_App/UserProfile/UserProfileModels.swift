@@ -31,16 +31,25 @@ enum UserProfile {
 }
 
 struct UserProfileResponseWrapped: Decodable {
-    let response: UserProfileResponse
+    let response: [UserProfileResponse]
 }
 
+
+
 struct UserProfileResponse: Decodable {
+    var id: Int
     var firstName: String
     var lastName: String
-    var relation: Int
+    var canAccessClosed: Bool
+    var isClosed: Bool
+//    var relation: Int
+    var photo200: String
 }
 
 struct UserInfoViewModel {
     var firstName: String?
     var lastName: String?
+    var photo200: String?
 }
+
+

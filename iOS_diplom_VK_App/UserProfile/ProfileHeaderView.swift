@@ -11,6 +11,7 @@ import TinyConstraints
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
     static let id = "ProfileHeaderView"
+    var avatar: String?
     
     // MARK: Init
     override init(reuseIdentifier: String?) {
@@ -18,24 +19,31 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         contentView.addSubviews(views: bottomView, avatarImage)
 //        bottomView.addSubviews(views: )
         setup()
+        contentView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+       
         
     }
     
     //UI
     private lazy var bottomView: UIView = {
         let bottomView = UIView()
-        bottomView.backgroundColor = .red
+        bottomView.backgroundColor = .white
         bottomView.layer.cornerRadius = 20
         bottomView.clipsToBounds = true
         bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return bottomView
     }()
     
-    private lazy var avatarImage: UIImageView = {
-        let avatarImage = UIImageView()
-        avatarImage.image = UIImage(named: "avatar")
+    lazy var avatarImage: WebImageView = {
+        let avatarImage = WebImageView()
         return avatarImage
     }()
+    
+    func setupHeader(viewModel: UserInfoViewModel) {
+        
+        self.avatarImage.set(imageUrl: viewModel.photo200)
+        
+    }
     
 
     
@@ -49,6 +57,10 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         
         avatarImage.height(150)
         avatarImage.width(150)
+        avatarImage.layer.cornerRadius = 75
+        avatarImage.clipsToBounds = true
+        avatarImage.layer.borderWidth = 2
+        avatarImage.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         avatarImage.centerX(to: bottomView)
         avatarImage.bottomToTop(of: bottomView, offset: 60)
 

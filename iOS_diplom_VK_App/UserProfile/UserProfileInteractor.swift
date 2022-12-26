@@ -27,9 +27,7 @@ class UserProfileInteractor: UserProfileBusinessLogic {
           NetworkService.shared.getUserProfile { [weak self] responce in
               guard let responce = responce else { return }
               self?.presenter?.presentData(response: UserProfile.Model.Response.ResponseType.presentUserInfo(user: responce))
-
           }
       }
   }
-  
 }

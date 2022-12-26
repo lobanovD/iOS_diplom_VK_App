@@ -69,23 +69,6 @@ final class NetworkService {
         }
     }
     
-    // Метод получения данных пользователя
-    func getUserProfile(completion: @escaping (_ responce: UserProfileResponseWrapped?) -> Void) {
-        
-        NetworkService.shared.request(path: GetUserInfo.path, parameters: []) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            guard let data = data else { return }
-            
-            let responce = try? decoder.decode(UserProfileResponseWrapped.self, from: data)
-            
-            completion(responce)
-            
-        }
-    }
     
     // Метод добавления лайка к посту
     func addLike(sourceID: Int, postID: Int) {
@@ -114,4 +97,26 @@ final class NetworkService {
             }
         }
     }
+    
+    // Метод получения данных пользователя
+    func getUserProfile(completion: @escaping (_ responce: UserProfileResponseWrapped?) -> Void) {
+        
+        let params1 = URLQueryItem(name: "fields", value: "photo_200")
+        
+        NetworkService.shared.request(path: GetUserInfo.path, parameters: [params1]) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let data = data else { return }
+            
+            let responce = try? decoder.decode(UserProfileResponseWrapped.self, from: data)
+            
+            print(11, responce)
+            completion(responce)
+            
+        }
+    }
+    
 }
