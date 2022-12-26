@@ -69,14 +69,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        view.backgroundColor = FeedVCConstants.mainViewBackgroungColor
         setup()
         UISetup()
         getNews()
         // Наблюдатели
         NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: "reloadNews"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(finishUpdateNews), name: NSNotification.Name(rawValue: "finishUpdateNews"), object: nil)
-        
     }
     
     private func UISetup() {
