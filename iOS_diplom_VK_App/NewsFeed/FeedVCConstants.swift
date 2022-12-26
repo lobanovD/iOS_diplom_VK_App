@@ -105,6 +105,9 @@ struct FeedVCConstants {
     // MARK: Main View
     static let mainViewBackgroungColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     
+    // MARK: Notification Center
+    static let reloadFavourite: String = "reloadFavourite"
+    static let reloadNews: String = "reloadNews"
 
 }
 

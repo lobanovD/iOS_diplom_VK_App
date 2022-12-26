@@ -13,13 +13,7 @@ final class CustomTabBar: UITabBarController {
         super.viewWillAppear(animated)
         self.navigationItem.title = self.tabBar.selectedItem?.title
         self.navigationItem.hidesBackButton = true
-//        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(feedUpdate))
-//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
-    
-//    @objc func feedUpdate() {
-//        NotificationCenter.default.post(name: Notification.Name("reloadNews"), object: nil)
-//    }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         self.navigationItem.title = item.title
@@ -42,4 +36,3 @@ final class CustomTabBar: UITabBarController {
         self.tabBar.backgroundColor = CustomTabBarConstants.TBBackground
     }
 }
-

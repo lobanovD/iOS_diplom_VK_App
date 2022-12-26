@@ -30,23 +30,22 @@ class FavouriteNewsViewController: UIViewController {
         feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
         feedTableView.widthToSuperview()
     }
-
+    
+    @objc func reloadFavourite() {
+        reloadData()
+    }
 
     // MARK: View lifecycle
     override func viewWillAppear(_ animated: Bool) {
         reloadData()
     }
     
-    @objc func reloadFavourite() {
-        reloadData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        view.backgroundColor = FeedVCConstants.mainViewBackgroungColor
         UISetup()
         // Наблюдатели
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavourite), name: NSNotification.Name(rawValue: "reloadFavourite"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavourite), name: NSNotification.Name(rawValue: FeedVCConstants.reloadFavourite), object: nil)
        
     }
     
@@ -73,8 +72,8 @@ extension FavouriteNewsViewController: UITableViewDelegate, UITableViewDataSourc
             LocalStorage.shared.likeStatusUpdate(index: indexPath.row, typePage: .Favourite)
             feedViewModel = (LocalStorage.shared.favouriteViewModel?.posts[indexPath.row])!
             cell.setupCell(viewModel: feedViewModel)
-            NotificationCenter.default.post(name: Notification.Name("reloadFavourite"), object: nil)
-            NotificationCenter.default.post(name: Notification.Name("reloadNews"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(FeedVCConstants.reloadFavourite), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(FeedVCConstants.reloadNews), object: nil)
             cell.layoutSubviews()
             }
         return cell

@@ -74,7 +74,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         UISetup()
         getNews()
         // Наблюдатели
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: "reloadNews"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: FeedVCConstants.reloadNews), object: nil)
     }
     
     private func UISetup() {
@@ -172,7 +172,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setupCell(viewModel: feedViewModel)
             tableView.reloadRows(at: [indexPath], with: .none)
             cell.layoutSubviews()
-            NotificationCenter.default.post(name: Notification.Name("reloadFavourite"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(FeedVCConstants.reloadFavourite), object: nil)
             }
         return cell
     }

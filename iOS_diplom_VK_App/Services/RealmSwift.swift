@@ -74,7 +74,7 @@ final class LocalStorage {
     var posts: [FeedViewModel.Post]
     var feedViewModel: FeedViewModel?
     var favouriteViewModel: FeedViewModel?
-    
+
     init() {
         Realm.Configuration.defaultConfiguration = config
         posts = []
@@ -121,15 +121,18 @@ final class LocalStorage {
         } catch {}
     }
     
+    
     // метод получения постов из хранилища
     func getFeedModel() {
-        
         feedViewModel = nil
         posts = []
+    
         do {
             let realm = try Realm()
-            let allPosts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
-            for post in allPosts {
+            
+            let currentPostForView = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
+        
+            for post in currentPostForView {
                 var currentPost = FeedViewModel.Post()
                 let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
                 
@@ -154,9 +157,6 @@ final class LocalStorage {
                 }
                
                 currentPost.totalHeight = post.totalHeight
-
-            
-                
                 self.posts.append(currentPost)
                 
                 
@@ -180,7 +180,6 @@ final class LocalStorage {
             let allFavouritePosts = allPosts.where {
                 $0.userLikes == 1
             }
-            
             
             for post in allFavouritePosts {
                 var currentPost = FeedViewModel.Post()
@@ -207,16 +206,10 @@ final class LocalStorage {
                 }
                
                 currentPost.totalHeight = post.totalHeight
-
-            
-                
                 self.posts.append(currentPost)
-                
-                
             }
             favouriteViewModel = FeedViewModel(posts: posts)
             
-            print(11111, self.favouriteViewModel?.posts.count)
         } catch {}
     }
     

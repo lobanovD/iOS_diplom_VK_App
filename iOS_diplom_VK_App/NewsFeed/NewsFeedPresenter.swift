@@ -34,15 +34,12 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
 
             
             // тут идет получение данных из бд
- 
             LocalStorage.shared.getFeedModel()
 
             guard let feedViewModel = LocalStorage.shared.feedViewModel else { return }
 
-
             // и отображение их в контроллере
             viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayNewsFeed(feedViewModel: feedViewModel))
-
         }
     }
     
