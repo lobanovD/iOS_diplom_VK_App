@@ -19,17 +19,33 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
-    var refreshControl:UIRefreshControl!
-    
     private var feedViewModel = FeedViewModel(posts: [])
-    
     let defaults = UserDefaults.standard
-    
-   
+    let refreshControl = UIRefreshControl()
     
     private func getNews() {
         interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
     }
+    
+    // MARK: UI
+    lazy var feedTableView: UITableView = {
+        let table = UITableView()
+        return table
+    }()
+    
+    private lazy var allertAboutNewFeed: UILabel = {
+        let allertAboutNewFeed = UILabel()
+        allertAboutNewFeed.text = FeedVCConstants.alertText
+        allertAboutNewFeed.backgroundColor = FeedVCConstants.alertBackgroundColor
+        allertAboutNewFeed.textAlignment = .center
+        allertAboutNewFeed.textColor = FeedVCConstants.alertTextColor
+        allertAboutNewFeed.layer.cornerRadius = FeedVCConstants.alertBorderCornerRadius
+        allertAboutNewFeed.layer.borderWidth = FeedVCConstants.alertBorderWidth
+        allertAboutNewFeed.layer.borderColor = FeedVCConstants.alertBorderColor
+        allertAboutNewFeed.clipsToBounds = true
+        allertAboutNewFeed.isHidden = true
+        return allertAboutNewFeed
+    }()
     
     // MARK: Setup
 
@@ -51,28 +67,17 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     // MARK: View lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        getNews()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         setup()
         UISetup()
-//        interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
-//        refreshControlSetup()
-        
+        getNews()
         // Наблюдатели
         NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: "reloadNews"), object: nil)
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(finishUpdateNews), name: NSNotification.Name(rawValue: "finishUpdateNews"), object: nil)
         
     }
-    
- 
-    
-   
-    
     
     private func UISetup() {
         view.addSubviews(views: feedTableView, allertAboutNewFeed)
@@ -85,20 +90,29 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         feedTableView.topToSuperview(usingSafeArea: true)
         feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
         feedTableView.widthToSuperview()
-        
         allertAboutNewFeed.topToSuperview(usingSafeArea: true)
         allertAboutNewFeed.leftToSuperview(offset: 50)
         allertAboutNewFeed.rightToSuperview(offset: -50)
         
-       
-        
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        feedTableView.addSubview(refreshControl)
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        getNews()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.refreshControl.endRefreshing()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.feedTableView.reloadData()
+            }
+        }
+        
+    }
     
     @objc func reloadNews() {
         getNews()
         self.feedTableView.reloadData()
-        
     }
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -108,8 +122,9 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
             feedTableView.reloadData()
-            print("таблица загружена")
             
+//            NotificationCenter.default.post(name: Notification.Name("updateFavourite"), object: nil)
+
             // Сохраняем количество постов в память
             if defaults.integer(forKey: "oldPostsCount") ==  0 {
                 defaults.set(feedViewModel.posts.count, forKey: "newPostCount")
@@ -123,11 +138,16 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             
             // Получаем индекс последнего просмотренного сообщения из памяти
             let finalPostIndex = defaults.integer(forKey: "index")
+            print("finalPostIndex - ", finalPostIndex)
             // Получаем значение количества постов, которое было до обновления таблицы
             let oldPostCount = defaults.integer(forKey: "oldPostCount")
             // Перемещаем область видимости на последний просмотренный пост
-            
-            feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (oldPostCount - finalPostIndex)], at: .top, animated: false)
+            if UserDefaults.isFirstLaunch() {
+                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (oldPostCount - finalPostIndex) - 1], at: .bottom, animated: false)
+            } else {
+                feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (oldPostCount - finalPostIndex)], at: .top, animated: false)
+            }
+          
             // Показываем аллерт о новых сообщениях
             let newPostCount = feedViewModel.posts.count
             if newPostCount > oldPostCount {
@@ -135,26 +155,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             }
         }
     }
-    
-    // MARK: UI
-    lazy var feedTableView: UITableView = {
-        let table = UITableView()
-        return table
-    }()
-    
-    private lazy var allertAboutNewFeed: UILabel = {
-        let allertAboutNewFeed = UILabel()
-        allertAboutNewFeed.text = "Свежие новости"
-        allertAboutNewFeed.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.4965524673, blue: 0.7551663518, alpha: 1)
-        allertAboutNewFeed.textAlignment = .center
-        allertAboutNewFeed.textColor = .white
-        allertAboutNewFeed.layer.cornerRadius = 5
-        allertAboutNewFeed.layer.borderWidth = 1
-        allertAboutNewFeed.layer.borderColor = CGColor(srgbRed: 45, green: 127, blue: 193, alpha: 1)
-        allertAboutNewFeed.clipsToBounds = true
-        allertAboutNewFeed.isHidden = true
-        return allertAboutNewFeed
-    }()
 }
 
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
@@ -163,38 +163,19 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         return feedViewModel.posts.count
     }
     
-  
- 
-   
- 
-    
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
         guard var feedViewModel = LocalStorage.shared.feedViewModel?.posts[indexPath.row] else { return cell }
-               
         cell.setupCell(viewModel: feedViewModel)
         cell.layoutSubviews()
-        
-        
-              
-        
-        
-        
-        
-        
         cell.tapLike = {
-            LocalStorage.shared.likeStatusUpdate(index: indexPath.row)
+            LocalStorage.shared.likeStatusUpdate(index: indexPath.row, typePage: .FeedNews)
             feedViewModel = (LocalStorage.shared.feedViewModel?.posts[indexPath.row])!
             cell.setupCell(viewModel: feedViewModel)
             tableView.reloadRows(at: [indexPath], with: .none)
             cell.layoutSubviews()
+            NotificationCenter.default.post(name: Notification.Name("reloadFavourite"), object: nil)
             }
-        
-
-
-        
-
         return cell
     }
     
@@ -202,21 +183,18 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = feedViewModel.posts[indexPath.row]
         return cellViewModel.totalHeight ?? 0
     }
-    
-    
-
-
 
     // Сохраняем индекс поста, на котором находится пользователь
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let firstVisibleIndexPath = self.feedTableView.indexPathsForVisibleRows?[0]
         defaults.set(firstVisibleIndexPath?.row, forKey: "index")
         
+        print("finalPostIndex", defaults.integer(forKey: "index"))
         // Скрываем аллерт о новых постах при показе самого "свежего" поста
         if firstVisibleIndexPath == [0, 0] {
             allertAboutNewFeed.isHidden = true
         }
     }
- 
-    
 }
+
+

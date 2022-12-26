@@ -94,11 +94,15 @@ struct FeedVCConstants {
     static let buttonsLabelTextColor: String = "buttonsColor"
     static let buttonsLabelLeftOffset: CGFloat = 6
     
-    // Full Text Button
-    static let fullTextButtonColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-    static let fullTextButtonTitle = "Показать полностью"
-    static let fullTextButtonFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+// MARK: New feed alert
+    static let alertBackgroundColor: UIColor = #colorLiteral(red: 0.1764705882, green: 0.4965524673, blue: 0.7551663518, alpha: 1)
+    static let alertTextColor: UIColor = .white
+    static let alertText: String = "Свежие новости"
+    static let alertBorderColor: CGColor = CGColor(srgbRed: 45, green: 127, blue: 193, alpha: 1)
+    static let alertBorderCornerRadius: CGFloat = 5
+    static let alertBorderWidth: CGFloat = 1
     
-    // Post text
-    static let charCount = 400
+
 }
+
+
