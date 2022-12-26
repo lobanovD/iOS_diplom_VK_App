@@ -91,11 +91,3 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         return FeedViewModel.FeedPostPhotoAttachment(photoUrlString: firstPhoto.url, width: firstPhoto.width, height: firstPhoto.height)
     }
 }
-
-
-
-
-
-
-
-
