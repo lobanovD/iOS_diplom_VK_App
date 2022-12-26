@@ -73,6 +73,7 @@ final class LocalStorage {
     let config = Realm.Configuration(schemaVersion: 1)
     var posts: [FeedViewModel.Post]
     var feedViewModel: FeedViewModel?
+    var favouriteViewModel: FeedViewModel?
     
     init() {
         Realm.Configuration.defaultConfiguration = config
@@ -130,7 +131,7 @@ final class LocalStorage {
             let allPosts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
             for post in allPosts {
                 var currentPost = FeedViewModel.Post()
-                var photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
+                let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
                 
                 currentPost.postID = post.postId
                 currentPost.sourceID = post.sourceId
@@ -169,14 +170,75 @@ final class LocalStorage {
         } catch {}
     }
     
+    // Метод получения Избранных постов
+    func getFavouritePost() {
+        favouriteViewModel = nil
+        posts = []
+        do {
+            let realm = try Realm()
+            let allPosts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
+            let allFavouritePosts = allPosts.where {
+                $0.userLikes == 1
+            }
+            
+            
+            for post in allFavouritePosts {
+                var currentPost = FeedViewModel.Post()
+                let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
+                
+                currentPost.postID = post.postId
+                currentPost.sourceID = post.sourceId
+                currentPost.iconUrlString = post.iconUrlString
+                currentPost.name = post.name
+                currentPost.text = post.text
+                currentPost.userLikes = post.userLikes
+                currentPost.date = post.date
+                currentPost.canLike = post.userCanLike
+                currentPost.likes = post.likesCount
+                currentPost.views = post.viewsCount
+                currentPost.shares = post.repostsCount
+                currentPost.comments = post.commentsCount
+                
+                if photoAttachment.photoUrlString == "" {
+                    currentPost.photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: "", width: 604, height: 340)
+                } else {
+                    
+                    currentPost.photoAttachment = photoAttachment
+                }
+               
+                currentPost.totalHeight = post.totalHeight
+
+            
+                
+                self.posts.append(currentPost)
+                
+                
+            }
+            favouriteViewModel = FeedViewModel(posts: posts)
+            
+            print(11111, self.favouriteViewModel?.posts.count)
+        } catch {}
+    }
+    
     
     
     
     // Метод обновления статуса "лайка"
-    func likeStatusUpdate(index: Int) {
+    func likeStatusUpdate(index: Int, typePage: TypePage) {
         do {
             let realm = try Realm()
-            let posts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
+            let posts: Results<FeedPost>?
+            
+            switch typePage {
+            case .FeedNews:
+                posts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
+            case .Favourite:
+                let allPosts = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
+                posts = allPosts.where {
+                    $0.userLikes == 1
+                }
+            }
+            guard let posts = posts else { return }
             let currentPost = posts[index]
             let status = currentPost.userLikes
             if status == 0 {
@@ -196,3 +258,4 @@ final class LocalStorage {
         } catch {}
     }
 }
+

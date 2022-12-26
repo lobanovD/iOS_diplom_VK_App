@@ -15,5 +15,9 @@ struct CustomTabBarConstants {
     static let profileVCTitle: String = "Профиль"
     static let profileVCIcon: UIImage = UIImage(systemName: "person.crop.circle")!
     
+    static let favouriteVCTitle: String = "Избранное"
+    static let favouriteVCIcon: UIImage = UIImage(systemName: "star")!
+    
     static let TBBackground: UIColor = .white
 }
+

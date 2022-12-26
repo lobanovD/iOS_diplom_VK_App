@@ -17,7 +17,7 @@
 		1A13951828E3AC9900806783 /* CustomTabBarConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */; };
 		1A6D471B28B0594B0059BA42 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */; };
 		1A6D471D28B05E620059BA42 /* TinyConstraints.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1A6D471F28B111750059BA42 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471E28B111750059BA42 /* UIExtensions.swift */; };
+		1A6D471F28B111750059BA42 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471E28B111750059BA42 /* Extensions.swift */; };
 		1AB987A5289F23CB00F56E76 /* VKSdkFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; };
 		1AB987A6289F23CB00F56E76 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB987AB289F2E6900F56E76 /* VKAuthService.swift */; };
@@ -44,6 +44,7 @@
 		28243A812940E0CD00E0AA33 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 28243A802940E0CD00E0AA33 /* RealmSwift */; };
 		282FF06728FE826200B8846C /* ProfileHeaderView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF06628FE826200B8846C /* ProfileHeaderView_.swift */; };
 		282FF06928FEAE7600B8846C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF06828FEAE7600B8846C /* ProfileHeaderView.swift */; };
+		287CF7782959BE150082910A /* FavouriteNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287CF7772959BE150082910A /* FavouriteNewsViewController.swift */; };
 		28E5687429389183000078B2 /* RealmSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5687329389183000078B2 /* RealmSwift.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +74,7 @@
 		1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarConstants.swift; sourceTree = "<group>"; };
 		1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TinyConstraints.xcframework; path = Carthage/Build/TinyConstraints.xcframework; sourceTree = "<group>"; };
-		1A6D471E28B111750059BA42 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		1A6D471E28B111750059BA42 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1AB987A4289F23CB00F56E76 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
 		1AB987AB289F2E6900F56E76 /* VKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAuthService.swift; sourceTree = "<group>"; };
 		1ABCBBF928A2FA0000010460 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		1AEE563728B6C17D00D6CC1A /* CellsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsProtocols.swift; sourceTree = "<group>"; };
 		282FF06628FE826200B8846C /* ProfileHeaderView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView_.swift; sourceTree = "<group>"; };
 		282FF06828FEAE7600B8846C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		287CF7772959BE150082910A /* FavouriteNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteNewsViewController.swift; sourceTree = "<group>"; };
 		28B234E4292F1E7D00CE95E4 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		28B234E7292F1E8000CE95E4 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
 		28E5687329389183000078B2 /* RealmSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSwift.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				1ABCBC1428A5C50800010460 /* Cell */,
 				1ABCBC0628A464A900010460 /* NewsFeedViewController.swift */,
+				287CF7772959BE150082910A /* FavouriteNewsViewController.swift */,
 				1ABCBC0728A464A900010460 /* NewsFeedInteractor.swift */,
 				1ABCBC0228A464A900010460 /* NewsFeedPresenter.swift */,
 				1ABCBC0528A464A900010460 /* NewsFeedModels.swift */,
@@ -203,7 +206,7 @@
 				1ABCBC1928AAF27500010460 /* WebImageView.swift */,
 				1ABCBC1C28AAF8E300010460 /* VKDateFormater.swift */,
 				1ABCBC2028AC542100010460 /* String + Height.swift */,
-				1A6D471E28B111750059BA42 /* UIExtensions.swift */,
+				1A6D471E28B111750059BA42 /* Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -321,13 +324,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A6D471F28B111750059BA42 /* UIExtensions.swift in Sources */,
+				1A6D471F28B111750059BA42 /* Extensions.swift in Sources */,
 				1ABCBC0C28A464A900010460 /* NewsFeedModels.swift in Sources */,
 				1ABCBC0B28A464A900010460 /* NewsFeedRouter.swift in Sources */,
 				1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */,
 				1ABCBC1A28AAF27500010460 /* WebImageView.swift in Sources */,
 				1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */,
 				28E5687429389183000078B2 /* RealmSwift.swift in Sources */,
+				287CF7782959BE150082910A /* FavouriteNewsViewController.swift in Sources */,
 				1ABCBC1D28AAF8E300010460 /* VKDateFormater.swift in Sources */,
 				282FF06928FEAE7600B8846C /* ProfileHeaderView.swift in Sources */,
 				1ABCBC0E28A464A900010460 /* NewsFeedInteractor.swift in Sources */,

@@ -148,3 +148,9 @@ struct Group: Decodable, ProfileRepresentable {
     let photo100: String
     var photo: String { return photo100 }
 }
+
+enum TypePage {
+    case FeedNews
+    case Favourite
+}
+

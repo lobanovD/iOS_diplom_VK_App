@@ -13,15 +13,13 @@ final class CustomTabBar: UITabBarController {
         super.viewWillAppear(animated)
         self.navigationItem.title = self.tabBar.selectedItem?.title
         self.navigationItem.hidesBackButton = true
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(feedUpdate))
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+//        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(feedUpdate))
+//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    @objc func feedUpdate() {
-        NotificationCenter.default.post(name: Notification.Name("reloadNews"), object: nil)
-        
-        
-    }
+//    @objc func feedUpdate() {
+//        NotificationCenter.default.post(name: Notification.Name("reloadNews"), object: nil)
+//    }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         self.navigationItem.title = item.title
@@ -31,12 +29,17 @@ final class CustomTabBar: UITabBarController {
         // Контроллеры
         let feedVC = NewsFeedViewController()
         let profileVC = UserProfileViewController()
+        let favouriteVC = FavouriteNewsViewController()
+        
         // Настройки контроллеров
         feedVC.tabBarItem.title  = CustomTabBarConstants.feedVCTitle
         feedVC.tabBarItem.image = CustomTabBarConstants.feedVCIcon
         profileVC.tabBarItem.title  = CustomTabBarConstants.profileVCTitle
         profileVC.tabBarItem.image = CustomTabBarConstants.profileVCIcon
-        self.viewControllers = [feedVC, profileVC]
+        favouriteVC.tabBarItem.title  = CustomTabBarConstants.favouriteVCTitle
+        favouriteVC.tabBarItem.image = CustomTabBarConstants.favouriteVCIcon
+        self.viewControllers = [feedVC, profileVC, favouriteVC]
         self.tabBar.backgroundColor = CustomTabBarConstants.TBBackground
     }
 }
+
