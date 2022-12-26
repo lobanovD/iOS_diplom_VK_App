@@ -19,83 +19,16 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         
         switch response {
             
-            
         case .saveAndPresentNewsFeed(feed: let feed):
             
-          
             let posts = feed.response.items.map { feedItem in
                 postViewModel(feedItem: feedItem, profiles: feed.response.profiles, group: feed.response.groups)
             }
             
-          
-            
-            
             for post in posts {
-//                guard
-//                    let postId = post.postID,
-//                    let sourceId = post.sourceID,
-//                    let text = post.text,
-//                    let date = post.date,
-//                    let commentsCount = post.comments,
-//                    let likesCount = post.likes,
-//                    let userLikes = post.userLikes,
-//                    let userCanLike = post.canLike,
-//                    let repostsCount = post.shares,
-//                    let viewsCount = post.views,
-//                    let iconUrlString = post.iconUrlString,
-//                    let name = post.name,
-//                    let totalHeight = post.totalHeight,
-//                    let photoAttachmentURL = post.photoAttachment?.photoUrlString,
-//                    let photoAttachmentWidth = post.photoAttachment?.width,
-//                    let photoAttachmentHeight = post.photoAttachment?.height
-//
-//
-//                else { continue }
-              
-                
-//                let currentPost = FeedPost(sourceId: sourceId,
-//                                           postId: postId,
-//                                           text: text,
-//                                           date: date,
-//                                           commentsCount: commentsCount,
-//                                           likesCount: likesCount,
-//                                           userLikes: userLikes,
-//                                           userCanLike: userCanLike,
-//                                           repostsCount: repostsCount,
-//                                           viewsCount: viewsCount,
-//                                           iconUrlString: iconUrlString,
-//                                           name: name,
-//                                           totalHeight: totalHeight,
-//                                           photoAttachmentURL: photoAttachmentURL,
-//                                           photoAttachmentWidth: photoAttachmentWidth,
-//                                           photoAttachmentHeight: photoAttachmentHeight
-//                )
-                
-                
-                
-//                let currentPost = FeedPost(sourceId: post.sourceID ?? 0,
-//                                           postId: post.postID ?? 0,
-//                                           text: post.text ?? "",
-//                                           date: post.date ?? 0,
-//                                           commentsCount: post.comments ?? 0,
-//                                           likesCount: post.likes ?? 0,
-//                                           userLikes: post.userLikes ?? 0,
-//
-//                                           repostsCount: post.shares ?? 0,
-//                                           viewsCount: post.views ?? 0,
-//                                           iconUrlString: post.iconUrlString ?? "",
-//                                           name: post.name ?? "",
-//                                           totalHeight: post.totalHeight ?? .zero,
-//                                           photoAttachmentURL: post.photoAttachment?.photoUrlString ?? "",
-//                                           photoAttachmentWidth: post.photoAttachment?.width ?? 0,
-//                                           photoAttachmentHeight: post.photoAttachment?.height ?? 0
-//                )
                 
                 let currentPost = FeedPost(sourceId: post.sourceID ?? 0, postId: post.postID ?? 0, text: post.text ?? "", date: post.date ?? 0, commentsCount: post.comments ?? 0, likesCount: post.likes ?? 0, userLikes: post.userLikes ?? 0, userCanLike: post.canLike ?? 0, repostsCount: post.shares ?? 0, viewsCount: post.views ?? 0, iconUrlString: post.iconUrlString ?? "", name: post.name ?? "", totalHeight: post.totalHeight ?? .zero, photoAttachmentURL: post.photoAttachment?.photoUrlString ?? "", photoAttachmentWidth: post.photoAttachment?.width ?? 0, photoAttachmentHeight: post.photoAttachment?.height ?? 0)
                 
-                
-                
-               
                 LocalStorage.shared.addPostsToLocalStorage(post: currentPost)
             }
 
@@ -107,7 +40,6 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
             guard let feedViewModel = LocalStorage.shared.feedViewModel else { return }
 
 
-
             // и отображение их в контроллере
             viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayNewsFeed(feedViewModel: feedViewModel))
 
@@ -117,9 +49,6 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     private func postViewModel(feedItem: FeedItem, profiles: [Profile], group: [Group]) -> FeedViewModel.Post {
         
         let profile = self.profile(sourceID: feedItem.sourceId ?? 0, profiles: profiles, groups: group)
-        
-//        let vkDateFormater = VKDateFormater()
-//        let date = vkDateFormater.formateDate(date: feedItem.date ?? 0)
         
         let photoAttacment = self.photoAttachment(feedItem: feedItem)
         
