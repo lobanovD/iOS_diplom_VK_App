@@ -101,7 +101,7 @@ final class NetworkService {
     // Метод получения данных пользователя
     func getUserProfile(completion: @escaping (_ responce: UserProfileResponseWrapped?) -> Void) {
         
-        let params1 = URLQueryItem(name: "fields", value: "photo_200")
+        let params1 = URLQueryItem(name: "fields", value: "photo_200,status,about")
         
         NetworkService.shared.request(path: GetUserInfo.path, parameters: [params1]) { data, error in
             if let error = error {

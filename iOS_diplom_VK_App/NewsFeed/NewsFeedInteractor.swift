@@ -29,6 +29,16 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
  
                 self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.saveAndPresentNewsFeed(feed: feedResponse))
             }
+            // Сразу запрашиваем данные о пользователе
+            DispatchQueue.global(qos: .background).async {
+                NetworkService.shared.getUserProfile { responce in
+                    // сохраняем в Local Storage
+                    guard let responce = responce?.response[0] else { return }
+                    let user = UserInfo(id: responce.id, firstName: responce.firstName, lastName: responce.lastName, about: responce.about, status: responce.status, photo200: responce.photo200)
+                    LocalStorage.shared.addUserInfo(user: user)
+                }
+            }
+           
         }
     }
 }

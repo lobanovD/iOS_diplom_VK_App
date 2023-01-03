@@ -10,7 +10,7 @@ import Foundation
 // MARK: Основное
 struct API {
     // Запрашиваемые разрешения (https://dev.vk.com/reference/access-rights)
-    static let scope = ["offline", "wall", "friends"]
+    static let scope = ["offline", "wall", "friends", "photos"]
     // ID приложения
     static let appID = "51425771"
     // Протокол запросов к API

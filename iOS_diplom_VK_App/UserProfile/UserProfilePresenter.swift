@@ -18,13 +18,13 @@ class UserProfilePresenter: UserProfilePresentationLogic {
   func presentData(response: UserProfile.Model.Response.ResponseType) {
      
       switch response {
-      case .presentUserInfo(user: let user):
-          let avatar = user.response[0].photo200
-          let firstName = user.response[0].firstName
-          let lastName =  user.response[0].lastName
-          let currentUser = UserInfoViewModel(firstName: firstName, lastName: lastName, photo200: avatar)
+      case .presentUserInfo(user: _):
+          
+          // Запрашиваем данные из Local Storage
+          LocalStorage.shared.getUserModel()
+          guard let currentUserViewModel = LocalStorage.shared.userInfoViewModel else { return }
         
-          viewController?.displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData.displayUserInfo(viewModel: currentUser))
+          viewController?.displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData.displayUserInfo(viewModel: currentUserViewModel))
       }
   }
 }

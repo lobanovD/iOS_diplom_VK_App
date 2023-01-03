@@ -105,7 +105,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
                 self.feedTableView.reloadData()
             }
         }
-        
     }
     
     @objc func reloadNews() {
@@ -120,8 +119,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
             feedTableView.reloadData()
-            
-//            NotificationCenter.default.post(name: Notification.Name("updateFavourite"), object: nil)
 
             // Сохраняем количество постов в память
             if defaults.integer(forKey: "oldPostsCount") ==  0 {
@@ -136,6 +133,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             
             // Получаем индекс последнего просмотренного сообщения из памяти
             let finalPostIndex = defaults.integer(forKey: "index")
+            print("finalPostIndex",finalPostIndex)
             // Получаем значение количества постов, которое было до обновления таблицы
             let oldPostCount = defaults.integer(forKey: "oldPostCount")
             // Перемещаем область видимости на последний просмотренный пост
@@ -185,12 +183,9 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let firstVisibleIndexPath = self.feedTableView.indexPathsForVisibleRows?[0]
         defaults.set(firstVisibleIndexPath?.row, forKey: "index")
-        
         // Скрываем аллерт о новых постах при показе самого "свежего" поста
         if firstVisibleIndexPath == [0, 0] {
             allertAboutNewFeed.isHidden = true
         }
     }
 }
-
-

@@ -40,15 +40,16 @@ struct UserProfileResponse: Decodable {
     var id: Int
     var firstName: String
     var lastName: String
-    var canAccessClosed: Bool
-    var isClosed: Bool
-//    var relation: Int
+    var about: String
+    var status: String
     var photo200: String
 }
 
 struct UserInfoViewModel {
     var firstName: String?
     var lastName: String?
+    var about: String?
+    var status: String?
     var photo200: String?
 }
 

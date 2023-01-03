@@ -24,9 +24,16 @@ class UserProfileInteractor: UserProfileBusinessLogic {
       
       switch request {
       case .getUserInfo:
+          print(1)
+          
           NetworkService.shared.getUserProfile { [weak self] responce in
-              guard let responce = responce else { return }
-              self?.presenter?.presentData(response: UserProfile.Model.Response.ResponseType.presentUserInfo(user: responce))
+              guard let responce = responce?.response[0] else { return }
+              let user = UserInfo(id: responce.id, firstName: responce.firstName, lastName: responce.lastName, about: responce.about, status: responce.status, photo200: responce.photo200)
+              LocalStorage.shared.addUserInfo(user: user)
+              
+              let userModel = UserProfileResponseWrapped(response: [responce])
+              
+              self?.presenter?.presentData(response: UserProfile.Model.Response.ResponseType.presentUserInfo(user: userModel))
           }
       }
   }
