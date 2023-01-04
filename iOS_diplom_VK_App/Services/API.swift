@@ -52,3 +52,8 @@ struct LikeActions {
 struct GetUserInfo {
     static let path = "/method/users.get"
 }
+
+// MARK: Фотографии
+struct GetPhoto {
+    static let photoPath = "/method/photos.getAll"
+}

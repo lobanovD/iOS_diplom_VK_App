@@ -44,4 +44,39 @@ extension LocalStorage {
             userInfoViewModel = currentUser
         } catch {}
     }
+    
+    // Метод добавления ссылок на фотографии пользователя в локальное хранилище
+    func addUserPhotos(photo: UserPhotos) {
+        do {
+            let realm = try Realm()
+            guard realm.object(ofType: UserPhotos.self, forPrimaryKey: photo.id) == nil else {
+                let currentPhoto = realm.object(ofType: UserPhotos.self, forPrimaryKey: photo.id)
+                try realm.write {
+                    currentPhoto?.url = photo.url
+                }
+                return }
+            
+            try realm.write {
+                realm.add(photo)
+            }
+        } catch {}
+    }
+    
+    // Метод получения первых 4 фото для хедера страницы пользователя
+    func getFirstPhotos() {
+        self.photosForHeader = []
+        var fourPhotos: [String] = []
+        do {
+            let realm = try Realm()
+            let photos = realm.objects(UserPhotos.self)
+        
+            for photo in photos {
+                var currentPhotoUrl = ""
+                currentPhotoUrl = photo.url
+                fourPhotos.append(currentPhotoUrl)
+            }
+            self.photosForHeader = fourPhotos
+        } catch {}
+    }
 }
+

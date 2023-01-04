@@ -50,7 +50,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     lazy var status: UILabel = {
         let status = UILabel()
-        status.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        status.font = UIFont.systemFont(ofSize: 16, weight: .light)
         status.textAlignment = .center
         status.numberOfLines = 0
         return status
@@ -58,25 +58,21 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var firstPhoto: WebImageView = {
         let firstPhoto = WebImageView()
-        firstPhoto.set(imageUrl: "https://sun9-78.userapi.com/impg/H3khl6YFEG0RkETKuw4ITGSXLIzPG4py9N19sQ/I74YCNNeKnY.jpg?size=320x427&quality=95&sign=513da1cf89ce83c8751e446798ee4d83&c_uniq_tag=ijfOb7niZ-3aSDQECbQIqsWdPFcq9GVrqDjb7B8tbf8&type=album")
         return firstPhoto
     }()
     
     private lazy var secondPhoto: WebImageView = {
         let secondPhoto = WebImageView()
-        secondPhoto.set(imageUrl: "https://sun9-3.userapi.com/impg/LsdcRqt7UDjIdK5bDFUlh2HwnWRDYz3HPtQ8Lg/j_T6OSK94J4.jpg?size=56x75&quality=95&sign=1ecc12e9167c421171225f00a608c99a&c_uniq_tag=GuOcWu6jp-Y-HVSuuD_SsU8H_GbUeKGwhshOdSH9wQs&type=album")
         return secondPhoto
     }()
     
     private lazy var thirdPhoto: WebImageView = {
         let thirdPhoto = WebImageView()
-        thirdPhoto.set(imageUrl: "https://sun9-3.userapi.com/impg/LsdcRqt7UDjIdK5bDFUlh2HwnWRDYz3HPtQ8Lg/j_T6OSK94J4.jpg?size=56x75&quality=95&sign=1ecc12e9167c421171225f00a608c99a&c_uniq_tag=GuOcWu6jp-Y-HVSuuD_SsU8H_GbUeKGwhshOdSH9wQs&type=album")
         return thirdPhoto
     }()
     
     private lazy var fourthPhoto: WebImageView = {
         let fourthPhoto = WebImageView()
-        fourthPhoto.set(imageUrl: "https://sun9-3.userapi.com/impg/LsdcRqt7UDjIdK5bDFUlh2HwnWRDYz3HPtQ8Lg/j_T6OSK94J4.jpg?size=56x75&quality=95&sign=1ecc12e9167c421171225f00a608c99a&c_uniq_tag=GuOcWu6jp-Y-HVSuuD_SsU8H_GbUeKGwhshOdSH9wQs&type=album")
         return fourthPhoto
     }()
     
@@ -106,9 +102,15 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 //        if self.status.countLines() == 3 {
 //            self.heightForHeaderInSection = 700
 //        }
+        
+        // Заполняем фотографии
+        guard let photosArray = LocalStorage.shared.photosForHeader else { return }
+        firstPhoto.set(imageUrl: photosArray[0])
+        secondPhoto.set(imageUrl: photosArray[1])
+        thirdPhoto.set(imageUrl: photosArray[2])
+        fourthPhoto.set(imageUrl: photosArray[3])
+        
     }
-    
-    
     
     
     // Constraints
@@ -117,7 +119,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         bottomView.bottomToSuperview()
         bottomView.leadingToSuperview()
         bottomView.trailingToSuperview()
-        bottomView.height(150)
+//        bottomView.height(150)
         
         avatarImage.height(150)
         avatarImage.width(150)
@@ -131,12 +133,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         fullNameLabel.topToBottom(of: avatarImage, offset: 10)
         fullNameLabel.leftToSuperview(offset: 6)
         fullNameLabel.rightToSuperview(offset: -6)
+        fullNameLabel.height(30)
 
         status.topToBottom(of: fullNameLabel, offset: 3)
         status.leftToSuperview(offset: 6)
         status.rightToSuperview(offset: -6)
-        status.height(60) // ВОТ ТУТ СДЕЛАТЬ ВЫЧИСЛЕНИЕ ВЫСОТЫ
-
+        status.height(40)
+        
         photoStackView.topToBottom(of: status, offset: 6)
         photoStackView.leftToSuperview(offset: 6)
         photoStackView.rightToSuperview(offset: -6)

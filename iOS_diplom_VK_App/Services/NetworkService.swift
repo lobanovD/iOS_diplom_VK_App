@@ -110,12 +110,23 @@ final class NetworkService {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
-            
             let responce = try? decoder.decode(UserProfileResponseWrapped.self, from: data)
-            
-            print(11, responce)
             completion(responce)
-            
+        }
+    }
+    
+    // Метод получения всех фото пользователя
+    func  getAllPhoto(completion: @escaping (_ responce: Photos?) -> Void) {
+        
+        NetworkService.shared.request(path: GetPhoto.photoPath, parameters: []) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let data = data else { return }
+            let responce = try? decoder.decode(Photos.self, from: data)
+            completion(responce)
         }
     }
     

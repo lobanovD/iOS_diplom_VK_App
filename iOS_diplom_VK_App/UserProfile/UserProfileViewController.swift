@@ -67,7 +67,11 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         case .displayUserInfo(viewModel: let model):
             self.userInfoViewModel = model
             print("данные получены")
+            LocalStorage.shared.getFirstPhotos()
             self.userProfileTable.reloadData()
+            
+            
+            
         }
     }
     
@@ -81,7 +85,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         userProfileTable.dataSource = self
         userProfileTable.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
 //        userProfileTable.estimatedRowHeight =  UITableView.automaticDimension
-        userProfileTable.sectionHeaderHeight = UITableView.automaticDimension
+//        userProfileTable.sectionHeaderHeight = UITableView.automaticDimension
 //        userProfileTable.estimatedSectionHeaderHeight = 500
 
 

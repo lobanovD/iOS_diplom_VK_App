@@ -53,4 +53,51 @@ struct UserInfoViewModel {
     var photo200: String?
 }
 
+// MARK: - Photos
+struct Photos: Codable {
+    let response: PhotoResponse
+}
+
+// MARK: - Response
+struct PhotoResponse: Codable {
+    let count: Int
+    let items: [Item]
+}
+
+// MARK: - Item
+struct Item: Codable {
+    let albumId, date, id, ownerId: Int
+    let lat, long: Double?
+    let sizes: [Size]
+    let text: String
+    let hasTags: Bool
+    let postId: Int?
+    let squareCrop: String?
+
+    enum CodingKeys: String, CodingKey {
+        case albumId
+        case date, id
+        case ownerId
+        case lat, long, sizes, text
+        case hasTags
+        case postId
+        case squareCrop
+    }
+}
+
+// MARK: - Size
+struct Size: Codable {
+    let height: Int
+    let type: String
+    let width: Int
+    let url: String
+}
+
+//struct PhotosViewModel {
+//    var photos: [UserPhoto]
+//}
+//struct UserPhoto {
+//    var id: Int?
+//    var url: String?
+//}
 

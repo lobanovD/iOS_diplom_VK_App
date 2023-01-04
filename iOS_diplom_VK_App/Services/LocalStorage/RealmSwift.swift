@@ -18,6 +18,7 @@ final class LocalStorage {
     var feedViewModel: FeedViewModel?
     var favouriteViewModel: FeedViewModel?
     var userInfoViewModel: UserInfoViewModel?
+    var photosForHeader: [String]?
     
     init() {
         Realm.Configuration.defaultConfiguration = config

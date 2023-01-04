@@ -24,7 +24,6 @@ class UserProfileInteractor: UserProfileBusinessLogic {
       
       switch request {
       case .getUserInfo:
-          print(1)
           
           NetworkService.shared.getUserProfile { [weak self] responce in
               guard let responce = responce?.response[0] else { return }
@@ -32,6 +31,9 @@ class UserProfileInteractor: UserProfileBusinessLogic {
               LocalStorage.shared.addUserInfo(user: user)
               
               let userModel = UserProfileResponseWrapped(response: [responce])
+              
+              // Заполняем массив фотографий для хедера страницы пользователя
+              LocalStorage.shared.getFirstPhotos()
               
               self?.presenter?.presentData(response: UserProfile.Model.Response.ResponseType.presentUserInfo(user: userModel))
           }

@@ -23,7 +23,6 @@ class UserInfo: Object {
                      status: String,
                      photo200: String)
     {
-        
         self.init()
         self.id = id
         self.firstName = firstName
@@ -32,4 +31,17 @@ class UserInfo: Object {
         self.status = status
         self.photo200 = photo200
     }
+}
+
+class UserPhotos: Object {
+    @Persisted (primaryKey: true) var id: Int
+    @Persisted var url: String
+    
+    convenience init(id: Int,
+                     url: String) {
+        self.init()
+        self.id = id
+        self.url = url
+    }
+    
 }

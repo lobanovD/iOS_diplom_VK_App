@@ -29,7 +29,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
  
                 self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.saveAndPresentNewsFeed(feed: feedResponse))
             }
-            // Сразу запрашиваем данные о пользователе
+            // Сразу запрашиваем данные о пользователе и его фотографии
             DispatchQueue.global(qos: .background).async {
                 NetworkService.shared.getUserProfile { responce in
                     // сохраняем в Local Storage
@@ -37,6 +37,20 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
                     let user = UserInfo(id: responce.id, firstName: responce.firstName, lastName: responce.lastName, about: responce.about, status: responce.status, photo200: responce.photo200)
                     LocalStorage.shared.addUserInfo(user: user)
                 }
+                
+                NetworkService.shared.getAllPhoto { photos in
+                    guard let items = photos?.response.items else { return }
+                    for item in items {
+                        for size in item.sizes {
+                            if size.type == "r" {
+                                // Записываем ссылки на фотографии в Local Storage
+                                let photo = UserPhotos(id: item.id, url: size.url)
+                                LocalStorage.shared.addUserPhotos(photo: photo)
+                            }
+                        }
+                    }
+                }
+                
             }
            
         }
