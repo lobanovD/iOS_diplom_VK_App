@@ -13,8 +13,8 @@ protocol UserProfileDisplayLogic: AnyObject {
     func displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData)
 }
 
-class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
-    
+class UserProfileViewController: UIViewController, UserProfileDisplayLogic, ProfileHeaderViewDelegate {
+
     var interactor: UserProfileBusinessLogic?
     var router: (NSObjectProtocol & UserProfileRoutingLogic)?
     private var userInfoViewModel = UserInfoViewModel()
@@ -34,11 +34,19 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         interactor.presenter      = presenter
         presenter.viewController  = viewController
         router.viewController     = viewController
+        
+        
+        
     }
     
     // MARK: Routing
     
-    
+    func didTapOnPhotoStackView() {
+        let photoVC = UserPhotoViewController()
+        photoVC.title = "Фотографии"
+        self.navigationController?.pushViewController(photoVC, animated: true)
+        print(1)
+    }
     
     // MARK: View lifecycle
     
@@ -47,6 +55,8 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         view.backgroundColor = VCConstants.mainViewBackgroungColor
         setup()
     }
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         interactor?.makeRequest(request: UserProfile.Model.Request.RequestType.getUserInfo)
@@ -106,6 +116,7 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let headerView = ProfileHeaderView()
+            headerView.delegate = self
             
             headerView.setupHeader(viewModel: userInfoViewModel)
             

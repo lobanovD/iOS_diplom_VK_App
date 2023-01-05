@@ -8,19 +8,27 @@
 import UIKit
 import TinyConstraints
 
+protocol ProfileHeaderViewDelegate {
+    func didTapOnPhotoStackView()
+}
+
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
     static let id = "ProfileHeaderView"
     var avatar: String?
     var heightForHeaderInSection: CGFloat?
+    var delegate: ProfileHeaderViewDelegate?
     
     // MARK: Init
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        
+        
         contentView.addSubviews(views: bottomView, avatarImage, fullNameLabel, status, photoStackView)
 
         setup()
         contentView.backgroundColor = VCConstants.mainViewBackgroungColor
+        
        
     }
     
@@ -107,6 +115,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         thirdPhoto.set(imageUrl: photosArray[2])
         fourthPhoto.set(imageUrl: photosArray[3])
         
+        // Обработка нажатия на стэк фото
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapToPhoto))
+        photoStackView.addGestureRecognizer(gesture)
+    }
+    
+    @objc func tapToPhoto() {
+        delegate?.didTapOnPhotoStackView()
     }
     
     // MARK: Constraints

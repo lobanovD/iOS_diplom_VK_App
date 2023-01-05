@@ -48,6 +48,7 @@
 		28B1A531295B704500620A42 /* FeedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B1A530295B704500620A42 /* FeedPostModel.swift */; };
 		28B1A534295B71A900620A42 /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B1A533295B71A900620A42 /* FeedPost.swift */; };
 		28B1A536295B71B700620A42 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B1A535295B71B700620A42 /* UserInfo.swift */; };
+		28D8BA9F29674A3C00AF72CE /* UserPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8BA9E29674A3C00AF72CE /* UserPhotoViewController.swift */; };
 		28E5687429389183000078B2 /* RealmSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5687329389183000078B2 /* RealmSwift.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		28B1A535295B71B700620A42 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		28B234E4292F1E7D00CE95E4 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		28B234E7292F1E8000CE95E4 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
+		28D8BA9E29674A3C00AF72CE /* UserPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoViewController.swift; sourceTree = "<group>"; };
 		28E5687329389183000078B2 /* RealmSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSwift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				1A042B1928EA2D130050DD57 /* UserProfileViewController.swift */,
+				28D8BA9E29674A3C00AF72CE /* UserPhotoViewController.swift */,
 				1A042B1A28EA2D130050DD57 /* UserProfileInteractor.swift */,
 				1A042B1528EA2D130050DD57 /* UserProfilePresenter.swift */,
 				1A042B1828EA2D130050DD57 /* UserProfileModels.swift */,
@@ -346,6 +349,7 @@
 				1ABCBC0C28A464A900010460 /* NewsFeedModels.swift in Sources */,
 				1ABCBC0B28A464A900010460 /* NewsFeedRouter.swift in Sources */,
 				1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */,
+				28D8BA9F29674A3C00AF72CE /* UserPhotoViewController.swift in Sources */,
 				1ABCBC1A28AAF27500010460 /* WebImageView.swift in Sources */,
 				1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */,
 				28E5687429389183000078B2 /* RealmSwift.swift in Sources */,
