@@ -29,6 +29,9 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
  
                 self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.saveAndPresentNewsFeed(feed: feedResponse))
             }
+            // Очищаем фотографии пользователя
+            LocalStorage.shared.deleteAllPhoto()
+            
             // Сразу запрашиваем данные о пользователе и его фотографии
             DispatchQueue.global(qos: .background).async {
                 NetworkService.shared.getUserProfile { responce in
@@ -38,6 +41,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
                     LocalStorage.shared.addUserInfo(user: user)
                 }
                 
+                // Получаем фотографии пользователя
                 NetworkService.shared.getAllPhoto { photos in
                     guard let items = photos?.response.items else { return }
                     for item in items {

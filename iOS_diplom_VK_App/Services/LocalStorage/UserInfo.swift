@@ -62,7 +62,7 @@ extension LocalStorage {
         } catch {}
     }
     
-    // Метод получения первых 4 фото для хедера страницы пользователя
+    // Метод получения всех фото пользователя
     func getFirstPhotos() {
         self.photosForHeader = []
         var fourPhotos: [String] = []
@@ -76,6 +76,18 @@ extension LocalStorage {
                 fourPhotos.append(currentPhotoUrl)
             }
             self.photosForHeader = fourPhotos
+        } catch {}
+    }
+    
+    // Метод удаления всех фото пользователя из локального хранилища
+    func deleteAllPhoto() {
+        do {
+            let realm = try Realm()
+            let photos = realm.objects(UserPhotos.self)
+        
+            try realm.write {
+                realm.delete(photos)
+            }
         } catch {}
     }
 }
