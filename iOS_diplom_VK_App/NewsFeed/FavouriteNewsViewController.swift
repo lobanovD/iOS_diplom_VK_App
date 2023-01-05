@@ -27,7 +27,7 @@ class FavouriteNewsViewController: UIViewController {
         feedTableView.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
         feedTableView.estimatedRowHeight =  UITableView.automaticDimension
         feedTableView.topToSuperview(usingSafeArea: true)
-        feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
+        feedTableView.bottomToSuperview(offset: VCConstants.tableViewBottomOffset, usingSafeArea: true)
         feedTableView.widthToSuperview()
     }
     
@@ -42,10 +42,10 @@ class FavouriteNewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = FeedVCConstants.mainViewBackgroungColor
+        view.backgroundColor = VCConstants.mainViewBackgroungColor
         UISetup()
         // Наблюдатели
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavourite), name: NSNotification.Name(rawValue: FeedVCConstants.reloadFavourite), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavourite), name: NSNotification.Name(rawValue: VCConstants.reloadFavourite), object: nil)
        
     }
     
@@ -72,8 +72,8 @@ extension FavouriteNewsViewController: UITableViewDelegate, UITableViewDataSourc
             LocalStorage.shared.likeStatusUpdate(index: indexPath.row, typePage: .Favourite)
             feedViewModel = (LocalStorage.shared.favouriteViewModel?.posts[indexPath.row])!
             cell.setupCell(viewModel: feedViewModel)
-            NotificationCenter.default.post(name: Notification.Name(FeedVCConstants.reloadFavourite), object: nil)
-            NotificationCenter.default.post(name: Notification.Name(FeedVCConstants.reloadNews), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadFavourite), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadNews), object: nil)
             cell.layoutSubviews()
             }
         return cell

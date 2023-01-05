@@ -44,10 +44,8 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        view.backgroundColor = VCConstants.mainViewBackgroungColor
         setup()
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,12 +64,9 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
             
         case .displayUserInfo(viewModel: let model):
             self.userInfoViewModel = model
-            print("данные получены")
             LocalStorage.shared.getFirstPhotos()
             self.userProfileTable.reloadData()
-            
-            
-            
+   
         }
     }
     
@@ -84,20 +79,10 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         userProfileTable.delegate = self
         userProfileTable.dataSource = self
         userProfileTable.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
-//        userProfileTable.estimatedRowHeight =  UITableView.automaticDimension
-//        userProfileTable.sectionHeaderHeight = UITableView.automaticDimension
-//        userProfileTable.estimatedSectionHeaderHeight = 500
-
-
         userProfileTable.topToSuperview(usingSafeArea: true)
-//         ОБР
-//        АТИТЬ
-//        ВНИМАНИЕ на офсет ниже
-        userProfileTable.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
+        userProfileTable.bottomToSuperview(offset: VCConstants.tableViewBottomOffset, usingSafeArea: true)
         userProfileTable.widthToSuperview()
     }
-    
-    
 }
 
 

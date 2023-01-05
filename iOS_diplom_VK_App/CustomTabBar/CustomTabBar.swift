@@ -26,13 +26,13 @@ final class CustomTabBar: UITabBarController {
         let favouriteVC = FavouriteNewsViewController()
         
         // Настройки контроллеров
-        feedVC.tabBarItem.title  = CustomTabBarConstants.feedVCTitle
-        feedVC.tabBarItem.image = CustomTabBarConstants.feedVCIcon
-        profileVC.tabBarItem.title  = CustomTabBarConstants.profileVCTitle
-        profileVC.tabBarItem.image = CustomTabBarConstants.profileVCIcon
-        favouriteVC.tabBarItem.title  = CustomTabBarConstants.favouriteVCTitle
-        favouriteVC.tabBarItem.image = CustomTabBarConstants.favouriteVCIcon
+        feedVC.tabBarItem.title  = VCConstants.feedVCTitle
+        feedVC.tabBarItem.image = VCConstants.feedVCIcon
+        profileVC.tabBarItem.title  = VCConstants.profileVCTitle
+        profileVC.tabBarItem.image = VCConstants.profileVCIcon
+        favouriteVC.tabBarItem.title  = VCConstants.favouriteVCTitle
+        favouriteVC.tabBarItem.image = VCConstants.favouriteVCIcon
         self.viewControllers = [feedVC, profileVC, favouriteVC]
-        self.tabBar.backgroundColor = CustomTabBarConstants.TBBackground
+        self.tabBar.backgroundColor = VCConstants.TBBackground
     }
 }

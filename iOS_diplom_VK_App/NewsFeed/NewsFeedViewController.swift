@@ -35,13 +35,13 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     private lazy var allertAboutNewFeed: UILabel = {
         let allertAboutNewFeed = UILabel()
-        allertAboutNewFeed.text = FeedVCConstants.alertText
-        allertAboutNewFeed.backgroundColor = FeedVCConstants.alertBackgroundColor
+        allertAboutNewFeed.text = VCConstants.alertText
+        allertAboutNewFeed.backgroundColor = VCConstants.alertBackgroundColor
         allertAboutNewFeed.textAlignment = .center
-        allertAboutNewFeed.textColor = FeedVCConstants.alertTextColor
-        allertAboutNewFeed.layer.cornerRadius = FeedVCConstants.alertBorderCornerRadius
-        allertAboutNewFeed.layer.borderWidth = FeedVCConstants.alertBorderWidth
-        allertAboutNewFeed.layer.borderColor = FeedVCConstants.alertBorderColor
+        allertAboutNewFeed.textColor = VCConstants.alertTextColor
+        allertAboutNewFeed.layer.cornerRadius = VCConstants.alertBorderCornerRadius
+        allertAboutNewFeed.layer.borderWidth = VCConstants.alertBorderWidth
+        allertAboutNewFeed.layer.borderColor = VCConstants.alertBorderColor
         allertAboutNewFeed.clipsToBounds = true
         allertAboutNewFeed.isHidden = true
         return allertAboutNewFeed
@@ -69,12 +69,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = FeedVCConstants.mainViewBackgroungColor
+        view.backgroundColor = VCConstants.mainViewBackgroungColor
         setup()
         UISetup()
         getNews()
         // Наблюдатели
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: FeedVCConstants.reloadNews), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadNews), name: NSNotification.Name(rawValue: VCConstants.reloadNews), object: nil)
     }
     
     private func UISetup() {
@@ -86,7 +86,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         feedTableView.register(NewsFeedCell.self, forCellReuseIdentifier: NewsFeedCell.id)
         feedTableView.estimatedRowHeight =  UITableView.automaticDimension
         feedTableView.topToSuperview(usingSafeArea: true)
-        feedTableView.bottomToSuperview(offset: FeedVCConstants.tableViewBottomOffset, usingSafeArea: true)
+        feedTableView.bottomToSuperview(offset: VCConstants.tableViewBottomOffset, usingSafeArea: true)
         feedTableView.widthToSuperview()
         allertAboutNewFeed.topToSuperview(usingSafeArea: true)
         allertAboutNewFeed.leftToSuperview(offset: 50)
@@ -169,7 +169,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setupCell(viewModel: feedViewModel)
             tableView.reloadRows(at: [indexPath], with: .none)
             cell.layoutSubviews()
-            NotificationCenter.default.post(name: Notification.Name(FeedVCConstants.reloadFavourite), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadFavourite), object: nil)
             }
         return cell
     }

@@ -15,18 +15,18 @@ final class CalculateCellHeight {
     // Вычисление общей высоты ячейки
     func calculateCellTotalHeight(photoAttachment: FeedCellPhotoAttachmentViewModel?, text: String?) -> CGFloat {
         // Постоянная высота заголовка поста
-        let titleHeight: CGFloat = FeedVCConstants.titleViewHeight + FeedVCConstants.titleViewTopOffset
+        let titleHeight: CGFloat = VCConstants.titleViewHeight + VCConstants.titleViewTopOffset
         // Высота текста
-        let textHeight = calculateTextHeight(text: text) + FeedVCConstants.postTextTopOffset
+        let textHeight = calculateTextHeight(text: text) + VCConstants.postTextTopOffset
         // Высота attachment
-        let attachmentHeight = calculatePhotoAttachmentHeight(photoAttachment: photoAttachment) + FeedVCConstants.postImageViewTopOffset
+        let attachmentHeight = calculatePhotoAttachmentHeight(photoAttachment: photoAttachment) + VCConstants.postImageViewTopOffset
         
         // Высота блока кнопок
-        let buttonBlockHeight = FeedVCConstants.buttonViewHeight
+        let buttonBlockHeight = VCConstants.buttonViewHeight
         var topOffsetOfButtonsBlock: CGFloat = 0
         
         if photoAttachment != nil {
-            topOffsetOfButtonsBlock = FeedVCConstants.topOffsetOfButtonsBlock
+            topOffsetOfButtonsBlock = VCConstants.topOffsetOfButtonsBlock
         } else {
             topOffsetOfButtonsBlock = 0
         }
@@ -41,17 +41,17 @@ final class CalculateCellHeight {
         guard let text = text else { return 0 }
         
         // Ширина текста
-        let screenWidth = screenWidth - (FeedVCConstants.cardViewLeftOffset + FeedVCConstants.cardViewRightOffset + FeedVCConstants.postTextLeftOffset + FeedVCConstants.postTextRightOffset)
+        let screenWidth = screenWidth - (VCConstants.cardViewLeftOffset + VCConstants.cardViewRightOffset + VCConstants.postTextLeftOffset + VCConstants.postTextRightOffset)
         
         //  Высота текста
-        let textHeight = text.height(textWidth: screenWidth, font: FeedVCConstants.postTextFontSize)
+        let textHeight = text.height(textWidth: screenWidth, font: VCConstants.postTextFontSize)
         return textHeight
     }
     
     // вычисление высоты Photo Attachment
     func calculatePhotoAttachmentHeight(photoAttachment: FeedCellPhotoAttachmentViewModel?) -> CGFloat {
         guard let photoAttachment = photoAttachment else { return 0 }
-        let imageWidth = screenWidth - (FeedVCConstants.cardViewLeftOffset + FeedVCConstants.cardViewRightOffset)
+        let imageWidth = screenWidth - (VCConstants.cardViewLeftOffset + VCConstants.cardViewRightOffset)
         let ratio = CGFloat(photoAttachment.width) / imageWidth
         // Вычисление высоты attachment
         let attachmentHeight: CGFloat = CGFloat(photoAttachment.height) / ratio

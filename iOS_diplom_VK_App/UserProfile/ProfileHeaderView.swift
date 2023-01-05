@@ -20,16 +20,15 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         contentView.addSubviews(views: bottomView, avatarImage, fullNameLabel, status, photoStackView)
 
         setup()
-        contentView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        contentView.backgroundColor = VCConstants.mainViewBackgroungColor
        
-        
     }
     
-    //UI
+    //MARK: UI
     private lazy var bottomView: UIView = {
         let bottomView = UIView()
         bottomView.backgroundColor = .white
-        bottomView.layer.cornerRadius = 20
+        bottomView.layer.cornerRadius = VCConstants.bottomViewCornerRadius
         bottomView.clipsToBounds = true
         bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return bottomView
@@ -43,14 +42,14 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        fullNameLabel.font = VCConstants.fullNameLabelFont
         fullNameLabel.textAlignment = .center
         return fullNameLabel
     }()
     
     lazy var status: UILabel = {
         let status = UILabel()
-        status.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        status.font = VCConstants.statusLabelFont
         status.textAlignment = .center
         status.numberOfLines = 0
         return status
@@ -83,12 +82,14 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         photoStackView.addArrangedSubview(thirdPhoto)
         photoStackView.addArrangedSubview(fourthPhoto)
         photoStackView.axis = .horizontal
-        photoStackView.spacing = 6
+        photoStackView.spacing = VCConstants.photoStackViewSpacing
         photoStackView.distribution = .fillEqually
-        photoStackView.layer.cornerRadius = 10
+        photoStackView.layer.cornerRadius = VCConstants.photoStackViewcornerRadius
         photoStackView.clipsToBounds = true
         return photoStackView
     }()
+    
+    //MARK: Setup
     
     func setupHeader(viewModel: UserInfoViewModel) {
         
@@ -99,10 +100,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let status = viewModel.status ?? ""
         self.status.text = status
         
-//        if self.status.countLines() == 3 {
-//            self.heightForHeaderInSection = 700
-//        }
-        
         // Заполняем фотографии
         guard let photosArray = LocalStorage.shared.photosForHeader else { return }
         firstPhoto.set(imageUrl: photosArray[0])
@@ -112,46 +109,40 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         
     }
     
-    
-    // Constraints
+    // MARK: Constraints
     private func setup() {
-        bottomView.topToSuperview(offset: 100)
+        bottomView.topToSuperview(offset: VCConstants.bottomViewTopOffset)
         bottomView.bottomToSuperview()
         bottomView.leadingToSuperview()
         bottomView.trailingToSuperview()
-//        bottomView.height(150)
         
-        avatarImage.height(150)
-        avatarImage.width(150)
-        avatarImage.layer.cornerRadius = 75
+        avatarImage.height(VCConstants.avatarImageHeight)
+        avatarImage.width(VCConstants.avatarImageWidth)
+        avatarImage.layer.cornerRadius = VCConstants.avatarImageCornerRadius
         avatarImage.clipsToBounds = true
-        avatarImage.layer.borderWidth = 2
-        avatarImage.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
+        avatarImage.layer.borderWidth = VCConstants.avatarImageBorderWidth
+        avatarImage.layer.borderColor = VCConstants.avatarImageBorderColor
         avatarImage.centerX(to: bottomView)
-        avatarImage.bottomToTop(of: bottomView, offset: 60)
+        avatarImage.bottomToTop(of: bottomView, offset: VCConstants.avatarImageBottomToTopOffset)
 
-        fullNameLabel.topToBottom(of: avatarImage, offset: 10)
-        fullNameLabel.leftToSuperview(offset: 6)
-        fullNameLabel.rightToSuperview(offset: -6)
-        fullNameLabel.height(30)
+        fullNameLabel.topToBottom(of: avatarImage, offset: VCConstants.fullNameLabelTopOffset)
+        fullNameLabel.leftToSuperview(offset: VCConstants.fullNameLabelLeftOffset)
+        fullNameLabel.rightToSuperview(offset: VCConstants.fullNameLabelRightOffset)
+        fullNameLabel.height(VCConstants.fullNameLabelHeight)
 
-        status.topToBottom(of: fullNameLabel, offset: 3)
-        status.leftToSuperview(offset: 6)
-        status.rightToSuperview(offset: -6)
-        status.height(40)
+        status.topToBottom(of: fullNameLabel, offset: VCConstants.statusTopToBottomOffset)
+        status.leftToSuperview(offset: VCConstants.statusLeftOffset)
+        status.rightToSuperview(offset: VCConstants.statusRightOffset)
+        status.height(VCConstants.statusHeight)
         
-        photoStackView.topToBottom(of: status, offset: 6)
-        photoStackView.leftToSuperview(offset: 6)
-        photoStackView.rightToSuperview(offset: -6)
-        photoStackView.height(100)
-        photoStackView.bottomToSuperview(offset: -10)
-        
-        
-        
+        photoStackView.topToBottom(of: status, offset: VCConstants.photoStackViewTopToBottomOffset)
+        photoStackView.leftToSuperview(offset: VCConstants.photoStackViewLeftOffset)
+        photoStackView.rightToSuperview(offset: VCConstants.photoStackViewRightOffset)
+        photoStackView.height(VCConstants.photoStackViewHeight)
+        photoStackView.bottomToSuperview(offset: VCConstants.photoStackViewBottomOffset)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

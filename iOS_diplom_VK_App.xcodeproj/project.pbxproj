@@ -14,7 +14,6 @@
 		1A042B2028EA2D130050DD57 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A042B1928EA2D130050DD57 /* UserProfileViewController.swift */; };
 		1A042B2128EA2D130050DD57 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A042B1A28EA2D130050DD57 /* UserProfileInteractor.swift */; };
 		1A13951628E3A4C000806783 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13951528E3A4C000806783 /* CustomTabBar.swift */; };
-		1A13951828E3AC9900806783 /* CustomTabBarConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */; };
 		1A6D471B28B0594B0059BA42 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */; };
 		1A6D471D28B05E620059BA42 /* TinyConstraints.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1A6D471F28B111750059BA42 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D471E28B111750059BA42 /* Extensions.swift */; };
@@ -38,7 +37,7 @@
 		1AD9F1E1289DBF9C0083730F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AD9F1E0289DBF9C0083730F /* Assets.xcassets */; };
 		1AD9F1E4289DBF9C0083730F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */; };
 		1AEE563428B43C0D00D6CC1A /* CalculateCellHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE563328B43C0D00D6CC1A /* CalculateCellHeight.swift */; };
-		1AEE563628B43D7900D6CC1A /* FeedVCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE563528B43D7900D6CC1A /* FeedVCConstants.swift */; };
+		1AEE563628B43D7900D6CC1A /* VCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE563528B43D7900D6CC1A /* VCConstants.swift */; };
 		1AEE563828B6C17D00D6CC1A /* CellsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE563728B6C17D00D6CC1A /* CellsProtocols.swift */; };
 		28243A7F2940E0CD00E0AA33 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 28243A7E2940E0CD00E0AA33 /* Realm */; };
 		28243A812940E0CD00E0AA33 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 28243A802940E0CD00E0AA33 /* RealmSwift */; };
@@ -75,7 +74,6 @@
 		1A042B1928EA2D130050DD57 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		1A042B1A28EA2D130050DD57 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
 		1A13951528E3A4C000806783 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarConstants.swift; sourceTree = "<group>"; };
 		1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		1A6D471C28B05E620059BA42 /* TinyConstraints.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TinyConstraints.xcframework; path = Carthage/Build/TinyConstraints.xcframework; sourceTree = "<group>"; };
 		1A6D471E28B111750059BA42 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -100,7 +98,7 @@
 		1AD9F1E3289DBF9C0083730F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AD9F1E5289DBF9C0083730F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AEE563328B43C0D00D6CC1A /* CalculateCellHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateCellHeight.swift; sourceTree = "<group>"; };
-		1AEE563528B43D7900D6CC1A /* FeedVCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVCConstants.swift; sourceTree = "<group>"; };
+		1AEE563528B43D7900D6CC1A /* VCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCConstants.swift; sourceTree = "<group>"; };
 		1AEE563728B6C17D00D6CC1A /* CellsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsProtocols.swift; sourceTree = "<group>"; };
 		282FF06628FE826200B8846C /* ProfileHeaderView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView_.swift; sourceTree = "<group>"; };
 		282FF06828FEAE7600B8846C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				1A13951528E3A4C000806783 /* CustomTabBar.swift */,
-				1A13951728E3AC9900806783 /* CustomTabBarConstants.swift */,
 			);
 			path = CustomTabBar;
 			sourceTree = "<group>";
@@ -193,7 +190,6 @@
 				1ABCBC0528A464A900010460 /* NewsFeedModels.swift */,
 				1ABCBC0328A464A900010460 /* NewsFeedWorker.swift */,
 				1ABCBC0428A464A900010460 /* NewsFeedRouter.swift */,
-				1AEE563528B43D7900D6CC1A /* FeedVCConstants.swift */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -246,6 +242,7 @@
 				1ABCBC0128A4647400010460 /* NewsFeed */,
 				1A042B2328EA2D230050DD57 /* UserProfile */,
 				1A13951928E3ACAB00806783 /* CustomTabBar */,
+				1AEE563528B43D7900D6CC1A /* VCConstants.swift */,
 				1ABCBC1B28AAF29D00010460 /* Helpers */,
 				1AD9F1E0289DBF9C0083730F /* Assets.xcassets */,
 				1AD9F1E2289DBF9C0083730F /* LaunchScreen.storyboard */,
@@ -359,7 +356,6 @@
 				1ABCBC0E28A464A900010460 /* NewsFeedInteractor.swift in Sources */,
 				1A042B1C28EA2D130050DD57 /* UserProfilePresenter.swift in Sources */,
 				1ABCBC0928A464A900010460 /* NewsFeedPresenter.swift in Sources */,
-				1A13951828E3AC9900806783 /* CustomTabBarConstants.swift in Sources */,
 				28B1A536295B71B700620A42 /* UserInfo.swift in Sources */,
 				1ABCBC0A28A464A900010460 /* NewsFeedWorker.swift in Sources */,
 				1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */,
@@ -378,7 +374,7 @@
 				1ABCBC2128AC542100010460 /* String + Height.swift in Sources */,
 				1A042B1D28EA2D130050DD57 /* UserProfileWorker.swift in Sources */,
 				1AEE563428B43C0D00D6CC1A /* CalculateCellHeight.swift in Sources */,
-				1AEE563628B43D7900D6CC1A /* FeedVCConstants.swift in Sources */,
+				1AEE563628B43D7900D6CC1A /* VCConstants.swift in Sources */,
 				1AEE563828B6C17D00D6CC1A /* CellsProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

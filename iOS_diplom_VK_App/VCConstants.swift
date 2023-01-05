@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct FeedVCConstants {
+struct VCConstants {
     
     
     // TODO: Сделать для айпада другие параметры
@@ -19,52 +19,60 @@ struct FeedVCConstants {
         }
     }
     
-    // MARK: Table View
+    // MARK: Main View
+    static let mainViewBackgroungColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+    
+    // MARK: Notification Center
+    static let reloadFavourite: String = "reloadFavourite"
+    static let reloadNews: String = "reloadNews"
+    
+    // MARK: NewsFeed
+    
+    // Table View
     static let tableViewBottomOffset: CGFloat = 0
     
-    // MARK: Card View
+    // Card View
     static let cardViewTopOffset: CGFloat = 8
     static let cardViewLeftOffset: CGFloat = 8
     static let cardViewRightOffset: CGFloat = 8
     static let cardViewBottomOffset: CGFloat = 0
     static let cardViewLayerCornerRadius: CGFloat = 10
     
-    // MARK: Title View
+    // Title View
     static let titleViewHeight: CGFloat = 50
     static let titleViewTopOffset: CGFloat = 8
     static let titleViewLeftOffset: CGFloat = 8
     static let titleViewRightOffset: CGFloat = 8
     
-    // MARK: Title Icon Image
+    // Title Icon Image
     static let titleImageLayerCornerRadius: CGFloat = 20
     static let titleIconImageHeight: CGFloat = 40
     static let titleIconImageWidth: CGFloat = 40
     
-    // MARK: Title Label
+    // Title Label
     static let titleLabelFont: UIFont = .systemFont(ofSize: 15, weight: .medium)
     static let titleLabelTopOffset: CGFloat = 6
     static let titleLabelLeftOffset: CGFloat = 6
     
-    // MARK: Time Label
+    // Time Label
     static let timeLabelFont: UIFont = .systemFont(ofSize: 12, weight: .light)
     static let timeLabelBottomOffset: CGFloat = -6
     static let timeLabelRightOffset: CGFloat = 6
     
-    // MARK: Text View
+    // Text View
     static let postTextFontSize: UIFont = .systemFont(ofSize: 15)
     static let postTextTopOffset: CGFloat = 8
     static let postTextLeftOffset: CGFloat = 8
     static let postTextRightOffset: CGFloat = 8
     
-    // MARK: Post Image View (фото)
+    // Post Image View (фото)
     static let postImageViewTopOffset: CGFloat = 8
     
-    // MARK: Buttons View
+    // Buttons View
     static let buttonViewHeight: CGFloat = 40
     static let topOffsetOfButtonsBlock: CGFloat = 8
     
-    
-    // MARK: Buttons (Likes, Comments, Reposts, Views)
+    // Buttons (Likes, Comments, Reposts, Views)
     // View
     static let buttonsViewLayerCornerRadius: CGFloat = 15
     static let buttonsViewLeftOffset: CGFloat = 8
@@ -94,7 +102,7 @@ struct FeedVCConstants {
     static let buttonsLabelTextColor: String = "buttonsColor"
     static let buttonsLabelLeftOffset: CGFloat = 6
     
-// MARK: New feed alert
+    // New feed alert
     static let alertBackgroundColor: UIColor = #colorLiteral(red: 0.1764705882, green: 0.4965524673, blue: 0.7551663518, alpha: 1)
     static let alertTextColor: UIColor = .white
     static let alertText: String = "Свежие новости"
@@ -102,13 +110,47 @@ struct FeedVCConstants {
     static let alertBorderCornerRadius: CGFloat = 5
     static let alertBorderWidth: CGFloat = 1
     
-    // MARK: Main View
-    static let mainViewBackgroungColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+    // MARK: User Profile
+    // Header View
+    static let bottomViewCornerRadius:CGFloat = 20
+    static let fullNameLabelFont: UIFont = UIFont.systemFont(ofSize: 23, weight: .bold)
+    static let statusLabelFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .light)
+    static let photoStackViewSpacing: CGFloat = 6
+    static let photoStackViewcornerRadius: CGFloat = 10
+    static let bottomViewTopOffset: CGFloat = 100
+    static let avatarImageHeight:CGFloat = 150
+    static let avatarImageWidth:CGFloat = 150
+    static let avatarImageCornerRadius:CGFloat = 75
+    static let avatarImageBorderWidth:CGFloat = 2
+    static let avatarImageBorderColor: CGColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
+    static let avatarImageBottomToTopOffset: CGFloat = 60
+    static let fullNameLabelTopOffset:CGFloat = 10
+    static let fullNameLabelLeftOffset:CGFloat = 6
+    static let fullNameLabelRightOffset:CGFloat = -6
+    static let fullNameLabelHeight:CGFloat = 30
+    static let statusTopToBottomOffset: CGFloat = 3
+    static let statusLeftOffset:CGFloat = 6
+    static let statusRightOffset:CGFloat = -6
+    static let statusHeight: CGFloat = 40
+    static let photoStackViewTopToBottomOffset: CGFloat = 6
+    static let photoStackViewLeftOffset:CGFloat = 6
+    static let photoStackViewRightOffset:CGFloat = -6
+    static let photoStackViewHeight: CGFloat = 100
+    static let photoStackViewBottomOffset: CGFloat = -10
     
-    // MARK: Notification Center
-    static let reloadFavourite: String = "reloadFavourite"
-    static let reloadNews: String = "reloadNews"
-
+    // MARK: CustomTabBar
+    static let feedVCTitle: String = "Новости"
+    static let feedVCIcon: UIImage = UIImage(systemName: "house")!
+    
+    static let profileVCTitle: String = "Профиль"
+    static let profileVCIcon: UIImage = UIImage(systemName: "person.crop.circle")!
+    
+    static let favouriteVCTitle: String = "Избранное"
+    static let favouriteVCIcon: UIImage = UIImage(systemName: "star")!
+    
+    static let TBBackground: UIColor = .white
+    
+    
 }
 
 
