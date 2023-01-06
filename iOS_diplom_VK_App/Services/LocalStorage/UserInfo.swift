@@ -20,6 +20,7 @@ extension LocalStorage {
                     currentUser?.lastName = user.lastName
                     currentUser?.about = user.about
                     currentUser?.status = user.status
+                    currentUser?.photo200 = user.photo200
                 }
                 return }
             
