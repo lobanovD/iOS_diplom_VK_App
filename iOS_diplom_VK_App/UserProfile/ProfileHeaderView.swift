@@ -22,14 +22,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // MARK: Init
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        
-        
-        contentView.addSubviews(views: bottomView, avatarImage, fullNameLabel, status, photoStackView)
-
-        setup()
         contentView.backgroundColor = VCConstants.mainViewBackgroungColor
-        
-       
+        contentView.addSubviews(views: bottomView, avatarImage, fullNameLabel, status, photoStackView)
+        setup()
     }
     
     //MARK: UI
@@ -41,7 +36,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         bottomView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return bottomView
     }()
-    
     
     private lazy var avatarImage: WebImageView = {
         let avatarImage = WebImageView()

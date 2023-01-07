@@ -130,4 +130,22 @@ final class NetworkService {
         }
     }
     
+    // Метод получения записей со стены пользователя
+    func getWall(completion: @escaping (_ responce: UserWallResponseWrapped?) -> Void) {
+        
+        NetworkService.shared.request(path: GetWall.path, parameters: []) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let data = data else { return }
+            print(data)
+            let responce = try? decoder.decode(UserWallResponseWrapped.self, from: data)
+            print(responce)
+            completion(responce)
+            
+        }
+    }
+    
 }

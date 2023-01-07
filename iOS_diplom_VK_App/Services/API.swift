@@ -57,3 +57,8 @@ struct GetUserInfo {
 struct GetPhoto {
     static let photoPath = "/method/photos.getAll"
 }
+
+// MARK: Стена
+struct GetWall {
+    static let path = "/method/wall.get"
+}

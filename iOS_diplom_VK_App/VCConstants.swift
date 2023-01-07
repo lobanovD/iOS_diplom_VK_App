@@ -137,6 +137,7 @@ struct VCConstants {
     static let photoStackViewRightOffset:CGFloat = -6
     static let photoStackViewHeight: CGFloat = 100
     static let photoStackViewBottomOffset: CGFloat = -10
+    static let photoTitle: String = "Фотографии"
     
     // MARK: CustomTabBar
     static let feedVCTitle: String = "Новости"
@@ -149,6 +150,9 @@ struct VCConstants {
     static let favouriteVCIcon: UIImage = UIImage(systemName: "star")!
     
     static let TBBackground: UIColor = .white
+    
+  
+    
     
     
 }

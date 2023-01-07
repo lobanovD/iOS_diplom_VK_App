@@ -18,6 +18,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
     var interactor: UserProfileBusinessLogic?
     var router: (NSObjectProtocol & UserProfileRoutingLogic)?
     private var userInfoViewModel = UserInfoViewModel()
+    private var wallViewModel = WallViewModel(posts: [])
     
     
     // MARK: Object lifecycle
@@ -43,7 +44,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
     
     func didTapOnPhotoStackView() {
         let photoVC = UserPhotoViewController()
-        photoVC.title = "Фотографии"
+        photoVC.title = VCConstants.photoTitle
         self.navigationController?.pushViewController(photoVC, animated: true)
         print(1)
     }
@@ -54,13 +55,18 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
         super.viewDidLoad()
         view.backgroundColor = VCConstants.mainViewBackgroungColor
         setup()
+        
+        print(9898989898, self.wallViewModel)
     }
     
 
     
     override func viewWillAppear(_ animated: Bool) {
         interactor?.makeRequest(request: UserProfile.Model.Request.RequestType.getUserInfo)
+        interactor?.makeRequest(request: UserProfile.Model.Request.RequestType.getWall)
         setupUserProfileTable()
+        
+
         
     }
     
@@ -77,6 +83,9 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
             LocalStorage.shared.getFirstPhotos()
             self.userProfileTable.reloadData()
    
+        case .displayWall(viewModel: let viewmodel):
+            self.wallViewModel = viewmodel
+            
         }
     }
     
@@ -101,7 +110,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
 extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-                return 20
+            return wallViewModel.posts.count
             } else {
                 return 0
             }

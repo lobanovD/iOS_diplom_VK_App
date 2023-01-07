@@ -41,7 +41,6 @@
 		1AEE563828B6C17D00D6CC1A /* CellsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE563728B6C17D00D6CC1A /* CellsProtocols.swift */; };
 		28243A7F2940E0CD00E0AA33 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 28243A7E2940E0CD00E0AA33 /* Realm */; };
 		28243A812940E0CD00E0AA33 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 28243A802940E0CD00E0AA33 /* RealmSwift */; };
-		282FF06728FE826200B8846C /* ProfileHeaderView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF06628FE826200B8846C /* ProfileHeaderView_.swift */; };
 		282FF06928FEAE7600B8846C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF06828FEAE7600B8846C /* ProfileHeaderView.swift */; };
 		287CF7782959BE150082910A /* FavouriteNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287CF7772959BE150082910A /* FavouriteNewsViewController.swift */; };
 		28B1A52F295B703600620A42 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B1A52E295B703600620A42 /* UserInfoModel.swift */; };
@@ -101,7 +100,6 @@
 		1AEE563328B43C0D00D6CC1A /* CalculateCellHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateCellHeight.swift; sourceTree = "<group>"; };
 		1AEE563528B43D7900D6CC1A /* VCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCConstants.swift; sourceTree = "<group>"; };
 		1AEE563728B6C17D00D6CC1A /* CellsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsProtocols.swift; sourceTree = "<group>"; };
-		282FF06628FE826200B8846C /* ProfileHeaderView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView_.swift; sourceTree = "<group>"; };
 		282FF06828FEAE7600B8846C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		287CF7772959BE150082910A /* FavouriteNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteNewsViewController.swift; sourceTree = "<group>"; };
 		28B1A52E295B703600620A42 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				1A042B1828EA2D130050DD57 /* UserProfileModels.swift */,
 				1A042B1628EA2D130050DD57 /* UserProfileWorker.swift */,
 				1A042B1728EA2D130050DD57 /* UserProfileRouter.swift */,
-				282FF06628FE826200B8846C /* ProfileHeaderView_.swift */,
 				282FF06828FEAE7600B8846C /* ProfileHeaderView.swift */,
 			);
 			path = UserProfile;
@@ -365,7 +362,6 @@
 				1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */,
 				1ABCBBFA28A2FA0000010460 /* NetworkService.swift in Sources */,
 				1AB987AC289F2E6900F56E76 /* VKAuthService.swift in Sources */,
-				282FF06728FE826200B8846C /* ProfileHeaderView_.swift in Sources */,
 				1ABCBBFC28A2FCAB00010460 /* API.swift in Sources */,
 				1A042B2028EA2D130050DD57 /* UserProfileViewController.swift in Sources */,
 				28B1A534295B71A900620A42 /* FeedPost.swift in Sources */,
