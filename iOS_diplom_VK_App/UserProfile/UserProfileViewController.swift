@@ -56,7 +56,10 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
         view.backgroundColor = VCConstants.mainViewBackgroungColor
         setup()
         
-        print(9898989898, self.wallViewModel)
+        
+        
+        
+        
     }
     
 
@@ -83,8 +86,9 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
             LocalStorage.shared.getFirstPhotos()
             self.userProfileTable.reloadData()
    
-        case .displayWall(viewModel: let viewmodel):
-            self.wallViewModel = viewmodel
+        case .displayWall(viewModel: let viewModel):
+            self.wallViewModel = viewModel
+            self.userProfileTable.reloadData()
             
         }
     }
@@ -98,6 +102,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
         userProfileTable.delegate = self
         userProfileTable.dataSource = self
         userProfileTable.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
+        userProfileTable.register(WallCell.self, forCellReuseIdentifier: WallCell.id)
         userProfileTable.topToSuperview(usingSafeArea: true)
         userProfileTable.bottomToSuperview(offset: VCConstants.tableViewBottomOffset, usingSafeArea: true)
         userProfileTable.widthToSuperview()
@@ -109,18 +114,32 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic, Prof
 
 extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+//        if section == 0 {
             return wallViewModel.posts.count
-            } else {
-                return 0
-            }
+//            } else {
+//                return 0
+//            }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "ddd")
-        //        cell.textLabel?.text = self.userInfoViewModel.firstName
+        let cell = tableView.dequeueReusableCell(withIdentifier: WallCell.id, for: indexPath) as! WallCell
+        print("0808080808080808080808080")
+        let wallViewModel = self.wallViewModel.posts[indexPath.row]
+        
+        cell.setupCell(viewModel: wallViewModel)
+        cell.layoutSubviews()
+//        cell.tapLike = {
+//            LocalStorage.shared.likeStatusUpdate(index: indexPath.row, typePage: .FeedNews)
+//            feedViewModel = (LocalStorage.shared.feedViewModel?.posts[indexPath.row])!
+//            cell.setupCell(viewModel: feedViewModel)
+//            tableView.reloadRows(at: [indexPath], with: .none)
+//            cell.layoutSubviews()
+//            NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadFavourite), object: nil)
+//            }
         return cell
     }
+    
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
@@ -134,6 +153,12 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
         } else {
             return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellViewModel = wallViewModel.posts[indexPath.row]
+        return cellViewModel.totalHeight ?? 100
+
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

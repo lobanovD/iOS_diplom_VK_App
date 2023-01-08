@@ -133,6 +133,8 @@ final class NetworkService {
     // Метод получения записей со стены пользователя
     func getWall(completion: @escaping (_ responce: UserWallResponseWrapped?) -> Void) {
         
+        print("ddddddddddddddd")
+        
         NetworkService.shared.request(path: GetWall.path, parameters: []) { data, error in
             if let error = error {
                 print(error.localizedDescription)

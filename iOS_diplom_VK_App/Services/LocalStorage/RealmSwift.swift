@@ -19,10 +19,13 @@ final class LocalStorage {
     var favouriteViewModel: FeedViewModel?
     var userInfoViewModel: UserInfoViewModel?
     var photosForHeader: [String]?
+    var wallViewModel: WallViewModel?
+    var wallPosts: [WallViewModel.Post]
     
     init() {
         Realm.Configuration.defaultConfiguration = config
         posts = []
+        wallPosts = []
         // Вывести адрес базы данных
                 print(Realm.Configuration.defaultConfiguration.fileURL?.path)
     }

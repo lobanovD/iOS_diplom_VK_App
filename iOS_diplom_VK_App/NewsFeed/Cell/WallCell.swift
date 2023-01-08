@@ -1,17 +1,18 @@
 //
-//  NewsFeedCell.swift
+//  WallCell.swift
 //  iOS_diplom_VK_App
 //
-//  Created by Dmitrii Lobanov on 20.08.2022.
+//  Created by Dmitrii Lobanov on 09.01.2023.
 //
+
 import Foundation
 import UIKit
 import TinyConstraints
 
-final class NewsFeedCell: UITableViewCell {
+final class WallCell: UITableViewCell {
     
     // Переменные и константы
-    static let id = "NewsFeedCodeCell"
+    static let id = "WallCell"
     private var likes: Int = 0
     private var comments: Int = 0
     private var reposts: Int = 0
@@ -244,17 +245,24 @@ final class NewsFeedCell: UITableViewCell {
     }
     
     // Конфигурирование ячейки (наполнение данными)
-    func setupCell(viewModel: FeedViewModel.Post) {
-        // Иконка автора(группы)
-        titleIconImage.set(imageUrl: viewModel.iconUrlString)
-        // Имя автора (группы)
-        titleLabel.text = viewModel.name
+    func setupCell(viewModel: WallViewModel.Post) {
+        
+        print("начинаем конфигурировать ячейку")
         // Дата
         let vkDateFormater = VKDateFormater()
         let date = vkDateFormater.formateDate(date: viewModel.date ?? 0)
         timeLabel.text = date
+        
         // Текст
         postText.text = viewModel.text
+        
+        
+        // Иконка автора(группы)
+//        titleIconImage.set(imageUrl: viewModel.iconUrlString)
+        // Имя автора (группы)
+//        titleLabel.text = viewModel.name
+
+
         // Иконка лайков
         if viewModel.userLikes == 1 {
             likesIcon.image = UIImage(named: VCConstants.buttonsLikesIconNameSet)
@@ -270,15 +278,15 @@ final class NewsFeedCell: UITableViewCell {
         // Количество просмотров
         viewsLabel.text = "\(viewModel.views ?? -100)"
    
-        // Жест нажатия на область "лайков"
-        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
-        likeActionButton.addGestureRecognizer(tapLikeGesture)
+//        // Жест нажатия на область "лайков"
+//        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
+//        likeActionButton.addGestureRecognizer(tapLikeGesture)
  
         // Обработка количества лайков, репостов, комментариев для установки ширины области каждого из них
-        getLikesCount(viewModel: viewModel)
-        getCommentsCount(viewModel: viewModel)
-        getRepostCount(viewModel: viewModel)
-        getViewsCount(viewModel: viewModel)
+//        getLikesCount(viewModel: viewModel)
+//        getCommentsCount(viewModel: viewModel)
+//        getRepostCount(viewModel: viewModel)
+//        getViewsCount(viewModel: viewModel)
         
         // Обработка размеров фото
         changePhotoAttachmentHeight(viewModel: viewModel)
@@ -287,7 +295,7 @@ final class NewsFeedCell: UITableViewCell {
     // MARK: Photo Attachment
     
     // Метод, изменяющий размер полученного фото
-    private func changePhotoAttachmentHeight(viewModel: FeedPostViewModelProtocol) {
+    private func changePhotoAttachmentHeight(viewModel: WallViewModel.Post) {
         
         if let photoAttachment = viewModel.photoAttachment {
             

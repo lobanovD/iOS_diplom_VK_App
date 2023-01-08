@@ -38,16 +38,6 @@ extension LocalStorage {
         } catch {}
     }
     
-//    // Метод записи поста в Local Storage
-//    private func writeToRealm(post: FeedPost) {
-//        do {
-//            let realm = try Realm()
-//            try realm.write {
-//                realm.add(post)
-//            }
-//        } catch {}
-//    }
-    
     // метод получения постов из хранилища
     func getFeedModel() {
         feedViewModel = nil

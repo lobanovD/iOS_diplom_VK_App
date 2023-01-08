@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12D82788296B215900EAF2C7 /* WallPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D82787296B215900EAF2C7 /* WallPostModel.swift */; };
+		12D8278A296B216000EAF2C7 /* WallPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D82789296B216000EAF2C7 /* WallPost.swift */; };
+		12D8278C296B312600EAF2C7 /* WallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D8278B296B312600EAF2C7 /* WallCell.swift */; };
 		1A042B1C28EA2D130050DD57 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A042B1528EA2D130050DD57 /* UserProfilePresenter.swift */; };
 		1A042B1D28EA2D130050DD57 /* UserProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A042B1628EA2D130050DD57 /* UserProfileWorker.swift */; };
 		1A042B1E28EA2D130050DD57 /* UserProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A042B1728EA2D130050DD57 /* UserProfileRouter.swift */; };
@@ -67,6 +70,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		12D82787296B215900EAF2C7 /* WallPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPostModel.swift; sourceTree = "<group>"; };
+		12D82789296B216000EAF2C7 /* WallPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPost.swift; sourceTree = "<group>"; };
+		12D8278B296B312600EAF2C7 /* WallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallCell.swift; sourceTree = "<group>"; };
 		1A042B1528EA2D130050DD57 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		1A042B1628EA2D130050DD57 /* UserProfileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileWorker.swift; sourceTree = "<group>"; };
 		1A042B1728EA2D130050DD57 /* UserProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRouter.swift; sourceTree = "<group>"; };
@@ -199,6 +205,7 @@
 			children = (
 				1AEE563728B6C17D00D6CC1A /* CellsProtocols.swift */,
 				1A6D471A28B0594B0059BA42 /* NewsFeedCell.swift */,
+				12D8278B296B312600EAF2C7 /* WallCell.swift */,
 				1AEE563328B43C0D00D6CC1A /* CalculateCellHeight.swift */,
 			);
 			path = Cell;
@@ -255,10 +262,12 @@
 			isa = PBXGroup;
 			children = (
 				28E5687329389183000078B2 /* RealmSwift.swift */,
-				28B1A52E295B703600620A42 /* UserInfoModel.swift */,
 				28B1A530295B704500620A42 /* FeedPostModel.swift */,
 				28B1A533295B71A900620A42 /* FeedPost.swift */,
 				28B1A535295B71B700620A42 /* UserInfo.swift */,
+				28B1A52E295B703600620A42 /* UserInfoModel.swift */,
+				12D82787296B215900EAF2C7 /* WallPostModel.swift */,
+				12D82789296B216000EAF2C7 /* WallPost.swift */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -348,6 +357,7 @@
 				1AD9F1DC289DBF980083730F /* AuthViewController.swift in Sources */,
 				28D8BA9F29674A3C00AF72CE /* UserPhotoViewController.swift in Sources */,
 				1ABCBC1A28AAF27500010460 /* WebImageView.swift in Sources */,
+				12D8278C296B312600EAF2C7 /* WallCell.swift in Sources */,
 				1AD9F1D8289DBF980083730F /* AppDelegate.swift in Sources */,
 				28E5687429389183000078B2 /* RealmSwift.swift in Sources */,
 				287CF7782959BE150082910A /* FavouriteNewsViewController.swift in Sources */,
@@ -357,6 +367,7 @@
 				1ABCBC0E28A464A900010460 /* NewsFeedInteractor.swift in Sources */,
 				1A042B1C28EA2D130050DD57 /* UserProfilePresenter.swift in Sources */,
 				1ABCBC0928A464A900010460 /* NewsFeedPresenter.swift in Sources */,
+				12D8278A296B216000EAF2C7 /* WallPost.swift in Sources */,
 				28B1A536295B71B700620A42 /* UserInfo.swift in Sources */,
 				1ABCBC0A28A464A900010460 /* NewsFeedWorker.swift in Sources */,
 				1AD9F1DA289DBF980083730F /* SceneDelegate.swift in Sources */,
@@ -370,6 +381,7 @@
 				1A042B1F28EA2D130050DD57 /* UserProfileModels.swift in Sources */,
 				1ABCBC0D28A464A900010460 /* NewsFeedViewController.swift in Sources */,
 				1A042B2128EA2D130050DD57 /* UserProfileInteractor.swift in Sources */,
+				12D82788296B215900EAF2C7 /* WallPostModel.swift in Sources */,
 				1A042B1E28EA2D130050DD57 /* UserProfileRouter.swift in Sources */,
 				1ABCBC2128AC542100010460 /* String + Height.swift in Sources */,
 				1A042B1D28EA2D130050DD57 /* UserProfileWorker.swift in Sources */,

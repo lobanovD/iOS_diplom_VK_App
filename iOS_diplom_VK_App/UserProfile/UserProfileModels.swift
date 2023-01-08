@@ -251,9 +251,12 @@ struct UserWallAttachment: Codable {
 // MARK: - Photo
 struct UserWallPhoto: Codable {
     let albumId, date, id, ownerId: Int
-    let accessKey: String
-    let postId: Int?
+    let lat: Double
+    let long: Double
+//    let accessKey: String
+//    let postId: Int?
     let sizes: [UserWallPhotoSize]
+    let squareCrop: String
     let text: String
     let hasTags: Bool
 }
@@ -302,25 +305,29 @@ struct WallViewModel {
     let posts: [Post]
     
     struct Post {
+        var id: Int?
+        var fromId: Int?
+        var ownerId: Int?
+        var date: Int?
         
 //        var iconUrlString: String?
 //        var name: String?
-//        var date: Int?
+
         var text: String?
-//        var likes: Int?
-//        var userLikes: Int?
+        var likes: Int?
+        var userLikes: Int?
 //        var canLike: Int?
-//        var comments: Int?
-//        var shares: Int?
-//        var views: Int?
-//        var photoAttachment: FeedCellPhotoAttachmentViewModel?
-//        var totalHeight: CGFloat?
-//        var postID: Int?
+        var comments: Int?
+        var shares: Int?
+        var views: Int?
+        var photoAttachment: WallPostPhotoAttachment?
+        var totalHeight: CGFloat?
+//        var postId: Int?
 //        var sourceID: Int?
 //        var current: Bool?
     }
     
-    struct FeedPostPhotoAttachment: FeedCellPhotoAttachmentViewModel {
+    struct WallPostPhotoAttachment: CellPhotoAttachmentViewModelProtocol {
         var photoUrlString: String?
         var width: Int
         var height: Int

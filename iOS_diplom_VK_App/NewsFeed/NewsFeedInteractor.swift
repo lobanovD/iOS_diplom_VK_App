@@ -26,7 +26,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
         case .getNewsFeed:
             NetworkService.shared.getFeed { [weak self] responce in
                 guard let feedResponse = responce else { return }
- 
+                
                 self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.saveAndPresentNewsFeed(feed: feedResponse))
             }
             // Очищаем фотографии пользователя
@@ -56,7 +56,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
                 }
                 
             }
-           
+            
         }
     }
 }

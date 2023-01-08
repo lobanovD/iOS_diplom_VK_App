@@ -33,7 +33,7 @@ struct FeedViewModel {
     
     let posts: [Post]
     
-    struct Post: FeedPostViewModel {
+    struct Post: FeedPostViewModelProtocol {
         
         var iconUrlString: String?
         var name: String?
@@ -45,14 +45,14 @@ struct FeedViewModel {
         var comments: Int?
         var shares: Int?
         var views: Int?
-        var photoAttachment: FeedCellPhotoAttachmentViewModel?
+        var photoAttachment: CellPhotoAttachmentViewModelProtocol?
         var totalHeight: CGFloat?
         var postID: Int?
         var sourceID: Int?
         var current: Bool?
     }
     
-    struct FeedPostPhotoAttachment: FeedCellPhotoAttachmentViewModel {
+    struct FeedPostPhotoAttachment: CellPhotoAttachmentViewModelProtocol {
         var photoUrlString: String?
         var width: Int
         var height: Int

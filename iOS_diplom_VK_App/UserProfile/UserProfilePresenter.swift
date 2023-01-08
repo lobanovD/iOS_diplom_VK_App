@@ -27,11 +27,32 @@ class UserProfilePresenter: UserProfilePresentationLogic {
           
       case .presentWall(wall: let wall):
           
+          // удаляем все записи со стены из локального хранилища
+          LocalStorage.shared.deleteAllWallPosts()
+          
           let wallPosts = wall.response.items.map { wallItem in
-//              wallItem.
               postViewModel(userWallItem: wallItem)
-
           }
+          
+          for post in wallPosts {
+              let currentPost = WallPost(id: post.id ?? 0,
+                                         text: post.text ?? "",
+                                         date: post.date ?? 0,
+                                         totalHeight: post.totalHeight ?? .zero
+                                         )
+              // добавляем в локальное хранилище
+              LocalStorage.shared.addWallPostsToLocalStorage(post: currentPost)
+              print(currentPost, "добавлен в хранилище")
+              
+          }
+          
+          // тут идет получение данных из бд
+          LocalStorage.shared.getWallModel()
+          
+          guard let wallViewModel = LocalStorage.shared.wallViewModel else { return }
+          
+          // и отображение их в контроллере
+          viewController?.displayData(viewModel: UserProfile.Model.ViewModel.ViewModelData.displayWall(viewModel: wallViewModel))
           
               
               
@@ -59,29 +80,49 @@ class UserProfilePresenter: UserProfilePresentationLogic {
         
         let photoAttacment = self.photoAttachment(userWallItem: userWallItem)
         
+        print("=============================")
+        print(userWallItem.text)
+        
         let cellHeightCalc = CalculateCellHeight()
         
         let cellHeight = cellHeightCalc.calculateCellTotalHeight(photoAttachment: photoAttacment,
                                                                  text: userWallItem.text)
-        return WallViewModel.Post.init(text:userWallItem.text)
-    }
-    
-    private func profile(sourceID: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable? {
         
-        let profilesOrGroups: [ProfileRepresentable] = sourceID > 0 ? profiles : groups
-        let currentSourceID = sourceID > 0 ? sourceID : -sourceID
-        let profileRepresentable = profilesOrGroups.first { profileRepresentable -> Bool in
-            profileRepresentable.id == currentSourceID
-        }
-        return profileRepresentable
+        var model = WallViewModel.Post()
+        model.id = userWallItem.id
+        model.fromId = userWallItem.fromId
+        model.ownerId = userWallItem.ownerId
+        model.date = userWallItem.date
+        model.text = userWallItem.text
+        model.likes = userWallItem.likes.count
+        model.userLikes = userWallItem.likes.userLikes
+        model.comments = userWallItem.comments.count
+        model.shares = userWallItem.reposts.count
+        model.views = userWallItem.views?.count
+        model.photoAttachment = photoAttacment
+        model.totalHeight = cellHeight
+        print("=-=-=-=-=-=-=-=-")
+        print(cellHeight)
+        
+        return model
     }
     
-    private func photoAttachment(userWallItem: UserWallItem) -> WallViewModel.FeedPostPhotoAttachment? {
+//    private func profile(sourceID: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable? {
+//        
+//        let profilesOrGroups: [ProfileRepresentable] = sourceID > 0 ? profiles : groups
+//        let currentSourceID = sourceID > 0 ? sourceID : -sourceID
+//        let profileRepresentable = profilesOrGroups.first { profileRepresentable -> Bool in
+//            profileRepresentable.id == currentSourceID
+//        }
+//        return profileRepresentable
+//    }
+    
+    private func photoAttachment(userWallItem: UserWallItem) -> WallViewModel.WallPostPhotoAttachment? {
         let photos = userWallItem.attachments.compactMap({ attachment in
             attachment.photo
         })
         let firstPhoto = photos.first?.sizes.first
         
-        return WallViewModel.FeedPostPhotoAttachment(photoUrlString: firstPhoto?.url, width: firstPhoto?.width ?? 0, height: firstPhoto?.height ?? 0)
+        return WallViewModel.WallPostPhotoAttachment(photoUrlString: firstPhoto?.url, width: firstPhoto?.width ?? 0, height: firstPhoto?.height ?? 0)
     }
 }
