@@ -42,12 +42,12 @@ extension LocalStorage {
     func getFeedModel() {
         feedViewModel = nil
         posts = []
-    
+        
         do {
             let realm = try Realm()
             
             let currentPostForView = realm.objects(FeedPost.self).sorted(byKeyPath: "date", ascending: false)
-        
+            
             for post in currentPostForView {
                 var currentPost = FeedViewModel.Post()
                 let photoAttachment = FeedViewModel.FeedPostPhotoAttachment(photoUrlString: post.photoAttachmentURL, width: post.photoAttachmentWidth, height: post.photoAttachmentHeight)
@@ -71,13 +71,13 @@ extension LocalStorage {
                     
                     currentPost.photoAttachment = photoAttachment
                 }
-               
+                
                 currentPost.totalHeight = post.totalHeight
                 self.posts.append(currentPost)
-//                // ограничиваем вывод из базы только постами с фото
-//                if photoAttachment.photoUrlString != "" {
-//                    self.posts.append(currentPost)
-//                }
+                //                // ограничиваем вывод из базы только постами с фото
+                //                if photoAttachment.photoUrlString != "" {
+                //                    self.posts.append(currentPost)
+                //                }
             }
             feedViewModel = FeedViewModel(posts: posts)
         } catch {}
@@ -117,7 +117,7 @@ extension LocalStorage {
                     
                     currentPost.photoAttachment = photoAttachment
                 }
-               
+                
                 currentPost.totalHeight = post.totalHeight
                 self.posts.append(currentPost)
             }

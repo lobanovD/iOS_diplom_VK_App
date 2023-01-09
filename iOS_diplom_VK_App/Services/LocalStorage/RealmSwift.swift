@@ -27,6 +27,6 @@ final class LocalStorage {
         posts = []
         wallPosts = []
         // Вывести адрес базы данных
-                print(Realm.Configuration.defaultConfiguration.fileURL?.path)
+        print(Realm.Configuration.defaultConfiguration.fileURL?.path)
     }
 }

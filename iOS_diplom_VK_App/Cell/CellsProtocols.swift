@@ -38,8 +38,6 @@ protocol WallViewModelProtocol {
     var views: Int? { get }
     var photoAttachment: CellPhotoAttachmentViewModelProtocol? { get }
     var totalHeight: CGFloat? { get }
-//    var postID: Int? { get }
-//    var sourceID: Int? { get }
 }
 
 protocol CellPhotoAttachmentViewModelProtocol {

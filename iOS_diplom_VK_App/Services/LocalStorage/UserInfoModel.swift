@@ -43,5 +43,4 @@ class UserPhotos: Object {
         self.id = id
         self.url = url
     }
-    
 }

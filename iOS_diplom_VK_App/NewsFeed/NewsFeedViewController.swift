@@ -15,10 +15,9 @@ protocol NewsFeedDisplayLogic: AnyObject {
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
 }
 
-class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
+final class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     var interactor: NewsFeedBusinessLogic?
-    var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
     private var feedViewModel = FeedViewModel(posts: [])
     let defaults = UserDefaults.standard
     let refreshControl = UIRefreshControl()
@@ -48,22 +47,15 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     }()
     
     // MARK: Setup
-
+    
     private func setup() {
         let viewController        = self
         let interactor            = NewsFeedInteractor()
         let presenter             = NewsFeedPresenter()
-        let router                = NewsFeedRouter()
         viewController.interactor = interactor
-        viewController.router     = router
         interactor.presenter      = presenter
         presenter.viewController  = viewController
-        router.viewController     = viewController
     }
-    
-    // MARK: Routing
-    
-
     
     // MARK: View lifecycle
     
@@ -119,7 +111,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
             feedTableView.reloadData()
-
+            
             // Сохраняем количество постов в память
             if defaults.integer(forKey: "oldPostsCount") ==  0 {
                 defaults.set(feedViewModel.posts.count, forKey: "newPostCount")
@@ -133,7 +125,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             
             // Получаем индекс последнего просмотренного сообщения из памяти
             let finalPostIndex = defaults.integer(forKey: "index")
-            print("finalPostIndex",finalPostIndex)
             // Получаем значение количества постов, которое было до обновления таблицы
             let oldPostCount = defaults.integer(forKey: "oldPostCount")
             // Перемещаем область видимости на последний просмотренный пост
@@ -142,7 +133,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             } else {
                 feedTableView.scrollToRow(at: [0, feedViewModel.posts.count - (oldPostCount - finalPostIndex)], at: .top, animated: false)
             }
-          
+            
             // Показываем аллерт о новых сообщениях
             let newPostCount = feedViewModel.posts.count
             if newPostCount > oldPostCount {
@@ -170,7 +161,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadRows(at: [indexPath], with: .none)
             cell.layoutSubviews()
             NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadFavourite), object: nil)
-            }
+        }
         return cell
     }
     
@@ -178,7 +169,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = feedViewModel.posts[indexPath.row]
         return cellViewModel.totalHeight ?? 0
     }
-
+    
     // Сохраняем индекс поста, на котором находится пользователь
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let firstVisibleIndexPath = self.feedTableView.indexPathsForVisibleRows?[0]

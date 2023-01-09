@@ -61,4 +61,6 @@ struct GetPhoto {
 // MARK: Стена
 struct GetWall {
     static let path = "/method/wall.get"
+    static let extended = "extended"
+    static let extendedStatus = "1"
 }

@@ -247,22 +247,16 @@ final class WallCell: UITableViewCell {
     // Конфигурирование ячейки (наполнение данными)
     func setupCell(viewModel: WallViewModel.Post) {
         
-        print("начинаем конфигурировать ячейку")
         // Дата
         let vkDateFormater = VKDateFormater()
         let date = vkDateFormater.formateDate(date: viewModel.date ?? 0)
         timeLabel.text = date
-        
         // Текст
         postText.text = viewModel.text
-        
-        
         // Иконка автора(группы)
-//        titleIconImage.set(imageUrl: viewModel.iconUrlString)
-        // Имя автора (группы)
-//        titleLabel.text = viewModel.name
-
-
+        titleIconImage.set(imageUrl: viewModel.photo)
+        //         Имя автора (группы)
+        titleLabel.text = viewModel.name
         // Иконка лайков
         if viewModel.userLikes == 1 {
             likesIcon.image = UIImage(named: VCConstants.buttonsLikesIconNameSet)
@@ -277,16 +271,12 @@ final class WallCell: UITableViewCell {
         repostsLabel.text = "\(viewModel.shares ?? -100)"
         // Количество просмотров
         viewsLabel.text = "\(viewModel.views ?? -100)"
-   
-//        // Жест нажатия на область "лайков"
-//        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
-//        likeActionButton.addGestureRecognizer(tapLikeGesture)
- 
+        
         // Обработка количества лайков, репостов, комментариев для установки ширины области каждого из них
-//        getLikesCount(viewModel: viewModel)
-//        getCommentsCount(viewModel: viewModel)
-//        getRepostCount(viewModel: viewModel)
-//        getViewsCount(viewModel: viewModel)
+        getLikesCount(viewModel: viewModel)
+        getCommentsCount(viewModel: viewModel)
+        getRepostCount(viewModel: viewModel)
+        getViewsCount(viewModel: viewModel)
         
         // Обработка размеров фото
         changePhotoAttachmentHeight(viewModel: viewModel)
@@ -296,14 +286,13 @@ final class WallCell: UITableViewCell {
     
     // Метод, изменяющий размер полученного фото
     private func changePhotoAttachmentHeight(viewModel: WallViewModel.Post) {
-        
         if let photoAttachment = viewModel.photoAttachment {
             
-                postImageView.set(imageUrl: photoAttachment.photoUrlString)
-                postImageView.isHidden = false
-                let heightCalculator = CalculateCellHeight()
-                let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
-                self.photoAttachmentHeight = cellHeight
+            postImageView.set(imageUrl: photoAttachment.photoUrlString)
+            postImageView.isHidden = false
+            let heightCalculator = CalculateCellHeight()
+            let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
+            self.photoAttachmentHeight = cellHeight
             
         } else {
             postImageView.isHidden = true
@@ -325,7 +314,7 @@ final class WallCell: UITableViewCell {
     }
     
     // Метод, изменяющий переменную likes
-    private func getLikesCount(viewModel: FeedPostViewModelProtocol) {
+    private func getLikesCount(viewModel: WallViewModel.Post) {
         guard let likes = viewModel.likes else { return }
         self.likes = likes
     }
@@ -370,7 +359,7 @@ final class WallCell: UITableViewCell {
     // MARK: View комментариев
     
     // Метод, изменяющий переменную comments
-    private func getCommentsCount(viewModel: FeedPostViewModelProtocol) {
+    private func getCommentsCount(viewModel: WallViewModel.Post) {
         guard let comments = viewModel.comments else { return }
         self.comments = comments
     }
@@ -417,7 +406,7 @@ final class WallCell: UITableViewCell {
     // MARK: View репостов
     
     // Метод, изменяющий переменную reposts
-    private func getRepostCount(viewModel: FeedPostViewModelProtocol) {
+    private func getRepostCount(viewModel: WallViewModel.Post) {
         guard let reposts = viewModel.shares else { return }
         self.reposts = reposts
     }
@@ -464,7 +453,7 @@ final class WallCell: UITableViewCell {
     // MARK: View просмотров
     
     // Метод, изменяющий переменную views
-    private func getViewsCount(viewModel: FeedPostViewModelProtocol) {
+    private func getViewsCount(viewModel: WallViewModel.Post) {
         guard let views = viewModel.views else { return }
         self.views = views
     }

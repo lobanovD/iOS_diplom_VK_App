@@ -12,7 +12,7 @@ protocol ProfileHeaderViewDelegate {
     func didTapOnPhotoStackView()
 }
 
-class ProfileHeaderView: UITableViewHeaderFooterView {
+final class ProfileHeaderView: UITableViewHeaderFooterView {
     
     static let id = "ProfileHeaderView"
     var avatar: String?
@@ -133,12 +133,12 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatarImage.layer.borderColor = VCConstants.avatarImageBorderColor
         avatarImage.centerX(to: bottomView)
         avatarImage.bottomToTop(of: bottomView, offset: VCConstants.avatarImageBottomToTopOffset)
-
+        
         fullNameLabel.topToBottom(of: avatarImage, offset: VCConstants.fullNameLabelTopOffset)
         fullNameLabel.leftToSuperview(offset: VCConstants.fullNameLabelLeftOffset)
         fullNameLabel.rightToSuperview(offset: VCConstants.fullNameLabelRightOffset)
         fullNameLabel.height(VCConstants.fullNameLabelHeight)
-
+        
         status.topToBottom(of: fullNameLabel, offset: VCConstants.statusTopToBottomOffset)
         status.leftToSuperview(offset: VCConstants.statusLeftOffset)
         status.rightToSuperview(offset: VCConstants.statusRightOffset)

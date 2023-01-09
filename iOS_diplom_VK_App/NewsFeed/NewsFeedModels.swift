@@ -153,4 +153,3 @@ enum TypePage {
     case FeedNews
     case Favourite
 }
-

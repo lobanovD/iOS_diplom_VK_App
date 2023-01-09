@@ -10,17 +10,14 @@ import TinyConstraints
 
 final class UserPhotoViewController: UIViewController {
     
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
     }
     
     //MARK: Setup
-    
     func setup() {
         view.backgroundColor = VCConstants.mainViewBackgroungColor
         photoCollection.backgroundColor = VCConstants.mainViewBackgroungColor
@@ -35,7 +32,6 @@ final class UserPhotoViewController: UIViewController {
     }
     
     // MARK: UI
-    
     private lazy var photoCollection: UICollectionView = {
         let photoCollectionLayout = UICollectionViewFlowLayout()
         photoCollectionLayout.scrollDirection = .vertical
@@ -90,8 +86,6 @@ final class PhotoCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(photo)
         photo.edgesToSuperview()
-//        photo.width(200)
-//        photo.height(266)
     }
     
     // MARK: UI

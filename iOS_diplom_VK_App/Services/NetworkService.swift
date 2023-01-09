@@ -56,10 +56,8 @@ final class NetworkService {
         let params1 = URLQueryItem(name: GetFeed.filtersName, value: GetFeed.filtersValue)
         let params2 = URLQueryItem(name: GetFeed.countName, value: GetFeed.countValue)
         
-        NetworkService.shared.request(path: GetFeed.path, parameters: [params1, params2]) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+        NetworkService.shared.request(path: GetFeed.path, parameters: [params1, params2]) { data, _ in
+            
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
@@ -69,7 +67,6 @@ final class NetworkService {
         }
     }
     
-    
     // Метод добавления лайка к посту
     func addLike(sourceID: Int, postID: Int) {
         
@@ -77,10 +74,7 @@ final class NetworkService {
         let params2 = URLQueryItem(name: LikeActions.itemID, value: "\(postID)")
         let params3 = URLQueryItem(name: LikeActions.type, value: LikeActions.post)
         
-        NetworkService.shared.request(path: LikeActions.addLikePath, parameters: [params1, params2, params3]) { _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+        NetworkService.shared.request(path: LikeActions.addLikePath, parameters: [params1, params2, params3]) { _, _ in
         }
     }
     
@@ -91,10 +85,7 @@ final class NetworkService {
         let params2 = URLQueryItem(name: LikeActions.itemID, value: "\(postID)")
         let params3 = URLQueryItem(name: LikeActions.type, value: LikeActions.post)
         
-        NetworkService.shared.request(path: LikeActions.removeLikePath, parameters: [params1, params2, params3]) { _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+        NetworkService.shared.request(path: LikeActions.removeLikePath, parameters: [params1, params2, params3]) { _, _ in
         }
     }
     
@@ -103,10 +94,7 @@ final class NetworkService {
         
         let params1 = URLQueryItem(name: "fields", value: "photo_200,status,about")
         
-        NetworkService.shared.request(path: GetUserInfo.path, parameters: [params1]) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+        NetworkService.shared.request(path: GetUserInfo.path, parameters: [params1]) { data, _ in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
@@ -118,10 +106,7 @@ final class NetworkService {
     // Метод получения всех фото пользователя
     func  getAllPhoto(completion: @escaping (_ responce: Photos?) -> Void) {
         
-        NetworkService.shared.request(path: GetPhoto.photoPath, parameters: []) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+        NetworkService.shared.request(path: GetPhoto.photoPath, parameters: []) { data, _ in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
@@ -133,21 +118,15 @@ final class NetworkService {
     // Метод получения записей со стены пользователя
     func getWall(completion: @escaping (_ responce: UserWallResponseWrapped?) -> Void) {
         
-        print("ddddddddddddddd")
+        let params1 = URLQueryItem(name: GetWall.extended, value: GetWall.extendedStatus)
         
-        NetworkService.shared.request(path: GetWall.path, parameters: []) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+        NetworkService.shared.request(path: GetWall.path, parameters: [params1]) { data, _ in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let data = data else { return }
-            print(data)
-            let responce = try? decoder.decode(UserWallResponseWrapped.self, from: data)
-            print(responce)
-            completion(responce)
             
+            let responce = try? decoder.decode(UserWallResponseWrapped.self, from: data)
+            completion(responce)
         }
     }
-    
 }

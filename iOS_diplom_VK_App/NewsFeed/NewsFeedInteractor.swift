@@ -12,15 +12,11 @@ protocol NewsFeedBusinessLogic {
     func makeRequest(request: NewsFeed.Model.Request.RequestType)
 }
 
-class NewsFeedInteractor: NewsFeedBusinessLogic {
+final class NewsFeedInteractor: NewsFeedBusinessLogic {
     
     var presenter: NewsFeedPresentationLogic?
-    var service: NewsFeedService?
     
     func makeRequest(request: NewsFeed.Model.Request.RequestType) {
-        if service == nil {
-            service = NewsFeedService()
-        }
         
         switch request {
         case .getNewsFeed:
@@ -54,9 +50,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
                         }
                     }
                 }
-                
             }
-            
         }
     }
 }

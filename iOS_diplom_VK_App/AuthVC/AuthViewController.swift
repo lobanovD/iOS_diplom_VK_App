@@ -24,25 +24,16 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     
     // MARK: AuthServiceDelegate
     func authServiceShouldShow(viewController: UIViewController) {
-        //print(#function)
         navigationController?.navigationBar.isHidden = true
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-//        navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
         navigationController?.pushViewController(viewController, animated: false)
     }
     
     func authServiceSignIn() {
-        //print(#function)
-        
         let tabBarVC = CustomTabBar()
         navigationController?.pushViewController(tabBarVC, animated: false)
         navigationController?.navigationBar.isHidden = false
-        
     }
     
     func authServiceSignInDidFail() {
-        //print(#function)
-        
-        
     }
 }

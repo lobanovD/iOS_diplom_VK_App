@@ -269,11 +269,11 @@ final class NewsFeedCell: UITableViewCell {
         repostsLabel.text = "\(viewModel.shares ?? -100)"
         // Количество просмотров
         viewsLabel.text = "\(viewModel.views ?? -100)"
-   
+        
         // Жест нажатия на область "лайков"
         let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(setLike))
         likeActionButton.addGestureRecognizer(tapLikeGesture)
- 
+        
         // Обработка количества лайков, репостов, комментариев для установки ширины области каждого из них
         getLikesCount(viewModel: viewModel)
         getCommentsCount(viewModel: viewModel)
@@ -291,11 +291,11 @@ final class NewsFeedCell: UITableViewCell {
         
         if let photoAttachment = viewModel.photoAttachment {
             
-                postImageView.set(imageUrl: photoAttachment.photoUrlString)
-                postImageView.isHidden = false
-                let heightCalculator = CalculateCellHeight()
-                let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
-                self.photoAttachmentHeight = cellHeight
+            postImageView.set(imageUrl: photoAttachment.photoUrlString)
+            postImageView.isHidden = false
+            let heightCalculator = CalculateCellHeight()
+            let cellHeight = heightCalculator.calculatePhotoAttachmentHeight(photoAttachment: photoAttachment)
+            self.photoAttachmentHeight = cellHeight
             
         } else {
             postImageView.isHidden = true

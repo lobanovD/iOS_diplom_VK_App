@@ -32,7 +32,7 @@ extension LocalStorage {
     // метод получения данных о пользователе из локального хранилища
     func getUserModel() {
         userInfoViewModel = nil
-    
+        
         do {
             let realm = try Realm()
             let user = realm.objects(UserInfo.self)
@@ -70,7 +70,7 @@ extension LocalStorage {
         do {
             let realm = try Realm()
             let photos = realm.objects(UserPhotos.self)
-        
+            
             for photo in photos {
                 var currentPhotoUrl = ""
                 currentPhotoUrl = photo.url
@@ -85,11 +85,10 @@ extension LocalStorage {
         do {
             let realm = try Realm()
             let photos = realm.objects(UserPhotos.self)
-        
+            
             try realm.write {
                 realm.delete(photos)
             }
         } catch {}
     }
 }
-

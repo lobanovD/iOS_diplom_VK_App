@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavouriteNewsViewController: UIViewController {
+final class FavouriteNewsViewController: UIViewController {
     
     private var feedViewModel = FeedViewModel(posts: [])
     
@@ -34,7 +34,7 @@ class FavouriteNewsViewController: UIViewController {
     @objc func reloadFavourite() {
         reloadData()
     }
-
+    
     // MARK: View lifecycle
     override func viewWillAppear(_ animated: Bool) {
         reloadData()
@@ -46,7 +46,6 @@ class FavouriteNewsViewController: UIViewController {
         UISetup()
         // Наблюдатели
         NotificationCenter.default.addObserver(self, selector: #selector(reloadFavourite), name: NSNotification.Name(rawValue: VCConstants.reloadFavourite), object: nil)
-       
     }
     
     private func reloadData() {
@@ -65,7 +64,7 @@ extension FavouriteNewsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.id, for: indexPath) as! NewsFeedCell
         guard var feedViewModel = LocalStorage.shared.favouriteViewModel?.posts[indexPath.row] else { return cell }
-       
+        
         cell.setupCell(viewModel: feedViewModel)
         cell.layoutSubviews()
         cell.tapLike = {
@@ -75,7 +74,7 @@ extension FavouriteNewsViewController: UITableViewDelegate, UITableViewDataSourc
             NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadFavourite), object: nil)
             NotificationCenter.default.post(name: Notification.Name(VCConstants.reloadNews), object: nil)
             cell.layoutSubviews()
-            }
+        }
         return cell
     }
     
