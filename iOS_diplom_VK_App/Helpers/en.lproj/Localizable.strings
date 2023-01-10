@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  iOS_diplom_VK_App
+
+  Created by Dmitrii Lobanov on 11.01.2023.
+  
+*/
+
+"news" = "News";
+"profile" = "Profile";
+"favourite" = "Favourite";
+"photos" = "Photos";
+"fresh_news" = "Fresh news";

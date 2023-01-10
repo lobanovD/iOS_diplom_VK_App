@@ -13,12 +13,19 @@ final class CustomTabBar: UITabBarController {
         super.viewWillAppear(animated)
         self.navigationItem.title = self.tabBar.selectedItem?.title
         self.navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.barTintColor = UIColor(named: "tabBarColor")
+        tabBar.tintColor = UIColor(named: "tabBarTintColor")
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "tabBarColor")
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         self.navigationItem.title = item.title
     }
-    
+  
     override func viewDidLoad() {
         // Контроллеры
         let feedVC = NewsFeedViewController()

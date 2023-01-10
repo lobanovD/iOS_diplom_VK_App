@@ -97,7 +97,7 @@ struct VCConstants {
     // New feed alert
     static let alertBackgroundColor: UIColor = #colorLiteral(red: 0.1764705882, green: 0.4965524673, blue: 0.7551663518, alpha: 1)
     static let alertTextColor: UIColor = .white
-    static let alertText: String = "Свежие новости"
+    static let alertText: String = NSLocalizedString("fresh_news", comment: "")
     static let alertBorderColor: CGColor = CGColor(srgbRed: 45, green: 127, blue: 193, alpha: 1)
     static let alertBorderCornerRadius: CGFloat = 5
     static let alertBorderWidth: CGFloat = 1
@@ -129,16 +129,16 @@ struct VCConstants {
     static let photoStackViewRightOffset:CGFloat = -6
     static let photoStackViewHeight: CGFloat = 100
     static let photoStackViewBottomOffset: CGFloat = -10
-    static let photoTitle: String = "Фотографии"
+    static let photoTitle: String = NSLocalizedString("photos", comment: "")
     
     // MARK: CustomTabBar
-    static let feedVCTitle: String = "Новости"
+    static let feedVCTitle: String = NSLocalizedString("news", comment: "")
     static let feedVCIcon: UIImage = UIImage(systemName: "house")!
     
-    static let profileVCTitle: String = "Профиль"
+    static let profileVCTitle: String = NSLocalizedString("profile", comment: "")
     static let profileVCIcon: UIImage = UIImage(systemName: "person.crop.circle")!
     
-    static let favouriteVCTitle: String = "Избранное"
+    static let favouriteVCTitle: String = NSLocalizedString("favourite", comment: "")
     static let favouriteVCIcon: UIImage = UIImage(systemName: "star")!
     
     static let TBBackground: UIColor = .white

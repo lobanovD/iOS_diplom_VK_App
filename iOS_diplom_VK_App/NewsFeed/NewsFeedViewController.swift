@@ -87,6 +87,7 @@ final class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         feedTableView.addSubview(refreshControl)
+        
     }
     
     @objc func refresh(_ sender: AnyObject) {

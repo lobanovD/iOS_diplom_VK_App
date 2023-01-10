@@ -11,9 +11,9 @@ final class AuthViewController: UIViewController, VKAuthServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = VCConstants.mainViewBackgroungColor
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.view.backgroundColor = .white
+        navigationController?.view.backgroundColor = VCConstants.mainViewBackgroungColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
